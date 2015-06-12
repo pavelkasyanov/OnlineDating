@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="OnlineDating:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="OnlineDating.war">
+      <element id="artifact" artifact-name="OnlineDating:war exploded" />
+    </root>
+  </artifact>
+</component>
