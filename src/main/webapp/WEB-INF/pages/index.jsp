@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel=" stylesheet ">
 </link>
@@ -14,10 +15,15 @@
 
             <div style="height: 20%; position: absolute; top: 150px; color: black; border: solid 1px black">
 
-                <input type="text" value="login">
-                <br>
-                <br>
-                <input type="button" value="ok">
+
+
+                <form action="#" method="post" name="loginForm">
+                    <p>
+                        <input type="text" name="loginText"></p>
+                    <input type="button" value="ok">
+                </form>
+
+
 
             </div>
 
