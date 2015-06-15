@@ -17,10 +17,10 @@
 
 
 
-                <form action="#" method="post" name="loginForm">
-                    <p>
-                        <input type="text" name="loginText"></p>
-                    <input type="button" value="ok">
+                <form action="/login" method="post">
+                    <p>Name:<input type="text" name="login" /></p>
+                    <p>Password:<input type="text" name="password" /></p>
+                    <input type="submit" value="ok">
                 </form>
 
 

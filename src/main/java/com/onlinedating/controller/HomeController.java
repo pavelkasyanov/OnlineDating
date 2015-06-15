@@ -34,7 +34,10 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(ModelMap model) {
+	public String logout(ModelMap model,
+						 HttpServletRequest request) {
+
+		request.getSession().removeAttribute("login_user");
 
 		return "redirect:/";
 	}
