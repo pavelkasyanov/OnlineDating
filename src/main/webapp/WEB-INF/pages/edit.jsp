@@ -26,9 +26,9 @@
         <div class="collapse navbar-collapse" id = "resp_menu">
 
           <ul class="nav navbar-nav" >
-            <li><a href="/"> Моя страница </a>   </li>
+            <li><a href="home"> Моя страница </a>   </li>
             <li><a href="#"> Поиск </a> </li>
-            <li><a href="/ask"> Вопросы </a> </li>
+            <li><a href="ask"> Вопросы </a> </li>
             <li><a href="#"> Link </a> </li>
           </ul>
 
