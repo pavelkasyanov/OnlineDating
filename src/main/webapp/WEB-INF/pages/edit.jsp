@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Владислав
-  Date: 16.06.2015
-  Time: 11:17
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel=" stylesheet ">
@@ -32,9 +26,9 @@
         <div class="collapse navbar-collapse" id = "resp_menu">
 
           <ul class="nav navbar-nav" >
-            <li><a href="#"> Моя страница </a>   </li>
+            <li><a href="/"> Моя страница </a>   </li>
             <li><a href="#"> Поиск </a> </li>
-            <li><a href="#"> Вопросы </a> </li>
+            <li><a href="/ask"> Вопросы </a> </li>
             <li><a href="#"> Link </a> </li>
           </ul>
 
