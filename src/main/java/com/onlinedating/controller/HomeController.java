@@ -25,4 +25,26 @@ public class HomeController {
 
 		return "redirect:/";
 	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(ModelMap model,
+						@RequestParam("login") String login,
+						@RequestParam("password") String pass,
+						HttpServletRequest request) {
+
+		if (login != null || !login.equals("")) {
+			request.getSession().setAttribute("login_user", login);
+		}
+
+		return "redirect:home";
+	}
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(ModelMap model,
+						 HttpServletRequest request) {
+
+		request.getSession().removeAttribute("login_user");
+
+		return "redirect:home";
+	}
 }
