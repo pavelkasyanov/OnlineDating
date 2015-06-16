@@ -3,6 +3,15 @@
 <html>
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel=" stylesheet ">
 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+  jQuery(document).ready(function ($) {
+    $('#mytabs').tab();
+  });
+</script>
+
 
 <body background="${pageContext.request.contextPath}/resources/css/bg/bg.jpg" >
 
@@ -48,7 +57,7 @@
 
     <div class="col-md-8 col-lg-8 col-sm-8">
 
-      <div class="tabs">
+      <div class="tabs" id="mytabs">
         <ul class="nav nav-tabs">
           <li class="active"><a href="#tab1" data-toggle="tab"> Мои вопросы </a></li>
           <li><a href="#tab2" data-toggle="tab"> Вопросы друзей </a></li>
