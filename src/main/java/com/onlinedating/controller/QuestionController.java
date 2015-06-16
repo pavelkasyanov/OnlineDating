@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class QuestionController {
     @RequestMapping(value = "/ask", method = RequestMethod.GET)
     public String index(ModelMap model) {
-        return "ask";
+        return "edit";
     }
 }

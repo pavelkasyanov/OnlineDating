@@ -11,13 +11,13 @@
 
         </div>
 
-        <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2" >
+        <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2" style=" top: 150px; color: black; border: solid 1px black" >
 
-            <div style="height: 20%; position: absolute; top: 150px; color: black; border: solid 1px black">
+            <div >
 
 
 
-                <form action="/login" method="post">
+                <form action="/login" method="post" >
                     <p>Name:<input type="text" name="login" /></p>
                     <p>Password:<input type="text" name="password" /></p>
                     <input type="submit" value="ok">
