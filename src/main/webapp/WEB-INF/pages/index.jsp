@@ -17,7 +17,7 @@
 
 
 
-                <form action="/login" method="post" >
+                <form action="login" method="post" >
                     <p>Name:<input type="text" name="login" /></p>
                     <p>Password:<input type="text" name="password" /></p>
                     <input type="submit" value="ok">

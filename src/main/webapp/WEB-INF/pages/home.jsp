@@ -29,9 +29,9 @@
 
           <ul class="nav navbar-nav" >
 
-            <li><a href="/"> Моя страница </a> </li>
+            <li><a href="home"> Моя страница </a> </li>
             <li><a href="#"> Поиск </a> </li>
-            <li><a href="/ask"> Вопросы </a> </li>
+            <li><a href="ask"> Вопросы </a> </li>
             <li><a href="#"> Link </a> </li>
           </ul>
 
@@ -56,7 +56,7 @@
         <li><h4> <a href="#"> Контакты<br> </a></h4></li>
         <li><h4> <a href="#"> Уведомления <br></a></h4></li>
         <li><h4> <a href="#"> Сообщения <br></a></h4></li>
-        <li><h4> <a href="/ask"> Редактирование  <br></a></h4></li>
+        <li><h4> <a href="ask"> Редактирование  <br></a></h4></li>
 
       </ul>
     </div>

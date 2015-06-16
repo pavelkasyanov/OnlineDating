@@ -11,13 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class HomeController {
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(ModelMap model, HttpServletRequest request) {
+		return "index";
+	}
+
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String home(ModelMap model, HttpServletRequest request) {
 		if (request.getSession().getAttribute("login_user") != null) {
 			return "home";
 		}
 
-		return "index";
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -30,7 +36,7 @@ public class HomeController {
 			request.getSession().setAttribute("login_user", login);
 		}
 
-		return "redirect:/";
+		return "redirect:home";
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -39,6 +45,6 @@ public class HomeController {
 
 		request.getSession().removeAttribute("login_user");
 
-		return "redirect:/";
+		return "redirect:home";
 	}
 }
