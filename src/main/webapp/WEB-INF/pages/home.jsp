@@ -3,6 +3,7 @@
 <html>
 <head>
 
+  <link href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" type="text/css" rel="stylesheet">
 
 </head>
@@ -98,7 +99,7 @@
               <p class="askP">
                 <c:out value="${ask}" />
               </p>
-           </h4>>
+           </h4>
 
         </c:forEach>
 
