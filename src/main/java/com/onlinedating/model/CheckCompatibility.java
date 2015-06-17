@@ -9,44 +9,44 @@ import static com.onlinedating.model.CompatibilityMarks.*;
  */
 
 public class CheckCompatibility {
-    private int valueWoman = 0;
-    private int valueMan = 0;
-    private int persent = 0;
+    private int valueInspected = 0;
+    private int valueWhoChecks = 0;
+    private int percent = 0;
     public void check(int Priority,String value)
     {
-        if(!value.equals("")) {
+        if(value.length() != 0) {
             if ((Priority == 1) && (value.equals(ANSWER_YES_EASY))) {
-                valueWoman += INSPECTED_IMPORTANT_YES_EASY;
-                valueMan += WHOCHECKS_IMPORTANT_YES_EASY;
+                valueInspected += INSPECTED_IMPORTANT_YES_EASY;
+                valueWhoChecks += WHOCHECKS_IMPORTANT_YES_EASY;
             }
             if ((Priority == 1) && (value.equals(ANSWER_YES_HEAVILY))) {
-                valueWoman += INSPECTED_IMPORTANT_YES_HEAVY;
-                valueMan += WHOCHECKS_IMPORTANT_YES_HEAVY;
+                valueInspected += INSPECTED_IMPORTANT_YES_HEAVY;
+                valueWhoChecks += WHOCHECKS_IMPORTANT_YES_HEAVY;
             }
             if ((Priority == 1) && (value.equals(ANSWER_NO))) {
-                valueWoman += INSPECTED_IMPORTANT_NO;
-                valueMan += WHOCHECKS_IMPORTANT_NO;
+                valueInspected += INSPECTED_IMPORTANT_NO;
+                valueWhoChecks += WHOCHECKS_IMPORTANT_NO;
             }
 
             if ((Priority == 0) && (value.equals(ANSWER_YES_EASY))) {
-                valueWoman += INSPECTED_NOTIMPORTANT_YES_EASY;
-                valueMan += WHOCHECKS_NOTIMPORTANT_YES_EASY;
+                valueInspected += INSPECTED_NOTIMPORTANT_YES_EASY;
+                valueWhoChecks += WHOCHECKS_NOTIMPORTANT_YES_EASY;
             }
             if ((Priority == 0) && (value.equals( ANSWER_YES_HEAVILY)))
             {
-                valueWoman += INSPECTED_NOTIMPORTANT_YES_HEAVY;
-                valueMan += WHOCHECKS_NOTIMPORTANT_YES_HEAVY;
+                valueInspected += INSPECTED_NOTIMPORTANT_YES_HEAVY;
+                valueWhoChecks += WHOCHECKS_NOTIMPORTANT_YES_HEAVY;
             }
             if ((Priority == 0) && (value.equals(ANSWER_NO))) {
-                valueWoman += INSPECTED_NOTIMPORTANT_NO;
-                valueMan += WHOCHECKS_NOTIMPORTANT_NO;
+                valueInspected += INSPECTED_NOTIMPORTANT_NO;
+                valueWhoChecks += WHOCHECKS_NOTIMPORTANT_NO;
             }
         }
         else
-            persent -= 1;
+            percent -= 1;
     }
 
-    public int[] chechSum(List<Integer> values)// get maximum Compatibility
+    public int[] checkSum(List<Integer> values)// get maximum Compatibility
     {
         int[] maxMark = new int[2];
         for(int q = 0;q<values.size();q++) {
@@ -63,17 +63,17 @@ public class CheckCompatibility {
         }
         return maxMark ;
     }
-    public int getValueWoman()
+    public int getValueInspected()
     {
-        return valueWoman;
+        return valueInspected;
     }
-    public int getValueMan()
+    public int getValueWhoChecks()
     {
-        return valueMan;
+        return valueWhoChecks;
     }
-    public int getPersent()
+    public int getPercent()
     {
-        return persent;
+        return percent;
     }
 
 }
