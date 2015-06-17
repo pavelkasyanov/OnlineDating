@@ -68,17 +68,18 @@
 
 
   <div class="col-md-3 col-lg-3 col-sm-3" style="text-align: center; border-right:solid 1px rgba(30, 30, 30, 0.23); ">
+
+
     <img src="${pageContext.request.contextPath}/resources/css/img/ph1.jpg" class="img-polaroid"  >
+
+
   </div>
 
   <div class="col-md-7 col-lg-7 col-sm-7"  style="height: 200px; border-bottom: solid 1px rgba(30, 30, 30, 0.23)">
     <h3>О себе</h3>
-    <p style="text-align: justify; margin-left: 0 "> С шести лет и до шестнадцати я занималась музыкой. И две мои сестры занимались музыкой. В коридоре
-      висел специальный ремень для тех, кто отказывался заниматься музыкой. Говорили, у меня талант. Мой
-      плейлист – это песни, которые берут в долгую дорогу, чтобы не заснуть. Там рядом Тэйлор Свифт и Михаил
-      Шуфутинский. Я усердно учусь и моей профессией будет преподавание русского языка и литературы в старших классах.
-      Парни думают, что быть учительницей – это моя сексуальная фантазия. Нет. Это призвание. А ещё мне нравится
-      готовить пироги и торты. Только сама я их не ем. Чтобы другим больше было </p>
+    <p style="text-align: justify; margin-left: 0 ">
+      <c:out value="${aboutMeText}" />
+    </p>
 
   </div>
 
@@ -103,8 +104,8 @@
           <p> class="askP">
 
             <c:out value="${ask}" />
-          </p>>
- <h4>
+          </p>
+ </h4>>
 
         </c:forEach>
       </ul>
