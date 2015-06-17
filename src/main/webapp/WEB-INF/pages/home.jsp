@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
+
 <html>
 <head>
 
@@ -92,9 +95,11 @@
       <ul >
         <c:forEach var="ask" items="${myAskList}">
         <li>
+          <div class="askDiv">
           <p>
             <c:out value="${ask}" />
           </p>
+          </div>
         </li>
         </c:forEach>
       </ul>

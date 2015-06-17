@@ -1,7 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel=" stylesheet ">
-</link>
+
 <body>
 
 

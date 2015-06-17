@@ -13,7 +13,7 @@
 </script>
 
 
-<body background="${pageContext.request.contextPath}/resources/css/bg/bg.jpg" >
+<body >
 
 
 <div class="container-fluid">

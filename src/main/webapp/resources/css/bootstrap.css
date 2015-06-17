@@ -10,7 +10,13 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
+
+.askDiv{
+  background-color: rgba(243, 243, 243, 0.81);
+}
+
 body {
+  background-color: black;
   margin: 0;
 }
 article,
