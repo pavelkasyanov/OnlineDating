@@ -1,0 +1,8 @@
+.askDiv{
+    background-color: rgba(0, 0, 0, 0.81);
+}
+
+body {
+    background-image: url("bg/bg.jpg");
+    margin: 0;
+}
