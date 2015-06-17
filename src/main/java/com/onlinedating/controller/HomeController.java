@@ -42,7 +42,7 @@ public class HomeController {
 					"      готовить пироги и торты. Только сама я их не ем. Чтобы другим больше было";
 			model.addAttribute("aboutMeText", aboutMeText);
 
-			String avatarUrl = "/resources/css/img/ph1.jpg";
+			String avatarUrl = "${pageContext.request.contextPath}/resources/css/img/ph1.jpg";
 
 			model.addAttribute("avatartUrl", avatarUrl);
 
