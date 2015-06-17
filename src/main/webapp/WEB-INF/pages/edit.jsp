@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel=" stylesheet ">
 
@@ -12,6 +13,32 @@
   jQuery(document).ready(function ($) {
     $('#mytabs').tab();
   });
+
+  $('.btn-toggle').click(function() {
+    $(this).find('.btn').toggleClass('active');
+
+    if ($(this).find('.btn-primary').size()>0) {
+      $(this).find('.btn').toggleClass('btn-primary');
+    }
+    if ($(this).find('.btn-danger').size()>0) {
+      $(this).find('.btn').toggleClass('btn-danger');
+    }
+    if ($(this).find('.btn-success').size()>0) {
+      $(this).find('.btn').toggleClass('btn-success');
+    }
+    if ($(this).find('.btn-info').size()>0) {
+      $(this).find('.btn').toggleClass('btn-info');
+    }
+
+    $(this).find('.btn').toggleClass('btn-default');
+
+  });
+
+  $('form').submit(function(){
+    alert($(this["options"]).val());
+    return false;
+  });
+
 </script>
 
 
@@ -78,12 +105,12 @@
               <div class="col-md-6  col-lg-6 col-sm-6  ">
 
                 <br>
-                <form class="form-horizontal">
+                <form action="/add_ask" method="post" class="form-horizontal">
 
-                  <textarea rows="5" style="width: 100%"></textarea>
+                  <textarea rows="5" style="width: 100%" name="questionText"></textarea>
                   <div class="form-actions">
                     <button type="submit" class="btn btn-primary">Сохранить изменения</button>
-                    <button type="button" class="btn">Отмена</button>
+                    <button type="reset" class="btn">Отмена</button>
                   </div>
 
                 </form>
@@ -110,19 +137,13 @@
           </div>
           <div class="tab-pane fade" id = "tab2">
             <ul>
+              <c:forEach var="question" items="${questionList}">
               <li>
                 <h4><br>
-                  Смотреть ужастики?
+                  <c:out value="${question.text}" />
                 </h4>
               </li>
-              <li>
-                <h4><br>  Играть в шахматы? </h4>
-              </li>
-
-              <li>
-                <h4><br>Поехать на выходные к маме?</h4>
-              </li>
-            </ul>
+              </c:forEach>
           </div>
           <div class="tab-pane fade" id = "tab3">
             <ul>
