@@ -71,7 +71,7 @@
   <div class="col-md-3 col-lg-3 col-sm-3" style="text-align: center; border-right:solid 1px rgba(30, 30, 30, 0.23); ">
 
 
-    <img src="${pageContext.request.contextPath}/ <c:out value="${aboutMeText}" />" class="img-polaroid"  >
+    <img src="${pageContext.request.contextPath}/ <c:out value="${avatartUrl}" />" class="img-polaroid"  >
 
 
   </div>
@@ -79,7 +79,7 @@
   <div class="col-md-7 col-lg-7 col-sm-7"  style="height: 200px; border-bottom: solid 1px rgba(30, 30, 30, 0.23)">
     <h3>О себе</h3>
     <p style="text-align: justify; margin-left: 0 ">
-      <c:out value="${avatartUrl}" />
+      <c:out value="${aboutMeText}" />
     </p>
 
   </div>
