@@ -91,11 +91,21 @@
       <br>
       <ul >
         <c:forEach var="ask" items="${myAskList}">
+
         <li>
           <p>
             <c:out value="${ask}" />
           </p>
         </li>
+
+
+ <h4>
+          <p> class="askP">
+
+            <c:out value="${ask}" />
+          </p>>
+ <h4>
+
         </c:forEach>
       </ul>
     </div>
