@@ -12,11 +12,11 @@ html {
 }
 
 .askDiv{
-  background-color: rgba(243, 243, 243, 0.81);
+  background-color: rgba(0, 0, 0, 0.81);
 }
 
 body {
-  background-color: black;
+  background-image: url("bg/bg.jpg");
   margin: 0;
 }
 article,
