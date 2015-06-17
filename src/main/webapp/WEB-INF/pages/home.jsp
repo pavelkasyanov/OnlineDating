@@ -1,14 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-
-
 <html>
 <head>
 
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" type="text/css" rel="stylesheet">
-
-  <link href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css" rel="stylesheet">
 
 </head>
 
@@ -94,16 +89,15 @@
       <h3>Мои вопросы</h3>
       <hr>
       <br>
-
+      <ul >
         <c:forEach var="ask" items="${myAskList}">
-
-
-          <p  class="askP">
+        <li>
+          <p>
             <c:out value="${ask}" />
           </p>
-
+        </li>
         </c:forEach>
-
+      </ul>
     </div>
   </div>
 </div>
