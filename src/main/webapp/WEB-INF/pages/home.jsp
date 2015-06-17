@@ -101,7 +101,7 @@
 
 
  <h4>
-          <p> class="askP">
+          <p class="askP">
 
             <c:out value="${ask}" />
           </p>
