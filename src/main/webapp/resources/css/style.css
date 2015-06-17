@@ -1,5 +1,8 @@
-.askDiv{
-    background-color: rgba(0, 0, 0, 0.81);
+.askP{
+    background-color: rgba(232, 232, 232, 0.87);
+    margin: 15px;
+    padding: 15px;
+
 }
 
 body {

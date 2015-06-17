@@ -8,6 +8,8 @@
 
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" type="text/css" rel="stylesheet">
 
+  <link href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css" rel="stylesheet">
+
 </head>
 
 <body >
@@ -92,17 +94,16 @@
       <h3>Мои вопросы</h3>
       <hr>
       <br>
-      <ul >
+
         <c:forEach var="ask" items="${myAskList}">
-        <li>
-          <div class="askDiv">
-          <p>
+
+
+          <p  class="askP">
             <c:out value="${ask}" />
           </p>
-          </div>
-        </li>
+
         </c:forEach>
-      </ul>
+
     </div>
   </div>
 </div>
