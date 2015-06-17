@@ -1,5 +1,8 @@
 package com.onlinedating.controller;
 
+import com.onlinedating.model.Question;
+import com.onlinedating.service.QuestionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,6 +17,9 @@ import java.util.List;
 @Controller
 public class HomeController {
 
+	@Autowired
+	QuestionService questionService;
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(ModelMap model, HttpServletRequest request) {
 		return "index";
@@ -23,15 +29,7 @@ public class HomeController {
 	public String home(ModelMap model, HttpServletRequest request) {
 		if (request.getSession().getAttribute("login_user") != null) {
 
-			List<String> myAskList = new ArrayList<String>();
-			myAskList.add("Ну что, похудела к лету, принцесска толстожопенькая?");
-			myAskList.add("У вас тоже перед сном возникает вопрос: \"Какую же жизнь придумать сегодня.\"?");
-			myAskList.add("Наливаю пол кружки горячей воды, завариваю чай и доливаю пол кружки холодной, я же не один такой?");
-			myAskList.add("А вы тоже измеряете дорогу в песнях?");
-			myAskList.add("А вы замечали, что если в автобусе или маршрутке много свободных мест, люди стараются сесть как можно дальше друг от друга?");
-			myAskList.add("Кто-нибудь пробовал худеть лёжа на диване?");
-
-			model.addAttribute("myAskList", myAskList);
+			model.addAttribute("myAskList", questionService.getList());
 
 
 			String aboutMeText = "С шести лет и до шестнадцати я занималась музыкой. И две мои сестры занимались музыкой. В коридоре\n" +
