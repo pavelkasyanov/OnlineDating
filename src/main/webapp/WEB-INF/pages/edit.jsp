@@ -1,13 +1,16 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Владислав
-  Date: 16.06.2015
-  Time: 11:17
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel=" stylesheet ">
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+  jQuery(document).ready(function ($) {
+    $('#mytabs').tab();
+  });
+</script>
 
 
 <body background="${pageContext.request.contextPath}/resources/css/bg/bg.jpg" >
@@ -32,9 +35,9 @@
         <div class="collapse navbar-collapse" id = "resp_menu">
 
           <ul class="nav navbar-nav" >
-            <li><a href="#"> Моя страница </a>   </li>
+            <li><a href="home"> Моя страница </a>   </li>
             <li><a href="#"> Поиск </a> </li>
-            <li><a href="#"> Вопросы </a> </li>
+            <li><a href="ask"> Вопросы </a> </li>
             <li><a href="#"> Link </a> </li>
           </ul>
 
@@ -54,7 +57,7 @@
 
     <div class="col-md-8 col-lg-8 col-sm-8">
 
-      <div class="tabs">
+      <div class="tabs" id="mytabs">
         <ul class="nav nav-tabs">
           <li class="active"><a href="#tab1" data-toggle="tab"> Мои вопросы </a></li>
           <li><a href="#tab2" data-toggle="tab"> Вопросы друзей </a></li>
