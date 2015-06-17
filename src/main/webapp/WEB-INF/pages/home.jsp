@@ -94,7 +94,6 @@
 
         <c:forEach var="ask" items="${myAskList}">
 
-
            <h4>
               <p class="askP">
                 <c:out value="${ask}" />
