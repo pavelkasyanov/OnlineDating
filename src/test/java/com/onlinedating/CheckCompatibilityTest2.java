@@ -17,7 +17,7 @@ public class CheckCompatibilityTest2 {
         CheckCompatibility cC = new CheckCompatibility();
         cC.check(0,"");
         assertEquals(-1, cC.getPercent());
-
+//1
         cC.check(1,ANSWER_YES_EASY);
         assertEquals(5,cC.getValueInspected());
         assertEquals(5,cC.getValueWhoChecks());
