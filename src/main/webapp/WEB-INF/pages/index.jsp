@@ -1,7 +1,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
-<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel=" stylesheet ">
-</link>
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel=" stylesheet " type="text/css">
+
+<link href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css" rel="stylesheet">
 <body>
 
 
@@ -11,7 +12,7 @@
 
         </div>
 
-        <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2" style=" top: 150px; color: black; border: solid 1px black" >
+        <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2" style=" top: 150px; color: black; background-color: rgba(0, 0, 0, 0.21)" >
 
             <div >
 

@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 
+  <link href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" type="text/css" rel="stylesheet">
 
 </head>
@@ -69,12 +69,18 @@
 
 
   <div class="col-md-3 col-lg-3 col-sm-3" style="text-align: center; border-right:solid 1px rgba(30, 30, 30, 0.23); ">
-    <img src=<c:out value="${avatartUrl}"/> class="img-polaroid"  >
+
+
+    <img src="${pageContext.request.contextPath}/ <c:out value="${avatartUrl}" />" class="img-polaroid"  >
+
+
   </div>
 
   <div class="col-md-7 col-lg-7 col-sm-7"  style="height: 200px; border-bottom: solid 1px rgba(30, 30, 30, 0.23)">
     <h3>О себе</h3>
-    <p style="text-align: justify; margin-left: 0 "><C:out value="${aboutMeText}" /></p>
+    <p style="text-align: justify; margin-left: 0 ">
+      <c:out value="${aboutMeText}" />
+    </p>
 
   </div>
 
@@ -85,15 +91,17 @@
       <h3>Мои вопросы</h3>
       <hr>
       <br>
-      <ul >
+
         <c:forEach var="ask" items="${myAskList}">
-        <li>
-          <p>
-            <c:out value="${ask}" />
-          </p>
-        </li>
+
+           <h4>
+              <p class="askP">
+                <c:out value="${ask}" />
+              </p>
+           </h4>
+
         </c:forEach>
-      </ul>
+
     </div>
   </div>
 </div>

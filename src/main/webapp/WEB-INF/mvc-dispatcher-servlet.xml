@@ -21,4 +21,6 @@
     <bean id="questionDAO" class="com.onlinedating.dao.QuestionDAO" />
     <bean id="questionService" class="com.onlinedating.service.QuestionService" />
 
+
+
 </beans>
