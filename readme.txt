@@ -11,3 +11,7 @@ localVlad ->remote vlad (т.е. vlad1)   - чтобы не затерлись и
 master->localVlad       - получить последние
 localVlad -> remote vlad (т.е. vlad1)     - залить на свою ветку
 localVlad -> master   - залить в общую
+
+
+
+///
