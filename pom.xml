@@ -15,6 +15,9 @@
         <!-- Spring -->
         <spring.version>4.1.1.RELEASE</spring.version>
         <jstl.version>1.2</jstl.version>
+
+        <!-- Hibernate -->
+        <hibernate.version>4.3.10.Final</hibernate.version>
     </properties>
 
     <dependencies>
@@ -29,6 +32,15 @@
             <artifactId>spring-web</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+
 
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -47,6 +59,24 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.35</version>
         </dependency>
 
         <dependency>

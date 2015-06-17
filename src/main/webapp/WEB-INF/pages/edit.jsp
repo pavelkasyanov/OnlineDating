@@ -140,7 +140,7 @@
               <c:forEach var="question" items="${questionList}">
               <li>
                 <h4><br>
-                  <c:out value="${question.text}" />
+                  <c:out value="${question}" />
                 </h4>
               </li>
               </c:forEach>
@@ -193,13 +193,9 @@
           <h3>Категории вопросов</h3>
 
           <select style="width: 60%">
-
-            <option>Отдых </option>
-            <option>Личное </option>
-            <option>Карьера</option>
-            <option>Ценности </option>
-
-
+            <c:forEach var="category" items="${categoryList}">
+              <option><c:out value="${category}"/></option>
+            </c:forEach>
           </select>
 
 
