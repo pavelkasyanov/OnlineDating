@@ -61,7 +61,7 @@ public class CheckCompatibilityTest2 {
         List<Integer> li = new ArrayList<Integer>(4);
         li.add(1);li.add(0);li.add(0); li.add(1);
         CheckCompatibility cC = new CheckCompatibility();
-        int[] a = cC.checkSum(li);
+        int[] a = cC.getMaximumCompatibility(li);
         assertEquals(16,a[1]);
         assertEquals(14,a[0]);
     }

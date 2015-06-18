@@ -12,41 +12,47 @@ public class CheckCompatibility {
     private int valueInspected = 0;
     private int valueWhoChecks = 0;
     private int percent = 0;
+
+    static final int PRIORITY_IMPORTANT = 1;
+    static final int PRIORITY_NOTIMPORTANT = 0;
     public void check(int Priority,String value)
     {
         if(value.length() != 0) {
-            if ((Priority == 1) && (value.equals(ANSWER_YES_EASY))) {
-                valueInspected += INSPECTED_IMPORTANT_YES_EASY;
-                valueWhoChecks += WHOCHECKS_IMPORTANT_YES_EASY;
-            }
-            if ((Priority == 1) && (value.equals(ANSWER_YES_HEAVILY))) {
-                valueInspected += INSPECTED_IMPORTANT_YES_HEAVY;
-                valueWhoChecks += WHOCHECKS_IMPORTANT_YES_HEAVY;
-            }
-            if ((Priority == 1) && (value.equals(ANSWER_NO))) {
-                valueInspected += INSPECTED_IMPORTANT_NO;
-                valueWhoChecks += WHOCHECKS_IMPORTANT_NO;
-            }
-
-            if ((Priority == 0) && (value.equals(ANSWER_YES_EASY))) {
-                valueInspected += INSPECTED_NOTIMPORTANT_YES_EASY;
-                valueWhoChecks += WHOCHECKS_NOTIMPORTANT_YES_EASY;
-            }
-            if ((Priority == 0) && (value.equals( ANSWER_YES_HEAVILY)))
+            if (PRIORITY_IMPORTANT == Priority)
             {
-                valueInspected += INSPECTED_NOTIMPORTANT_YES_HEAVY;
-                valueWhoChecks += WHOCHECKS_NOTIMPORTANT_YES_HEAVY;
+                if(ANSWER_YES_EASY.equals(value)) {
+                    valueInspected += INSPECTED_IMPORTANT_YES_EASY;
+                    valueWhoChecks += WHOCHECKS_IMPORTANT_YES_EASY;
+                }
+                if (ANSWER_YES_HEAVILY.equals(value)) {
+                    valueInspected += INSPECTED_IMPORTANT_YES_HEAVY;
+                    valueWhoChecks += WHOCHECKS_IMPORTANT_YES_HEAVY;
+                }
+                if (ANSWER_NO.equals(value)) {
+                    valueInspected += INSPECTED_IMPORTANT_NO;
+                    valueWhoChecks += WHOCHECKS_IMPORTANT_NO;
+                }
             }
-            if ((Priority == 0) && (value.equals(ANSWER_NO))) {
-                valueInspected += INSPECTED_NOTIMPORTANT_NO;
-                valueWhoChecks += WHOCHECKS_NOTIMPORTANT_NO;
+            if(PRIORITY_NOTIMPORTANT == 0) {
+                if (ANSWER_YES_EASY.equals(value)) {
+                    valueInspected += INSPECTED_NOTIMPORTANT_YES_EASY;
+                    valueWhoChecks += WHOCHECKS_NOTIMPORTANT_YES_EASY;
+                }
+                if (ANSWER_YES_HEAVILY.equals(value)) {
+                    valueInspected += INSPECTED_NOTIMPORTANT_YES_HEAVY;
+                    valueWhoChecks += WHOCHECKS_NOTIMPORTANT_YES_HEAVY;
+                }
+                if (ANSWER_NO.equals(value)) {
+                    valueInspected += INSPECTED_NOTIMPORTANT_NO;
+                    valueWhoChecks += WHOCHECKS_NOTIMPORTANT_NO;
+                }
             }
         }
         else
             percent -= 1;
     }
 
-    public int[] checkSum(List<Integer> values)// get maximum Compatibility
+    public int[] getMaximumCompatibility(List<Integer> values)
     {
         int[] maxMark = new int[2];
         for(int q = 0;q<values.size();q++) {
