@@ -94,6 +94,11 @@
             <ref bean="sessionFactory" />
         </constructor-arg>
     </bean>
+    <bean id="photo" class="com.onlinedating.dao.PhotoDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
 
 
     <bean id="questionService" class="com.onlinedating.service.QuestionServiceImpl"/>
