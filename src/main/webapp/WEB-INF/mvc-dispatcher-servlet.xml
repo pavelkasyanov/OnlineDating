@@ -24,7 +24,7 @@
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location">
-            <value>classpath:../resources/hibernate/hibernate.properties</value>
+            <value>classpath:hibernate/hibernate.properties</value>
         </property>
     </bean>
 
