@@ -1,7 +1,6 @@
 package com.onlinedating.controller;
 
 import com.onlinedating.model.Question;
-import com.onlinedating.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -17,8 +16,8 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-	@Autowired
-	QuestionService questionService;
+	/*@Autowired
+	QuestionService questionService;*/
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(ModelMap model, HttpServletRequest request) {
@@ -29,7 +28,7 @@ public class HomeController {
 	public String home(ModelMap model, HttpServletRequest request) {
 		if (request.getSession().getAttribute("login_user") != null) {
 
-			model.addAttribute("myAskList", questionService.getList());
+			model.addAttribute("myAskList", null);
 
 
 			String aboutMeText = "С шести лет и до шестнадцати я занималась музыкой. И две мои сестры занимались музыкой. В коридоре\n" +
