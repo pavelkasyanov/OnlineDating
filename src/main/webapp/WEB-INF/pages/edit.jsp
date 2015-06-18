@@ -128,8 +128,8 @@
                 <div class="btn-group btn-toggle" style="margin-left: 15px; margin-top: 0">
                   <h3>Приоритет вопроса</h3>
                   <br>
-                  <button class="btn btn-lg btn-default">Важно</button>
-                  <button class="btn btn-lg btn-primary active">Не важно</button>
+                  <button class="btn btn-lg btn-default" id="askImport">Важно</button>
+                  <button class="btn btn-lg btn-primary active" id="askNotImport">Не важно</button>
                 </div>
               </div>
             </div>
