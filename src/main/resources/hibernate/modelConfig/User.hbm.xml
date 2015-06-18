@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.onlinedating.model">
+    <class name="User" table="User">
+        <id name="UserID" type="java.lang.Integer">
+            <column name="UserID" />
+            <generator class="identity">
+            </generator>
+        </id>
+
+        <property name="User_Name" type="string">
+            <column name="User_Name" not-null="true" unique="true" />
+        </property>
+        <property name="User_login" type="string">
+            <column name="User_Login"  not-null="true" unique="true" />
+        </property>
+        <property name="User_Inf" type="string">
+            <column name="User_OwnInformation"   unique="true" />
+        </property>
+
+        <many-to-one name="city" class="City">
+            <column name="City_CityID"  unique="true"></column>
+        </many-to-one>
+
+        <many-to-one name="questionList" class="QuestionList">
+            <column name="QuestionList_QuestionListID"  unique="true"></column>
+        </many-to-one>
+
+        <set name="questions" table="Question" fetch="select">
+            <key>
+                <column name="User_UserID" not-null="true"></column>
+            </key>
+            <one-to-many class="Question"/>
+        </set>
+
+    </class>
+</hibernate-mapping>

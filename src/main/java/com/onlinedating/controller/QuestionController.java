@@ -1,6 +1,7 @@
 package com.onlinedating.controller;
 
-import com.onlinedating.service.QuestionService;
+
+import com.onlinedating.dao.CategoryDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,13 +12,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class QuestionController {
 
+    /*@Autowired
+    QuestionService questionService;*/
     @Autowired
-    QuestionService questionService;
+    CategoryDAO categoryDAO;
 
     @RequestMapping(value = "/ask", method = RequestMethod.GET)
     public String index(ModelMap model) {
 
-        model.addAttribute("questionList", questionService.getList());
+        model.addAttribute("questionList", null);
+        model.addAttribute("categoryList", categoryDAO.category_list());
 
         return "edit";
     }
@@ -26,7 +30,7 @@ public class QuestionController {
     public String addAsk(@RequestParam(value = "questionText") String questionText) {
 
         if (questionText != null && !questionText.equals("")) {
-            questionService.add(questionText);
+            //questionService.add(questionText);
         }
 
         return "redirect:/ask";
