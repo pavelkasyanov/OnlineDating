@@ -7,7 +7,7 @@ public class User implements java.io.Serializable {
     private String User_login;
     private String User_Name;
     private String User_Inf;
-
+    private String Sex;
     private City city;
     private QuestionList questionList;
     private Set<Question> questions;
@@ -60,5 +60,13 @@ public class User implements java.io.Serializable {
 
     public void setQuestions(Set<Question> questions) {
         this.questions = questions;
+    }
+
+    public String getSex() {
+        return Sex;
+    }
+
+    public void setSex(String sex) {
+        Sex = sex;
     }
 }

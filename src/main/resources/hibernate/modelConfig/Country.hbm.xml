@@ -3,7 +3,7 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping  package="com.onlinedating.model">
 
-    <class name="Country" table="Country">
+    <class name="com.onlinedating.model.Country" table="Country">
         <id column="CountryID" name="CountryID" type="integer">
             <generator class="identity"/>
         </id>

@@ -70,5 +70,25 @@
     <bean id="categoryDao" class="com.onlinedating.dao.CategoryDAOImpl">
         <constructor-arg ref="sessionFactory"/>
     </bean>
+    <bean id="eventList" class="com.onlinedating.dao.EventListDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+    <bean id="event" class="com.onlinedating.dao.EventDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+
+
+    <bean id="questionService" class="com.onlinedating.service.QuestionServiceImpl"/>
+    <bean id="userService" class="com.onlinedating.service.UserServiceImpl"/>
+    <bean id="questionListService" class="com.onlinedating.service.QuestionListServiceImpl"/>
+    <bean id="categoryService" class="com.onlinedating.service.CategoryServiceImpl"/>
+    <bean id="countryService" class="com.onlinedating.service.CountryServiceImpl"/>
+    <bean id="cityService" class="com.onlinedating.service.CityServiceImpl"/>
+    <bean id="eventService" class="com.onlinedating.service.EventServiceImpl"/>
+    <bean id="eventListService" class="com.onlinedating.service.EventListServiceImpl"/>
 
 </beans>

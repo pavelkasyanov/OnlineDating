@@ -13,5 +13,7 @@
         <mapping resource="hibernate/modelConfig/Question.hbm.xml"/>
         <mapping resource="hibernate/modelConfig/Country.hbm.xml"/>
         <mapping resource="hibernate/modelConfig/Category.hbm.xml"/>
+        <mapping resource="hibernate/modelConfig/Event.hbm.xml"/>
+        <mapping resource="hibernate/modelConfig/EventList.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
