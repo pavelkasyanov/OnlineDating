@@ -33,13 +33,13 @@ public class CountryDAOImpl implements  ICountryDAO {
     @Override
     @Transactional
     public Country get_btID(int id) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
         Country country = (Country)session.get(Country.class, id);
 
         session.getTransaction().commit();
-        session.close();
+
         return country;
     }
 

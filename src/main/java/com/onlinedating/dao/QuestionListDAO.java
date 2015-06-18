@@ -11,6 +11,7 @@ import java.util.List;
 public interface QuestionListDAO {
     void Add( QuestionList questionList);
     QuestionList get_btID(int id);
+    void test ();
 
 }
 

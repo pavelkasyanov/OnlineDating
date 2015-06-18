@@ -20,31 +20,31 @@ public class UserDAOImpl implements UserDAO {
     @Override
     @Transactional
     public void Add(User user) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
         session.save(user);
         session.getTransaction().commit();
-        session.close();
+
     }
 
     @Override
     @Transactional
     public User get_btID(int id) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
         User user = (User)session.get(User.class,id);
 
         session.getTransaction().commit();
-        session.close();
+       // session.close();
         return user;
     }
 
     @Override
     @Transactional
     public User get_byLogin(String login) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
         User user =
@@ -53,7 +53,7 @@ public class UserDAOImpl implements UserDAO {
                         uniqueResult();
 
         session.getTransaction().commit();
-        session.close();
+        ;
 
         return user;
     }
@@ -61,7 +61,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     @Transactional
     public void update(User user , int id) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
 
@@ -69,7 +69,7 @@ public class UserDAOImpl implements UserDAO {
         employee = user;
         session.update(employee);
         session.getTransaction().commit();
-        session.close();
+
     }
 
     @Override

@@ -1,8 +1,8 @@
 package com.onlinedating.dao;
 
 import com.onlinedating.model.Category;
+import com.onlinedating.model.Event;
 import com.onlinedating.model.Question;
-import com.onlinedating.model.QuestionList;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -13,97 +13,81 @@ import java.util.List;
 /**
  * Created by Aver on 17.06.2015.
  */
-public class QuestionDAOImpl implements QuestionDAO {
+public class EventDAOImpl implements EventDAO{
+
     private SessionFactory sessionFactory;
 
-    public QuestionDAOImpl(SessionFactory sessionFactory) {
+    public EventDAOImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
+
     @Override
     @Transactional
-    public void Add(Question question) {
+    public void Add(Event event) {
         Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
-        session.save(question);
+        session.save(event);
         session.getTransaction().commit();
 
     }
 
+
     @Override
     @Transactional
-    public Question get_btID(int id) {
+    public Event get_btID(int id) {
         Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
-        Question question = (Question)session.get(Question.class,id);
+        Event event = (Event)session.get(Event.class,id);
         session.getTransaction().commit();
-
-        return question;
+        return event;
     }
 
-    @Override
-    public void update(Question question, int id) {
 
+
+    @Override
+    @Transactional
+    public void update(Event event, int id) {
         Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
 
-        Question employee =
-                (Question)session.get(Question.class, id);
-        employee = question;
+        Event employee =
+                (Event)session.get(Event.class, id);
+        employee = event;
         session.update(employee);
 
         session.getTransaction().commit();
-
     }
 
     @Override
+    @Transactional
     public void delete(int id) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
-        Question question =
-                (Question)session.get(Question.class, id);
+        Event question =
+                (Event)session.get(Event.class, id);
         session.delete(question);
         session.getTransaction().commit();
-
     }
 
     @Override
     @Transactional
-    public List<Category> question_list() {
+    public List<Event> question_list() {
         Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
-        List question = null;
-        question = session.createQuery("FROM Question").list();
-        for (Iterator iterator = question.iterator(); iterator.hasNext();){
-            Question employee = (Question) iterator.next();
+        List event = null;
+        event = session.createQuery("FROM E ").list();
+        for (Iterator iterator = event.iterator(); iterator.hasNext();){
+            Event employee = (Event) iterator.next();
             System.out.print("Category Name: " + employee.getText());
 
         }
         session.getTransaction().commit();
 
-        return question;
-    }
-    public List<Question> Get_Question_list_byquestionList(QuestionList questionList)
-    {
-        Session session = sessionFactory.getCurrentSession();
-
-        System.out.println("Maven + Hibernate + MySQL");
-        session.beginTransaction();
-        List cities = null;
-       int  countryID = questionList.getQuestionListID();
-        cities = session.createQuery("FROM Question where QuestionList_QuestionListID =" + countryID).list();
-        for (Iterator iterator = cities.iterator(); iterator.hasNext();){
-            Question employee = (Question) iterator.next();
-            System.out.print("Cuntry Name: " + employee.getText());
-
-        }
-        session.getTransaction().commit();
-
-        return cities;
-
+        return event;
     }
 }

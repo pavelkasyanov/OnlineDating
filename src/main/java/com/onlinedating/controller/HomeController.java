@@ -1,6 +1,12 @@
 package com.onlinedating.controller;
 
+import com.onlinedating.dao.QuestionDAO;
 import com.onlinedating.model.Question;
+import com.onlinedating.model.QuestionList;
+import com.onlinedating.model.User;
+import com.onlinedating.service.QuestionListService;
+import com.onlinedating.service.QuestionService;
+import com.onlinedating.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -12,12 +18,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class HomeController {
 
-	/*@Autowired
-	QuestionService questionService;*/
+	@Autowired
+	QuestionDAO questionService;
+	@Autowired
+	QuestionListService questionListService;
+	@Autowired
+	UserService userService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(ModelMap model, HttpServletRequest request) {
@@ -28,15 +39,14 @@ public class HomeController {
 	public String home(ModelMap model, HttpServletRequest request) {
 		if (request.getSession().getAttribute("login_user") != null) {
 
-			model.addAttribute("myAskList", null);
 
 
-			String aboutMeText = "С шести лет и до шестнадцати я занималась музыкой. И две мои сестры занимались музыкой. В коридоре\n" +
-					"      висел специальный ремень для тех, кто отказывался заниматься музыкой. Говорили, у меня талант. Мой\n" +
-					"      плейлист – это песни, которые берут в долгую дорогу, чтобы не заснуть. Там рядом Тэйлор Свифт и Михаил\n" +
-					"      Шуфутинский. Я усердно учусь и моей профессией будет преподавание русского языка и литературы в старших классах.\n" +
-					"      Парни думают, что быть учительницей – это моя сексуальная фантазия. Нет. Это призвание. А ещё мне нравится\n" +
-					"      готовить пироги и торты. Только сама я их не ем. Чтобы другим больше было";
+			User user = userService.get((String)request.getSession().getAttribute("login_user"));
+			QuestionList questionList = questionListService.get_btID(user.getQuestionList().getQuestionListID());
+			//List<Question> list = questionService.Get_Question_list_byquestionList(questionList);\
+			Set<Question> list = questionList.getQuestions();
+			model.addAttribute("myAskList",list );
+			String aboutMeText = user.getUser_Inf();
 			model.addAttribute("aboutMeText", aboutMeText);
 
 			String avatarUrl = "/resources/css/img/ph1.jpg";

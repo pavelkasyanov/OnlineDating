@@ -1,0 +1,21 @@
+package com.onlinedating.service;
+
+import com.onlinedating.model.*;
+import com.onlinedating.model.Category;
+
+import java.util.List;
+
+/**
+ * Created by Aver on 17.06.2015.
+ */
+public interface QuestionService
+{
+    void Add( String question, String text);
+
+    Question get_btID(int id);
+    void update( Question question, int id);
+    void delete (int id);
+
+
+    List<Category> question_list();
+}

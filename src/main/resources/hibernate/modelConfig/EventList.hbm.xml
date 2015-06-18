@@ -2,17 +2,17 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="com.onlinedating.model">
 
-    <class name="QuestionList" table="QuestionList">
-        <id name="QuestionListID" type="java.lang.Integer">
-            <column name="QuestionListID" />
+    <class name="EventList" table="EventList">
+        <id name="eventList_id" type="java.lang.Integer">
+            <column name="EventListID" />
             <generator class="identity">
             </generator>
         </id>
-        <set name="questions" table="Question" fetch="select" >
+        <set name="events" table="Event" fetch="select" >
             <key>
-                <column name="QuestionList_QuestionListID" not-null="true"></column>
+                <column name="EventList_EventListID" not-null="true"></column>
             </key>
-            <one-to-many class="Question"/>
+            <one-to-many class="Event"/>
         </set>
 
     </class>
