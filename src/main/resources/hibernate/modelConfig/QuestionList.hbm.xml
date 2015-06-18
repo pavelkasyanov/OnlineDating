@@ -8,7 +8,7 @@
             <generator class="identity">
             </generator>
         </id>
-        <set name="questions" table="Question" fetch="select" >
+        <set name="questions" table="Question" fetch="subselect" lazy="false" >
             <key>
                 <column name="QuestionList_QuestionListID" not-null="true"></column>
             </key>
