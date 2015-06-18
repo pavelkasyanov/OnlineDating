@@ -8,7 +8,7 @@
             <generator class="identity">
             </generator>
         </id>
-        <set name="events" table="Event" fetch="select">
+        <set name="events" table="Event" fetch="select" >
             <key>
                 <column name="EventList_EventListID" not-null="true"></column>
             </key>

@@ -95,8 +95,8 @@
         <c:forEach var="ask" items="${myAskList}">
 
            <h4>
-              <p class="askP">
-                <c:out value="${ask}" />
+              <p class="ask">
+                <c:out value="${ask.text}" />
               </p>
            </h4>
 

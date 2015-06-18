@@ -19,7 +19,7 @@ public class EventListDAOImpl implements EventListDAO {
     @Override
     @Transactional
     public void Add(EventList eventList) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
         //����������� ��� ������� � ��������
@@ -27,19 +27,19 @@ public class EventListDAOImpl implements EventListDAO {
         session.save(eventList);
 
         session.getTransaction().commit();
-        session.close();
+
     }
 
     @Override
     @Transactional
     public EventList get_btID(int id) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
         EventList eventList = (EventList)session.get(EventList.class,id);
 
         session.getTransaction().commit();
-        session.close();
+
         return eventList;
     }
 }

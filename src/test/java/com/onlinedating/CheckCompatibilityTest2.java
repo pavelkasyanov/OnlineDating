@@ -59,7 +59,10 @@ public class CheckCompatibilityTest2 {
     @Test
     public void testCheckSum() throws Exception {
         List<Integer> li = new ArrayList<Integer>(4);
-        li.add(1);li.add(0);li.add(0); li.add(1);
+        li.add(1);
+        li.add(0);
+        li.add(0);
+        li.add(1);
         CheckCompatibility cC = new CheckCompatibility();
         int[] a = cC.checkSum(li);
         assertEquals(16,a[1]);

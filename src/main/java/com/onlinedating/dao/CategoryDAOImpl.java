@@ -20,7 +20,7 @@ public class CategoryDAOImpl implements  CategoryDAO {
     @Override
     @Transactional
     public void Add(Category category) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
 
@@ -28,27 +28,27 @@ public class CategoryDAOImpl implements  CategoryDAO {
 
         session.save(category);
         session.getTransaction().commit();
-        session.close();
+
 
     }
 
     @Override
     @Transactional
     public Category get_btID(int id) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
         Category category = (Category)session.get(Category.class,id);
 
         session.getTransaction().commit();
-        session.close();
+
         return category;
     }
 
     @Override
     @Transactional
     public List<Category> category_list() {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
         List category = null;
@@ -59,7 +59,7 @@ public class CategoryDAOImpl implements  CategoryDAO {
 
         }
         session.getTransaction().commit();
-        session.close();
+
         return category;
     }
 }

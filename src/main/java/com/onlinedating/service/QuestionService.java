@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface QuestionService
 {
-    void Add( Question question);
+    void Add( String question, String text);
 
     Question get_btID(int id);
     void update( Question question, int id);

@@ -24,24 +24,23 @@ public class EventDAOImpl implements EventDAO{
     @Override
     @Transactional
     public void Add(Event event) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
         session.save(event);
         session.getTransaction().commit();
-        session.close();
+
     }
 
 
     @Override
     @Transactional
     public Event get_btID(int id) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
         Event event = (Event)session.get(Event.class,id);
         session.getTransaction().commit();
-        session.close();
         return event;
     }
 
@@ -50,7 +49,7 @@ public class EventDAOImpl implements EventDAO{
     @Override
     @Transactional
     public void update(Event event, int id) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
 
@@ -60,26 +59,24 @@ public class EventDAOImpl implements EventDAO{
         session.update(employee);
 
         session.getTransaction().commit();
-        session.close();
     }
 
     @Override
     @Transactional
     public void delete(int id) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
         Event question =
                 (Event)session.get(Event.class, id);
         session.delete(question);
         session.getTransaction().commit();
-        session.close();
     }
 
     @Override
     @Transactional
     public List<Event> question_list() {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
         List event = null;
@@ -90,7 +87,7 @@ public class EventDAOImpl implements EventDAO{
 
         }
         session.getTransaction().commit();
-        session.close();
+
         return event;
     }
 }
