@@ -25,17 +25,17 @@
             <column name="Sex"   unique="true" />
         </property>
 
-        <many-to-one name="city" class="City">
+        <many-to-one name="city" class="City" fetch="join">
         <column name="City_CityID"  unique="true"></column>
     </many-to-one>
 
-    <many-to-one name="questionList" class="QuestionList">
+    <many-to-one name="questionList" class="QuestionList" fetch="join">
         <column name="QuestionList_QuestionListID"  unique="true"></column>
     </many-to-one>
 
-        <set name="questions" table="Question" fetch="select">
+        <set name="questions" table="Question" fetch="subselect" lazy="false">
             <key>
-                <column name="User_UserID" not-null="true"></column>
+                <column name="User_UserID" not-null="true" ></column>
             </key>
             <one-to-many class="Question"/>
         </set>

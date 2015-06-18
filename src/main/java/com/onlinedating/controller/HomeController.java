@@ -43,8 +43,8 @@ public class HomeController {
 
 			User user = userService.get((String)request.getSession().getAttribute("login_user"));
 			QuestionList questionList = questionListService.get_btID(user.getQuestionList().getQuestionListID());
-			//List<Question> list = questionService.Get_Question_list_byquestionList(questionList);\
-			Set<Question> list = questionList.getQuestions();
+			List<Question> list = questionService.Get_Question_list_byquestionList(questionList);
+			//Set<Question> list = user.getQuestions();
 			model.addAttribute("myAskList",list );
 			String aboutMeText = user.getUser_Inf();
 			model.addAttribute("aboutMeText", aboutMeText);
