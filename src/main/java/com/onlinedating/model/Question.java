@@ -82,4 +82,9 @@ public class Question {
         this.questionList = questionList;
     }
 
+    @Override
+    public String toString() {
+        return this.text;
+    }
+
 }

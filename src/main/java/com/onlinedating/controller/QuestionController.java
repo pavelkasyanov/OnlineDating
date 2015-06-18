@@ -2,8 +2,10 @@ package com.onlinedating.controller;
 
 
 import com.onlinedating.dao.CategoryDAO;
+import com.onlinedating.service.CategoryService;
 import com.onlinedating.service.QuestionService;
 import com.onlinedating.service.QuestionServiceImpl;
+import com.onlinedating.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,13 +21,20 @@ public class QuestionController {
     @Autowired
     QuestionService questionService;
     @Autowired
-    CategoryDAO categoryDAO;
+    CategoryService categoryService;
+
+    @Autowired
+    UserService userService;
 
     @RequestMapping(value = "/ask", method = RequestMethod.GET)
-    public String index(ModelMap model) {
+    public String index(ModelMap model,
+                        HttpServletRequest request) {
+
+        String userLogin = (String) request.getSession().getAttribute("login_user");
 
         model.addAttribute("questionList", null);
-        model.addAttribute("categoryList", categoryDAO.category_list());
+        model.addAttribute("myQuestionList", userService.get(userLogin).getQuestions());
+        model.addAttribute("categoryList", categoryService.category_list());
 
         return "edit";
     }

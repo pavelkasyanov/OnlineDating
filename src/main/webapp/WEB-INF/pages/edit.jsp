@@ -12,33 +12,32 @@
 <script type="text/javascript">
   jQuery(document).ready(function ($) {
     $('#mytabs').tab();
+
+    $('.btn-toggle').click(function() {
+      $(this).find('.btn').toggleClass('active');
+
+      if ($(this).find('.btn-primary').size()>0) {
+        $(this).find('.btn').toggleClass('btn-primary');
+      }
+      if ($(this).find('.btn-danger').size()>0) {
+        $(this).find('.btn').toggleClass('btn-danger');
+      }
+      if ($(this).find('.btn-success').size()>0) {
+        $(this).find('.btn').toggleClass('btn-success');
+      }
+      if ($(this).find('.btn-info').size()>0) {
+        $(this).find('.btn').toggleClass('btn-info');
+      }
+
+      $(this).find('.btn').toggleClass('btn-default');
+
+    });
+
+    $('form').submit(function(){
+      alert($(this["options"]).val());
+      return true;
+    });
   });
-
-  $('.btn-toggle').click(function() {
-    $(this).find('.btn').toggleClass('active');
-
-    if ($(this).find('.btn-primary').size()>0) {
-      $(this).find('.btn').toggleClass('btn-primary');
-    }
-    if ($(this).find('.btn-danger').size()>0) {
-      $(this).find('.btn').toggleClass('btn-danger');
-    }
-    if ($(this).find('.btn-success').size()>0) {
-      $(this).find('.btn').toggleClass('btn-success');
-    }
-    if ($(this).find('.btn-info').size()>0) {
-      $(this).find('.btn').toggleClass('btn-info');
-    }
-
-    $(this).find('.btn').toggleClass('btn-default');
-
-  });
-
-  $('form').submit(function(){
-    alert($(this["options"]).val());
-    return false;
-  });
-
 </script>
 
 
@@ -128,11 +127,18 @@
                   <button class="btn btn-lg btn-primary active">Не важно</button>
                 </div>
               </div>
-
-
-
             </div>
-
+            <div class="row">
+              <ul>
+                <c:forEach var="question" items="${myQuestionList}">
+                  <li>
+                    <h4><br>
+                      <c:out value="${question}" />
+                    </h4>
+                  </li>
+                </c:forEach>
+              </ul>
+            </div>
 
           </div>
           <div class="tab-pane fade" id = "tab2">
@@ -144,6 +150,7 @@
                 </h4>
               </li>
               </c:forEach>
+              </ul>
           </div>
           <div class="tab-pane fade" id = "tab3">
             <ul>

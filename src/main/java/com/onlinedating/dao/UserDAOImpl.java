@@ -53,7 +53,6 @@ public class UserDAOImpl implements UserDAO {
                         uniqueResult();
 
         session.getTransaction().commit();
-        ;
 
         return user;
     }

@@ -14,8 +14,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -39,18 +42,15 @@ public class HomeController {
 	public String home(ModelMap model, HttpServletRequest request) {
 		if (request.getSession().getAttribute("login_user") != null) {
 
-
-
 			User user = userService.get((String)request.getSession().getAttribute("login_user"));
 			QuestionList questionList = questionListService.get_btID(user.getQuestionList().getQuestionListID());
 			List<Question> list = questionService.Get_Question_list_byquestionList(questionList);
-			//Set<Question> list = user.getQuestions();
 			model.addAttribute("myAskList",list );
-			String aboutMeText = user.getUser_Inf();
-			model.addAttribute("aboutMeText", aboutMeText);
+
+			model.addAttribute("aboutMeText",user.getUser_Inf());
+
 
 			String avatarUrl = "/resources/css/img/ph1.jpg";
-
 			model.addAttribute("avatartUrl", avatarUrl);
 
 			return "home";
@@ -60,16 +60,27 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(ModelMap model,
-						@RequestParam("login") String login,
-						@RequestParam("password") String pass,
-						HttpServletRequest request) {
+	@ResponseBody
+	public String login(@RequestParam("login") String login,
+						@RequestParam("pass") String pass,
+						HttpServletRequest request,
+						HttpServletResponse response) {
+
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
 
 		if (login != null || !login.equals("")) {
-			request.getSession().setAttribute("login_user", login);
+
+			User user = userService.get(login);
+			if (user != null) {
+				request.getSession().setAttribute("login_user", login);
+				return "";
+			}
+
+			return "user not exist!";
 		}
 
-		return "redirect:home";
+		return "error";
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

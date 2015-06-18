@@ -35,6 +35,7 @@ public class QuestionServiceImpl implements  QuestionService {
         question.setQuestionList(user.getQuestionList());
         Calendar cal = Calendar.getInstance();
         question.setDate(cal.getTime());
+
         questionDAO.Add(question);
     }
 

@@ -3,6 +3,33 @@
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel=" stylesheet " type="text/css">
 
 <link href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $('form').submit(function(){
+            var userLogin = $('#login').val();
+            var userPass = $('#pass').val();
+
+            var loginResp = $.post( 'login',
+                    {login: userLogin,
+                        pass:userPass}
+            );
+
+            loginResp.done(function( data ) {
+                if (data != '') {
+                    document.getElementById('error_user_login_alert').style.display = "block"
+                    $('#error_user_login_alert').text(data);
+                    document.getElementById('pass').value = '';
+                } else {
+                    window.location.replace('/home');
+                }
+            });
+
+            return false;
+        });
+    });
+</script>
 <body>
 
 
@@ -16,15 +43,12 @@
 
             <div >
 
-
-
+                <div class="alert alert-danger" style = "display:none" id="error_user_login_alert"></div>
                 <form action="login" method="post" >
-                    <p>Name:<input type="text" name="login" /></p>
-                    <p>Password:<input type="text" name="password" /></p>
-                    <input type="submit" value="ok">
+                    <p>Name:<input type="text" name="login" id="login" /></p>
+                    <p>Password:<input type="text" name="pass" id="pass"/></p>
+                    <input type="submit" value="login">
                 </form>
-
-
 
             </div>
 
