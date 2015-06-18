@@ -33,10 +33,7 @@
 
     });
 
-    $('form').submit(function(){
-      alert($(this["options"]).val());
-      return true;
-    });
+
   });
 </script>
 
@@ -106,9 +103,17 @@
                 <br>
                 <form action="add_ask" method="post" class="form-horizontal">
 
-                  <textarea rows="5" style="width: 100%" name="questionText"></textarea>
-                  <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                  <h3>Выбор категории вопроса</h3>
+
+                  <select style="width: 60%" name="category_new">
+                    <c:forEach var="category" items="${categoryList}">
+                      <option value="${category}"><c:out value="${category}"/></option>
+                    </c:forEach>
+                  </select>
+                  <textarea rows="5" style="width: 100%; resize: none" name="questionText" ></textarea>
+                      <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+
                     <button type="reset" class="btn">Отмена</button>
                   </div>
 
@@ -199,7 +204,7 @@
 
           <h3>Категории вопросов</h3>
 
-          <select style="width: 60%">
+          <select style="width: 60%" >
             <c:forEach var="category" items="${categoryList}">
               <option><c:out value="${category}"/></option>
             </c:forEach>

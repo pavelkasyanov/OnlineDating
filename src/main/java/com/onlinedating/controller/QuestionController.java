@@ -40,12 +40,13 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "/add_ask", method = RequestMethod.POST)
-    public String addAsk(@RequestParam(value = "questionText") String questionText, HttpServletRequest request) {
+    public String addAsk(@RequestParam(value = "questionText") String questionText,
+                         @RequestParam(value = "category_new") String category, HttpServletRequest request) {
 
 
             if (questionText != null && !questionText.equals("")) {
 
-                questionService.Add(questionText, (String)request.getSession().getAttribute("login_user"));
+                questionService.Add(questionText, (String)request.getSession().getAttribute("login_user"),category);
             }
 
             return "redirect:/ask";

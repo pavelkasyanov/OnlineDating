@@ -10,6 +10,7 @@ import java.util.List;
 public interface CategoryService {
 
     void Add( Category category);
-    Category get_btID(int id);
+    Category get_byID(int id);
+    Category get_byName(String name);
     List<Category> category_list ();
 }

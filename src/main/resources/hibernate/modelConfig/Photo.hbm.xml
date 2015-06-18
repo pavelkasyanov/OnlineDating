@@ -11,10 +11,9 @@
         <property name="photo" type="binary">
             <column name="photo_file" not-null="true" />
         </property>
-        <property name="url" type="String">
+        <property name="url" type="string">
             <column name="Photo_url" not-null="true" />
         </property>
-
 
     </class>
 </hibernate-mapping>

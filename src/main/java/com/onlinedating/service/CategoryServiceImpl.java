@@ -19,8 +19,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category get_btID(int id) {
-        return categoryDAO.get_btID(id);
+    public Category get_byID(int id) {
+        return categoryDAO.get_byID(id);
+    }
+
+    @Override
+    public Category get_byName(String name) {
+        return  categoryDAO.get_byName(name);
     }
 
     @Override

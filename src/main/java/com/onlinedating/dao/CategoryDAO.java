@@ -10,6 +10,8 @@ import java.util.List;
  */
 public interface CategoryDAO {
     void Add( Category category);
-    Category get_btID(int id);
+    Category get_byName(String name);
+    Category get_byID(int id);
+
     List<Category> category_list ();
 }

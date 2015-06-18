@@ -44,14 +44,15 @@ public class HomeController {
 
 			User user = userService.get((String)request.getSession().getAttribute("login_user"));
 			QuestionList questionList = questionListService.get_btID(user.getQuestionList().getQuestionListID());
-			List<Question> list = questionService.Get_Question_list_byquestionList(questionList);
+			Set<Question> list = questionList.getQuestions();
 			model.addAttribute("myAskList",list );
+			model.addAttribute("avatartUrl",user.getPhoto().getUrl());
 
 			model.addAttribute("aboutMeText",user.getUser_Inf());
 
 
-			String avatarUrl = "/resources/css/img/ph1.jpg";
-			model.addAttribute("avatartUrl", avatarUrl);
+			/*String avatarUrl = "/resources/css/img/ph1.jpg";
+			model.addAttribute("avatartUrl", avatarUrl);*/
 
 			return "home";
 		}

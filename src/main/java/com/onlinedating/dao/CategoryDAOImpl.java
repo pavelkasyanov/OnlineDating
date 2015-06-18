@@ -1,8 +1,10 @@
 package com.onlinedating.dao;
 
 import com.onlinedating.model.Category;
+import com.onlinedating.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 import javax.transaction.Transactional;
 import java.util.Iterator;
@@ -32,13 +34,30 @@ public class CategoryDAOImpl implements  CategoryDAO {
 
     }
 
+
     @Override
     @Transactional
-    public Category get_btID(int id) {
+    public Category get_byID(int id) {
         Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
         Category category = (Category)session.get(Category.class,id);
+
+        session.getTransaction().commit();
+
+        return category;
+    }
+
+    @Override
+    @Transactional
+    public Category get_byName(String category_name) {
+        Session session = sessionFactory.getCurrentSession();
+        System.out.println("Maven + Hibernate + MySQL");
+        session.beginTransaction();
+        Category category =
+                (Category)session.createCriteria( Category.class ).
+                        add(Restrictions.eq("Category_Name", category_name)).
+                        uniqueResult();
 
         session.getTransaction().commit();
 
