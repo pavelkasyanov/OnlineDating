@@ -23,7 +23,9 @@
     <!-- Hibernate settings -->
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:hibernate/hibernate.properties"/>
+        <property name="location">
+            <value>classpath:../resources/hibernate/hibernate.properties</value>
+        </property>
     </bean>
 
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
@@ -48,27 +50,39 @@
     <!-- DAO settings -->
 
     <bean id="userDao" class="com.onlinedating.dao.UserDAOImpl">
-        <constructor-arg ref="sessionFactory"/>
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
     </bean>
 
     <bean id="countryDao" class="com.onlinedating.dao.CountryDAOImpl">
-        <constructor-arg ref="sessionFactory"/>
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
     </bean>
 
     <bean id="cityDao" class="com.onlinedating.dao.CityDAOImpl">
-        <constructor-arg ref="sessionFactory"/>
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
     </bean>
 
     <bean id="questionlistDao" class="com.onlinedating.dao.QuestionListDAOImpl">
-        <constructor-arg ref="sessionFactory"/>
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
     </bean>
 
     <bean id="questionDao" class="com.onlinedating.dao.QuestionDAOImpl">
-        <constructor-arg ref="sessionFactory"/>
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
     </bean>
 
     <bean id="categoryDao" class="com.onlinedating.dao.CategoryDAOImpl">
-        <constructor-arg ref="sessionFactory"/>
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
     </bean>
 
 </beans>
