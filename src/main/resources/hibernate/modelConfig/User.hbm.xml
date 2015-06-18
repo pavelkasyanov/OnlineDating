@@ -21,17 +21,22 @@
         <column name="User_OwnInformation"   unique="true" />
     </property>
 
+
         <property name="Sex" type="string">
             <column name="Sex"   unique="true" />
         </property>
 
         <many-to-one name="city" class="City" fetch="join">
-        <column name="City_CityID"  unique="true"></column>
-    </many-to-one>
+             <column name="City_CityID"  unique="true"></column>
+        </many-to-one>
 
-    <many-to-one name="questionList" class="QuestionList" fetch="join">
-        <column name="QuestionList_QuestionListID"  unique="true"></column>
-    </many-to-one>
+        <many-to-one name="questionList" class="QuestionList" fetch="join">
+             <column name="QuestionList_QuestionListID"  unique="true"></column>
+        </many-to-one>
+
+        <many-to-one name="photo" class="Photo" fetch="join">
+            <column name="Photo_PhotoID"  unique="true"></column>
+        </many-to-one>
 
         <set name="questions" table="Question" fetch="subselect" lazy="false">
             <key>

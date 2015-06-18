@@ -11,6 +11,7 @@ public class User implements java.io.Serializable {
     private City city;
     private QuestionList questionList;
     private Set<Question> questions;
+    private Photo photo;
 
     public int getUserID() {
         return UserID;
@@ -68,5 +69,13 @@ public class User implements java.io.Serializable {
 
     public void setSex(String sex) {
         Sex = sex;
+    }
+
+    public Photo getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Photo photo) {
+        this.photo = photo;
     }
 }
