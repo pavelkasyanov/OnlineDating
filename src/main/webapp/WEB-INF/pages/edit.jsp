@@ -105,7 +105,7 @@
               <div class="col-md-6  col-lg-6 col-sm-6  ">
 
                 <br>
-                <form action="/add_ask" method="post" class="form-horizontal">
+                <form action="add_ask" method="post" class="form-horizontal">
 
                   <textarea rows="5" style="width: 100%" name="questionText"></textarea>
                   <div class="form-actions">
