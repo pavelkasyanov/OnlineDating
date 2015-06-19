@@ -147,35 +147,27 @@
           </div>
           <div class="tab-pane fade" id = "tab3">
             <ul>
-              <li>
-                <h4><br>
-                  Смотреть ужастики?
-                </h4>
-              </li>
-              <li>
-                <h4><br> Играть в шахматы? </h4>
-              </li>
-
-              <li>
-                <h4><br>Поехать на выходные к маме?</h4>
-              </li>
+              <c:forEach var="question" items="${questionList}">
+                <li>
+                  <h4><br>
+                    <c:out value="${question.text}" />
+                  </h4>
+                </li>
+              </c:forEach>
             </ul>
           </div>
 
           <div class="tab-pane fade" id = "tab4">
             <ul>
-              <li>
-                <h4> <br>
-                  Смотреть ужастики?
-                </h4>
-              </li>
-              <li>
-                <h4> <br>Играть в шахматы? </h4>
-              </li>
+              <c:forEach var="question" items="${questionList}">
+                <li>
+                  <h4><br>
+                    <c:out value="${question.text}" />
+                  </h4>
 
-              <li>
-                <h4> <br>Поехать на выходные к маме?</h4>
-              </li>
+                  <input type="button" value="добавить">
+                </li>
+              </c:forEach>
             </ul>
           </div>
 
