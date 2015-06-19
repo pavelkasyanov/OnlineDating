@@ -34,7 +34,8 @@
             <li><a href="home"> Моя страница </a> </li>
             <li><a href="#"> Поиск </a> </li>
             <li><a href="ask"> Вопросы </a> </li>
-            <li><a href="#"> Link </a> </li>
+            <!--TODO add condition -->
+            <li><a href="logout"> Log Out </a> </li>
           </ul>
 
         </div>
@@ -71,7 +72,7 @@
   <div class="col-md-3 col-lg-3 col-sm-3" style="text-align: center; border-right:solid 1px rgba(30, 30, 30, 0.23); ">
 
 
-    <img src="${pageContext.request.contextPath}/ <c:out value="${avatartUrl}" />" class="img-polaroid"  >
+    <img src="${avatartUrl}" class="img-polaroid"  width="200" height="200">
 
 
   </div>
@@ -95,8 +96,8 @@
         <c:forEach var="ask" items="${myAskList}">
 
            <h4>
-              <p class="askP">
-                <c:out value="${ask}" />
+              <p class="ask">
+                <c:out value="${ask.text}" />
               </p>
            </h4>
 

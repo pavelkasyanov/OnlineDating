@@ -12,33 +12,64 @@
 <script type="text/javascript">
   jQuery(document).ready(function ($) {
     $('#mytabs').tab();
+
+    $('.btn-toggle').click(function() {
+      $(this).find('.btn').toggleClass('active');
+
+      if ($(this).find('.btn-primary').size()>0) {
+        $(this).find('.btn').toggleClass('btn-primary');
+      }
+    });
+
+    $('form').submit(function(){
+      var text = $('#questionText').val();
+      var category = $('#category_new').val();
+
+      var loginResp = $.post( '/add_ask',
+              {questionText: text,
+                category_new:category}
+      );
+
+      loginResp.done(function( data ) {
+        var obj = JSON.parse(data);
+
+        var result = '<li><h4><br>'+obj.text+'</h4> </li>';
+        $('#my_question_list').append(result);
+        $('textarea').val('');
+
+      });
+
+      loginResp.error(function() { alert("Ошибка выполнения"); })
+
+      return false;
+    });
   });
 
-  $('.btn-toggle').click(function() {
-    $(this).find('.btn').toggleClass('active');
+  function getLastQuestions() {
 
-    if ($(this).find('.btn-primary').size()>0) {
-      $(this).find('.btn').toggleClass('btn-primary');
-    }
-    if ($(this).find('.btn-danger').size()>0) {
-      $(this).find('.btn').toggleClass('btn-danger');
-    }
-    if ($(this).find('.btn-success').size()>0) {
-      $(this).find('.btn').toggleClass('btn-success');
-    }
-    if ($(this).find('.btn-info').size()>0) {
-      $(this).find('.btn').toggleClass('btn-info');
-    }
+    var lastQuestionRequest = $.get('/last_ask');
 
-    $(this).find('.btn').toggleClass('btn-default');
+    lastQuestionRequest.done(function( data ) {
+      var obj = JSON.parse(data);
+      var cont = $('#lastAskList');
+      cont.empty();
 
-  });
+      obj.forEach( function(item, i, obj) {
+        var result = '<li><h4><br>'+item.text+'</h4> </li>';
+        cont.append(result);
+      });
+    });
+  }
 
-  $('form').submit(function(){
-    alert($(this["options"]).val());
-    return false;
-  });
+  function deleteQuestion(askId) {
+    var deleteAsk = $.post('/delete_ask',
+            {askId: askId});
 
+    deleteAsk.done(function( data ){
+      var element = $('#'+'myAsk_'+askId);
+      element.hide();
+    });
+  }
 </script>
 
 
@@ -91,7 +122,7 @@
           <li class="active"><a href="#tab1" data-toggle="tab"> Мои вопросы </a></li>
           <li><a href="#tab2" data-toggle="tab"> Вопросы друзей </a></li>
           <li><a href="#tab3" data-toggle="tab"> Топ </a></li>
-          <li><a href="#tab3" data-toggle="tab"> Последние вопросы </a></li>
+          <li><a href="#tab4" data-toggle="tab" onclick="getLastQuestions();"> Последние вопросы </a></li>
 
         </ul>
 
@@ -105,11 +136,19 @@
               <div class="col-md-6  col-lg-6 col-sm-6  ">
 
                 <br>
-                <form action="/add_ask" method="post" class="form-horizontal">
+                <form action="add_ask" method="post" class="form-horizontal">
 
-                  <textarea rows="5" style="width: 100%" name="questionText"></textarea>
-                  <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                  <h3>Выбор категории вопроса</h3>
+
+                  <select style="width: 60%" name="category_new" id="category_new">
+                    <c:forEach var="category" items="${categoryList}">
+                      <option value="${category}"><c:out value="${category}"/></option>
+                    </c:forEach>
+                  </select>
+                  <textarea rows="5" style="width: 100%; resize: none" name="questionText" id="questionText"></textarea>
+                      <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+
                     <button type="reset" class="btn">Отмена</button>
                   </div>
 
@@ -124,15 +163,22 @@
                 <div class="btn-group btn-toggle" style="margin-left: 15px; margin-top: 0">
                   <h3>Приоритет вопроса</h3>
                   <br>
-                  <button class="btn btn-lg btn-default">Важно</button>
-                  <button class="btn btn-lg btn-primary active">Не важно</button>
+                  <button class="btn btn-lg btn-default" id="askImport">Важно</button>
+                  <button class="btn btn-lg btn-primary active" id="askNotImport">Не важно</button>
                 </div>
               </div>
-
-
-
             </div>
-
+            <div class="row" id="my_question_list_div">
+              <ul id="my_question_list">
+                <c:forEach var="question" items="${myQuestionList}">
+                  <li id="myAsk_${question.questionID}">
+                    <h4><br>
+                      <c:out value="${question}" /><a onclick="deleteQuestion(${question.questionID});">delete</a>
+                    </h4>
+                  </li>
+                </c:forEach>
+              </ul>
+            </div>
 
           </div>
           <div class="tab-pane fade" id = "tab2">
@@ -140,10 +186,11 @@
               <c:forEach var="question" items="${questionList}">
               <li>
                 <h4><br>
-                  <c:out value="${question.text}" />
+                  <c:out value="${question}" />
                 </h4>
               </li>
               </c:forEach>
+              </ul>
           </div>
           <div class="tab-pane fade" id = "tab3">
             <ul>
@@ -163,19 +210,7 @@
           </div>
 
           <div class="tab-pane fade" id = "tab4">
-            <ul>
-              <li>
-                <h4> <br>
-                  Смотреть ужастики?
-                </h4>
-              </li>
-              <li>
-                <h4> <br>Играть в шахматы? </h4>
-              </li>
-
-              <li>
-                <h4> <br>Поехать на выходные к маме?</h4>
-              </li>
+            <ul id="lastAskList">
             </ul>
           </div>
 
@@ -192,14 +227,10 @@
 
           <h3>Категории вопросов</h3>
 
-          <select style="width: 60%">
-
-            <option>Отдых </option>
-            <option>Личное </option>
-            <option>Карьера</option>
-            <option>Ценности </option>
-
-
+          <select style="width: 60%" >
+            <c:forEach var="category" items="${categoryList}">
+              <option><c:out value="${category}"/></option>
+            </c:forEach>
           </select>
 
 

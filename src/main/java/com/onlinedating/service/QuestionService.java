@@ -1,25 +1,22 @@
 package com.onlinedating.service;
 
-
-import com.onlinedating.dao.QuestionDAO;
-import com.onlinedating.model.Question;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.onlinedating.model.*;
+import com.onlinedating.model.Category;
 
 import java.util.List;
 
-public class QuestionService  implements IQuestionService {
+/**
+ * Created by Aver on 17.06.2015.
+ */
+public interface QuestionService
+{
+    Question Add( String question, String text, String category);
 
-    @Autowired
-    QuestionDAO questionDAO;
+    Question get_btID(int id);
+    void update( Question question, int id);
+    void delete (int id);
+    List<Question> getLast(int count);
 
-    @Override
-    public void add(String question) {
-        Question q = new Question(question);
-        questionDAO.add(q);
-    }
 
-    @Override
-    public List<Question> getList() {
-        return questionDAO.getList();
-    }
+    List<Question> question_list();
 }

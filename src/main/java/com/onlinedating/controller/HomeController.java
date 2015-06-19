@@ -1,24 +1,37 @@
 package com.onlinedating.controller;
 
+import com.onlinedating.dao.QuestionDAO;
 import com.onlinedating.model.Question;
-import com.onlinedating.service.QuestionService;
+import com.onlinedating.model.QuestionList;
+import com.onlinedating.model.User;
+import com.onlinedating.service.QuestionListService;
+import com.onlinedating.service.UserService;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 @Controller
 public class HomeController {
 
+	public static final String CUR_USER = "cur_user";
 	@Autowired
-	QuestionService questionService;
+	QuestionDAO questionService;
+	@Autowired
+	QuestionListService questionListService;
+	@Autowired
+	UserService userService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(ModelMap model, HttpServletRequest request) {
@@ -27,22 +40,19 @@ public class HomeController {
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(ModelMap model, HttpServletRequest request) {
-		if (request.getSession().getAttribute("login_user") != null) {
+		if (request.getSession().getAttribute(CUR_USER) != null) {
 
-			model.addAttribute("myAskList", questionService.getList());
+			User user = (User)request.getSession().getAttribute(CUR_USER);
+			//QuestionList questionList = questionListService.get_btID(user.getQuestionList().getQuestionListID());
+			//Set<Question> list = questionList.getQuestions();
+			Set<Question> questions = userService.getQuestions(user);
+			model.addAttribute("myAskList", questions);
 
+			//TODO add url user
+			//model.addAttribute("avatartUrl",user.getPhoto().getUrl());
 
-			String aboutMeText = "С шести лет и до шестнадцати я занималась музыкой. И две мои сестры занимались музыкой. В коридоре\n" +
-					"      висел специальный ремень для тех, кто отказывался заниматься музыкой. Говорили, у меня талант. Мой\n" +
-					"      плейлист – это песни, которые берут в долгую дорогу, чтобы не заснуть. Там рядом Тэйлор Свифт и Михаил\n" +
-					"      Шуфутинский. Я усердно учусь и моей профессией будет преподавание русского языка и литературы в старших классах.\n" +
-					"      Парни думают, что быть учительницей – это моя сексуальная фантазия. Нет. Это призвание. А ещё мне нравится\n" +
-					"      готовить пироги и торты. Только сама я их не ем. Чтобы другим больше было";
-			model.addAttribute("aboutMeText", aboutMeText);
-
-			String avatarUrl = "/resources/css/img/ph1.jpg";
-
-			model.addAttribute("avatartUrl", avatarUrl);
+			//TODO aboutme
+			//model.addAttribute("aboutMeText",user.getUser_Inf());
 
 			return "home";
 		}
@@ -51,23 +61,42 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(ModelMap model,
-						@RequestParam("login") String login,
-						@RequestParam("password") String pass,
-						HttpServletRequest request) {
+	@ResponseBody
+	public String login(@RequestParam("login") String login,
+						@RequestParam("pass") String pass,
+						HttpServletRequest request,
+						HttpServletResponse response) throws IOException {
+
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		ObjectMapper converter = new ObjectMapper();
 
 		if (login != null || !login.equals("")) {
-			request.getSession().setAttribute("login_user", login);
+
+			User user = userService.get(login);
+			System.out.println("User service get glogih");
+
+			if (user != null) {
+				request.getSession().setAttribute(CUR_USER, user);
+				map.put("answer", "");
+				return converter.writeValueAsString(map);
+			}
+
+			map.put("answer", "user not exist");
+			return converter.writeValueAsString(map);
 		}
 
-		return "redirect:home";
+		map.put("answer", "error");
+		return converter.writeValueAsString(map);
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(ModelMap model,
 						 HttpServletRequest request) {
 
-		request.getSession().removeAttribute("login_user");
+		request.getSession().removeAttribute(CUR_USER);
 
 		return "redirect:home";
 	}
