@@ -71,7 +71,7 @@
   <div class="col-md-3 col-lg-3 col-sm-3" style="text-align: center; border-right:solid 1px rgba(30, 30, 30, 0.23); ">
 
 
-    <img src="${avatartUrl}" class="img-polaroid"  >
+    <img src="${avatartUrl}" class="img-polaroid"  width="200" height="200">
 
 
   </div>
