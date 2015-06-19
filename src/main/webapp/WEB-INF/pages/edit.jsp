@@ -46,6 +46,7 @@
 
         var result = '<li><h4><br>'+obj.text+'</h4> </li>';
         $('#my_question_list').append(result);
+        $('textarea').val('');
 
       });
 
