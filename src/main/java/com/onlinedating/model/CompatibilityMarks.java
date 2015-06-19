@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 
 public class CompatibilityMarks {
-    final static String DEFAULT_FILE_NAME= "compatibilityMarks.properties";
+    final static String DEFAULT_FILE_NAME= "C:\\Users\\Кирилл\\IdeaProjects\\OnlineDating2\\configCompatibility.txt";
 
     private int[] marks = new int[12];
 
