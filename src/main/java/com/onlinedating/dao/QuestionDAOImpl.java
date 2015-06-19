@@ -73,7 +73,7 @@ public class QuestionDAOImpl implements QuestionDAO {
 
     @Override
     @Transactional
-    public List<Category> question_list() {
+    public List<Question> question_list() {
         Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();

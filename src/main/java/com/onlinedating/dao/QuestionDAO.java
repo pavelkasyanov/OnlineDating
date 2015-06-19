@@ -16,6 +16,6 @@ public interface QuestionDAO {
     Question get_btID(int id);
     void update( Question question, int id);
     void delete (int id);
-    List<Category> question_list();
+    List<Question> question_list();
      List<Question> Get_Question_list_byquestionList(QuestionList questionList);
 }

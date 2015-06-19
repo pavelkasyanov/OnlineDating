@@ -4,11 +4,13 @@ import com.onlinedating.dao.QuestionDAO;
 import com.onlinedating.model.Category;
 import com.onlinedating.model.Question;
 import com.onlinedating.model.User;
+import org.hibernate.metamodel.relational.Database;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -34,8 +36,8 @@ public class QuestionServiceImpl implements  QuestionService {
         question.setPriority(0);
         question.setCategory(categoryService.get_byName(category));
         question.setQuestionList(user.getQuestionList());
-        Calendar cal = Calendar.getInstance();
-        question.setDate(cal.getTime());
+        Date dateoperation = new java.sql.Date(new java.util.Date().getTime());
+        question.setDate(dateoperation);
 
         questionDAO.Add(question);
 
@@ -58,7 +60,23 @@ public class QuestionServiceImpl implements  QuestionService {
     }
 
     @Override
-    public List<Category> question_list() {
+    public List<Question> getLast() {
+
+        List<Question> last_list = question_list();
+        Collections.sort(last_list, new QuestionDataComparator());
+        int lenght = last_list.size();
+        if(lenght<10)
+            return last_list;
+        else
+        {
+           return last_list.subList(0,9);
+        }
+
+
+    }
+
+    @Override
+    public List<Question> question_list() {
         return questionDAO.question_list();
     }
 }

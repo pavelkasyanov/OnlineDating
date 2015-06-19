@@ -106,7 +106,7 @@
           <li class="active"><a href="#tab1" data-toggle="tab"> Мои вопросы </a></li>
           <li><a href="#tab2" data-toggle="tab"> Вопросы друзей </a></li>
           <li><a href="#tab3" data-toggle="tab"> Топ </a></li>
-          <li><a href="#tab3" data-toggle="tab"> Последние вопросы </a></li>
+          <li><a href="#tab4" data-toggle="tab"> Последние вопросы </a></li>
 
         </ul>
 
@@ -195,18 +195,13 @@
 
           <div class="tab-pane fade" id = "tab4">
             <ul>
-              <li>
-                <h4> <br>
-                  Смотреть ужастики?
-                </h4>
-              </li>
-              <li>
-                <h4> <br>Играть в шахматы? </h4>
-              </li>
-
-              <li>
-                <h4> <br>Поехать на выходные к маме?</h4>
-              </li>
+              <c:forEach var="question" items="${last_questions}">
+                <li>
+                  <h4><br>
+                    <c:out value="${question}" />
+                  </h4>
+                </li>
+              </c:forEach>
             </ul>
           </div>
 

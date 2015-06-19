@@ -37,6 +37,7 @@ public class QuestionController {
         String userLogin = (String) request.getSession().getAttribute("login_user");
 
         model.addAttribute("questionList", null);
+        model.addAttribute("last_questions",questionService.getLast());
         model.addAttribute("myQuestionList", userService.get(userLogin).getQuestions());
         model.addAttribute("categoryList", categoryService.category_list());
 
