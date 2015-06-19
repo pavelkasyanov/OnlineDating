@@ -60,19 +60,13 @@ public class QuestionServiceImpl implements  QuestionService {
     }
 
     @Override
-    public List<Question> getLast() {
+    public List<Question> getLast(int count) {
 
         List<Question> last_list = question_list();
         Collections.sort(last_list, new QuestionDataComparator());
-        int lenght = last_list.size();
-        if(lenght<10)
-            return last_list;
-        else
-        {
-           return last_list.subList(0,9);
-        }
+        int length = last_list.size();
 
-
+        return (length < count ? last_list : last_list.subList(0, count));
     }
 
     @Override
