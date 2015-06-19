@@ -4,6 +4,8 @@ import java.util.List;
 
 import static com.onlinedating.model.CompatibilityAnswers.*;
 import static com.onlinedating.model.CompatibilityMarks.*;
+import static com.onlinedating.model.CompatibilityMarks.DEFAULT_FILE_NAME;
+
 /**
  * Created by Кирилл on 17.06.15.
  */
@@ -12,12 +14,15 @@ public class CheckCompatibility {
     private int valueInspected = 0;
     private int valueWhoChecks = 0;
     private int percent = 0;
-
+    final static String DEFAULT_FILE_NAME= "prop.properties";
     static final int PRIORITY_IMPORTANT = 1;
     static final int PRIORITY_NOTIMPORTANT = 0;
+
     public void check(int priority,String value)
     {
         CompatibilityMarks comMarks = new CompatibilityMarks();
+        comMarks.loadProperties(DEFAULT_FILE_NAME);
+        //System.out.print(comMarks.getInspectedImportantYesEasy());
         if(value == null) {
             if (PRIORITY_IMPORTANT == priority)
             {
