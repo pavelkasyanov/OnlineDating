@@ -140,32 +140,52 @@
               <c:forEach var="question" items="${questionList}">
               <li>
                 <h4><br>
-                  <c:out value="${question.text}" />
+                  <c:out value="${question.text}" /> <p></p>
+                  <div class="btn-group btn-toggle" style="margin-left: 15px; margin-top: 0; font-size: 20px">
+
+                    <button class="btn btn-lg btn-default">Важно</button>
+                    <button class="btn btn-lg btn-primary active">Не важно</button>
+                  </div>  <button class="btn btn-lg btn-default">Добавить</button>
                 </h4>
               </li>
               </c:forEach>
           </div>
+
+
+
           <div class="tab-pane fade" id = "tab3">
             <ul>
               <c:forEach var="question" items="${questionList}">
                 <li>
                   <h4><br>
-                    <c:out value="${question.text}" />
+                    <c:out value="${question.text}" /> <p></p>
+                    <div class="btn-group btn-toggle" style="margin-left: 15px; margin-top: 0; font-size: 20px">
+
+                      <button class="btn btn-lg btn-default">Важно</button>
+                      <button class="btn btn-lg btn-primary active">Не важно</button>
+                    </div> <button class="btn btn-lg btn-default">Добавить</button>
                   </h4>
                 </li>
               </c:forEach>
             </ul>
           </div>
 
+
+
+
           <div class="tab-pane fade" id = "tab4">
             <ul>
               <c:forEach var="question" items="${questionList}">
                 <li>
                   <h4><br>
-                    <c:out value="${question.text}" />
-                  </h4>
+                    <c:out value="${question.text}" /> <p></p>
+                    <div class="btn-group btn-toggle" style="margin-left: 15px; margin-top: 0; font-size: 20px">
 
-                  <input type="button" value="добавить">
+                      <button class="btn btn-lg btn-default">Важно</button>
+                      <button class="btn btn-lg btn-primary active">Не важно</button>
+                    </div>
+                    <button class="btn btn-lg btn-default">Добавить</button>
+                  </h4>
                 </li>
               </c:forEach>
             </ul>
