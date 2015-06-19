@@ -4,6 +4,7 @@ import com.onlinedating.dao.QuestionDAO;
 import com.onlinedating.model.Question;
 import com.onlinedating.model.QuestionList;
 import com.onlinedating.model.User;
+import com.onlinedating.model.mvc.AskRow;
 import com.onlinedating.service.QuestionListService;
 import com.onlinedating.service.UserService;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -18,9 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class HomeController {
@@ -46,7 +45,6 @@ public class HomeController {
 			//QuestionList questionList = questionListService.get_btID(user.getQuestionList().getQuestionListID());
 			//Set<Question> list = questionList.getQuestions();
 			Set<Question> questions = userService.getQuestions(user);
-			model.addAttribute("myAskList", questions);
 
 			//TODO add url user
 			//model.addAttribute("avatartUrl",user.getPhoto().getUrl());
@@ -54,10 +52,42 @@ public class HomeController {
 			//TODO aboutme
 			//model.addAttribute("aboutMeText",user.getUser_Inf());
 
+			addQuestions(model, questions);
+
 			return "home";
 		}
 
 		return "redirect:/";
+	}
+
+	private void addQuestions(ModelMap model, Set<Question> questions) {
+		model.addAttribute("myAskList", questions);
+
+		List<AskRow> stat = getStat(questions);
+		model.addAttribute("askRowList", stat);
+
+//			<c:out value="${askRow.question.text}" />
+//
+//			<c:out value="${askRow.countAnswered}" />
+//			<c:out value="${askRow.countDenied}" />
+//			<c:out value="${askRow.countImportant}" />
+//			<c:out value="${askRow.countAgreed}" />
+//
+	}
+
+//	TODO to servis
+
+	private List<AskRow> getStat(Set<Question> questions) {
+		List<AskRow> askRows = new ArrayList<AskRow>();
+		for (Question question:questions){
+			AskRow askRow = new AskRow(question);
+			askRow.setCountAnswered(15);
+			askRow.setCountDenied(20);
+			askRows.add(askRow);
+
+
+		}
+		return askRows;
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
