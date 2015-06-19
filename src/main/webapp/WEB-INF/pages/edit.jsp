@@ -19,7 +19,7 @@
       if ($(this).find('.btn-primary').size()>0) {
         $(this).find('.btn').toggleClass('btn-primary');
       }
-      if ($(this).find('.btn-danger').size()>0) {
+      /*if ($(this).find('.btn-danger').size()>0) {
         $(this).find('.btn').toggleClass('btn-danger');
       }
       if ($(this).find('.btn-success').size()>0) {
@@ -29,10 +29,28 @@
         $(this).find('.btn').toggleClass('btn-info');
       }
 
-      $(this).find('.btn').toggleClass('btn-default');
-
+      $(this).find('.btn').toggleClass('btn-default');*/
     });
 
+    $('form').submit(function(){
+      var text = $('#questionText').val();
+      var category = $('#category_new').val();
+
+      var loginResp = $.post( '/add_ask_ajax',
+              {questionText: text,
+                category_new:category}
+      );
+
+      loginResp.done(function( data ) {
+        var obj = JSON.parse(data);
+
+        var result = '<li><h4><br>'+obj.text+'</h4> </li>';
+        $('#my_question_list').append(result);
+
+      });
+
+      return false;
+    });
 
   });
 </script>
@@ -105,12 +123,12 @@
 
                   <h3>Выбор категории вопроса</h3>
 
-                  <select style="width: 60%" name="category_new">
+                  <select style="width: 60%" name="category_new" id="category_new">
                     <c:forEach var="category" items="${categoryList}">
                       <option value="${category}"><c:out value="${category}"/></option>
                     </c:forEach>
                   </select>
-                  <textarea rows="5" style="width: 100%; resize: none" name="questionText" ></textarea>
+                  <textarea rows="5" style="width: 100%; resize: none" name="questionText" id="questionText"></textarea>
                       <div class="form-actions">
                         <button type="submit" class="btn btn-primary">Сохранить изменения</button>
 
@@ -134,7 +152,7 @@
               </div>
             </div>
             <div class="row">
-              <ul>
+              <ul id="my_question_list">
                 <c:forEach var="question" items="${myQuestionList}">
                   <li>
                     <h4><br>

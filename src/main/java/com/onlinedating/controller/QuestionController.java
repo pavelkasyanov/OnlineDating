@@ -1,19 +1,23 @@
 package com.onlinedating.controller;
 
 
-import com.onlinedating.dao.CategoryDAO;
+import com.onlinedating.model.Question;
+import com.onlinedating.model.mvc.QuestionModel;
+
 import com.onlinedating.service.CategoryService;
 import com.onlinedating.service.QuestionService;
-import com.onlinedating.service.QuestionServiceImpl;
 import com.onlinedating.service.UserService;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 @Controller
 public class QuestionController {
@@ -39,16 +43,29 @@ public class QuestionController {
         return "edit";
     }
 
-    @RequestMapping(value = "/add_ask", method = RequestMethod.POST)
+    @RequestMapping(value = "/add_ask_ajax", method = RequestMethod.POST)
+    @ResponseBody
     public String addAsk(@RequestParam(value = "questionText") String questionText,
-                         @RequestParam(value = "category_new") String category, HttpServletRequest request) {
+                            @RequestParam(value = "category_new") String category,
+                            HttpServletRequest request) throws IOException {
 
+        Question question = null;
+        QuestionModel questionModel = null;
+        ObjectMapper converter = new ObjectMapper();
+            if (true) {
 
-            if (questionText != null && !questionText.equals("")) {
+                question = questionService.Add(questionText,
+                        (String) request.getSession().getAttribute("login_user"),
+                        category);
 
-                questionService.Add(questionText, (String)request.getSession().getAttribute("login_user"),category);
+                questionModel = new QuestionModel();
+
+                questionModel.setText(question.getText());
+                questionModel.setDate(question.getDate());
+                questionModel.setMy_fav(question.getMy_fav());
+                questionModel.setPriority(question.getPriority());
             }
 
-            return "redirect:/ask";
+            return converter.writeValueAsString(questionModel);
     }
 }

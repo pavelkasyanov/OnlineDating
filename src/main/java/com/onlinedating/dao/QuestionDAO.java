@@ -10,6 +10,7 @@ import java.util.List;
  * Created by Aver on 17.06.2015.
  */
 public interface QuestionDAO {
+
     void Add( Question question);
 
     Question get_btID(int id);

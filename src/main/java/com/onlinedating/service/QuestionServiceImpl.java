@@ -23,8 +23,9 @@ public class QuestionServiceImpl implements  QuestionService {
     CategoryService categoryService;
     @Autowired
     QuestionListService questionListService;
+
     @Override
-    public void Add(String text,String user_login, String category)
+    public Question Add(String text,String user_login, String category)
     {
         Question question = new Question();
         User user = userService.get(user_login);
@@ -37,6 +38,8 @@ public class QuestionServiceImpl implements  QuestionService {
         question.setDate(cal.getTime());
 
         questionDAO.Add(question);
+
+        return question;
     }
 
     @Override

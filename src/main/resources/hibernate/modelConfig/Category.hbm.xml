@@ -12,7 +12,7 @@
             <column name="Category_Name"  not-null="true" unique="true" />
         </property>
 
-        <set name="questions" table="Question" fetch="select">
+        <set name="questions" table="Question" fetch="join">
             <key>
                 <column name="Category_CategorID" not-null="true"></column>
             </key>

@@ -19,6 +19,7 @@ public class QuestionDAOImpl implements QuestionDAO {
     public QuestionDAOImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
+
     @Override
     @Transactional
     public void Add(Question question) {
