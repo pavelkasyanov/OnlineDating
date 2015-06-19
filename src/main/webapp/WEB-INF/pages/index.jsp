@@ -17,9 +17,10 @@
             );
 
             loginResp.done(function( data ) {
-                if (data != '') {
+                var obj = JSON.parse(data);
+                if (obj.answer != '') {
                     document.getElementById('error_user_login_alert').style.display = "block"
-                    $('#error_user_login_alert').text(data);
+                    $('#error_user_login_alert').text(obj.answer);
                     document.getElementById('pass').value = '';
                 } else {
                     window.location.replace('/home');

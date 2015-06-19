@@ -34,6 +34,8 @@
           <element id="library" level="project" name="Maven: org.apache.commons:commons-dbcp2:2.0" />
           <element id="library" level="project" name="Maven: org.apache.commons:commons-pool2:2.2" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.35" />
+          <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.9.13" />
+          <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.13" />
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
         </element>
       </element>

@@ -5,10 +5,9 @@ import com.onlinedating.model.Question;
 import com.onlinedating.model.QuestionList;
 import com.onlinedating.model.User;
 import com.onlinedating.service.QuestionListService;
-import com.onlinedating.service.QuestionService;
 import com.onlinedating.service.UserService;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 @Controller
@@ -61,23 +60,29 @@ public class HomeController {
 	public String login(@RequestParam("login") String login,
 						@RequestParam("pass") String pass,
 						HttpServletRequest request,
-						HttpServletResponse response) {
+						HttpServletResponse response) throws IOException {
 
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		ObjectMapper converter = new ObjectMapper();
 
 		if (login != null || !login.equals("")) {
 
 			User user = userService.get(login);
 			if (user != null) {
 				request.getSession().setAttribute("login_user", login);
-				return "";
+				map.put("answer", "");
+				return converter.writeValueAsString(map);
 			}
 
-			return "user not exist!";
+			map.put("answer", "user not exist");
+			return converter.writeValueAsString(map);
 		}
 
-		return "error";
+		map.put("answer", "error");
+		return converter.writeValueAsString(map);
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
