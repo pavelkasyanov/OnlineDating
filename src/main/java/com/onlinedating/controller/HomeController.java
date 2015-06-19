@@ -25,6 +25,7 @@ import java.util.Set;
 @Controller
 public class HomeController {
 
+	public static final String CUR_USER = "cur_user";
 	@Autowired
 	QuestionDAO questionService;
 	@Autowired
@@ -39,15 +40,19 @@ public class HomeController {
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(ModelMap model, HttpServletRequest request) {
-		if (request.getSession().getAttribute("login_user") != null) {
+		if (request.getSession().getAttribute(CUR_USER) != null) {
 
-			User user = userService.get((String)request.getSession().getAttribute("login_user"));
-			QuestionList questionList = questionListService.get_btID(user.getQuestionList().getQuestionListID());
-			Set<Question> list = questionList.getQuestions();
-			model.addAttribute("myAskList",list );
-			model.addAttribute("avatartUrl",user.getPhoto().getUrl());
+			User user = (User)request.getSession().getAttribute(CUR_USER);
+			//QuestionList questionList = questionListService.get_btID(user.getQuestionList().getQuestionListID());
+			//Set<Question> list = questionList.getQuestions();
+			Set<Question> questions = userService.getQuestions(user);
+			model.addAttribute("myAskList", questions);
 
-			model.addAttribute("aboutMeText",user.getUser_Inf());
+			//TODO add url user
+			//model.addAttribute("avatartUrl",user.getPhoto().getUrl());
+
+			//TODO aboutme
+			//model.addAttribute("aboutMeText",user.getUser_Inf());
 
 			return "home";
 		}
@@ -71,8 +76,10 @@ public class HomeController {
 		if (login != null || !login.equals("")) {
 
 			User user = userService.get(login);
+			System.out.println("User service get glogih");
+
 			if (user != null) {
-				request.getSession().setAttribute("login_user", login);
+				request.getSession().setAttribute(CUR_USER, user);
 				map.put("answer", "");
 				return converter.writeValueAsString(map);
 			}
@@ -89,7 +96,7 @@ public class HomeController {
 	public String logout(ModelMap model,
 						 HttpServletRequest request) {
 
-		request.getSession().removeAttribute("login_user");
+		request.getSession().removeAttribute(CUR_USER);
 
 		return "redirect:home";
 	}

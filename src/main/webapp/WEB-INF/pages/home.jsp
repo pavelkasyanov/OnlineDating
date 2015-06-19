@@ -34,7 +34,8 @@
             <li><a href="home"> Моя страница </a> </li>
             <li><a href="#"> Поиск </a> </li>
             <li><a href="ask"> Вопросы </a> </li>
-            <li><a href="#"> Link </a> </li>
+            <!--TODO add condition -->
+            <li><a href="logout"> Log Out </a> </li>
           </ul>
 
         </div>

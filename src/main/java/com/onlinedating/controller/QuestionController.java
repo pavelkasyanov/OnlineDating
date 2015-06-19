@@ -2,6 +2,7 @@ package com.onlinedating.controller;
 
 
 import com.onlinedating.model.Question;
+import com.onlinedating.model.User;
 import com.onlinedating.model.mvc.QuestionModel;
 
 import com.onlinedating.service.CategoryService;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -37,11 +37,11 @@ public class QuestionController {
     public String index(ModelMap model,
                         HttpServletRequest request) {
 
-        String userLogin = (String) request.getSession().getAttribute("login_user");
+        User user = (User)request.getSession().getAttribute(HomeController.CUR_USER);
 
         model.addAttribute("questionList", null);
         model.addAttribute("last_questions",questionService.getLast(10));
-        model.addAttribute("myQuestionList", userService.get(userLogin).getQuestions());
+        model.addAttribute("myQuestionList", userService.getQuestions(user));
         model.addAttribute("categoryList", categoryService.category_list());
 
         return "edit";
