@@ -16,12 +16,7 @@ public class PropertiesAnalizatorMap  {
     private static final String ANALIZATOR_MAP = "configCompatibility.properties";
     private Properties props;
     boolean isWeb;
-/*
-    public static void main(String[] args) {
-        System.out.println(new PropertiesAnalizatorMap(false).props.getProperty("INSPECTED_IMPORTANT_YES_EASY"));
-      //  System.out.println("Ваш".toLowerCase((new Locale("RU"))));
-    }
-*/
+
     public PropertiesAnalizatorMap() {
         this(false);
     }
@@ -66,6 +61,7 @@ public class PropertiesAnalizatorMap  {
         try {
             fileInputStream = new FileInputStream(ANALIZATOR_MAP);
             props.load(fileInputStream);
+            fileInputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
