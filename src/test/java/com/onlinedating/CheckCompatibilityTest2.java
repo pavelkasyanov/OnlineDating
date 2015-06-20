@@ -67,5 +67,6 @@ public class CheckCompatibilityTest2 {
         int[] a = cC.getMaximumCompatibility(li);
         assertEquals(18,a[1]);
         assertEquals(14,a[0]);
+
     }
 }
