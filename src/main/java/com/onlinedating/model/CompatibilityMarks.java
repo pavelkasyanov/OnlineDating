@@ -38,7 +38,6 @@ public class CompatibilityMarks {
 
     public void loadProperties(String fileName){
         PropertiesAnalizatorMap propAnaliz = new PropertiesAnalizatorMap();
-        //System.out.println("!!!! = " + propAnaliz.matched("INSPECTED_IMPORTANT_YES_EASY") + "/n");
         marks[0] = inspectedImportantYesEasy = Integer.parseInt(propAnaliz.matched("INSPECTED_IMPORTANT_YES_EASY"));
         marks[1] = inspectedImportantYesHeavily = Integer.parseInt(propAnaliz.matched("INSPECTED_IMPORTANT_YES_HEAVY"));
         marks[2] = inspectedImportantNo = Integer.parseInt(propAnaliz.matched("INSPECTED_IMPORTANT_NO"));
@@ -53,9 +52,10 @@ public class CompatibilityMarks {
         marks[10] = whochecksUnimportantYesHeavily = Integer.parseInt(propAnaliz.matched("WHOCHECKS_UNIMPORTANT_YES_HEAVY"));
         marks[11] = whochecksUnimportantNo = Integer.parseInt(propAnaliz.matched("WHOCHECKS_UNIMPORTANT_NO"));
         calculateMaxPossibleValues();
+
     }
 
-    private void calculateMaxPossibleValues(){
+    public void calculateMaxPossibleValues(){
         // 4 for for all 4 variables
         inspectedMaxMarkImportant = 0;
         for(int i = 0; i< 3;i++){

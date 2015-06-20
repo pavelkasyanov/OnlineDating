@@ -18,17 +18,16 @@ public class CheckCompatibility {
     static final int PRIORITY_IMPORTANT = 1;
     static final int PRIORITY_NOTIMPORTANT = 0;
 
-    public void check(int priority,String value)
+    public void check(int priority, String value)
     {
         CompatibilityMarks comMarks = new CompatibilityMarks();
         comMarks.loadProperties(DEFAULT_FILE_NAME);
-        //System.out.print(comMarks.getInspectedImportantYesEasy());
-        if(value == null) {
+        if(value != null) {
             if (PRIORITY_IMPORTANT == priority)
             {
                 if(ANSWER_YES_EASY.equals(value)) {
                     valueInspected += comMarks.getInspectedImportantYesEasy();
-                    valueWhoChecks += comMarks.getWhochecksImportantYesEasy();
+                     valueWhoChecks += comMarks.getWhochecksImportantYesEasy();
                 }
                 if (ANSWER_YES_HEAVILY.equals(value)) {
                     valueInspected += comMarks.getInspectedImportantYesHeavily();
@@ -61,6 +60,7 @@ public class CheckCompatibility {
     public int[] getMaximumCompatibility(List<Integer> values)
     {
         CompatibilityMarks comMarks = new CompatibilityMarks();
+        comMarks.loadProperties(DEFAULT_FILE_NAME);
         int[] maxMark = new int[2];
         for(int q = 0;q<values.size();q++) {
             if(values.get(q) == 1)
