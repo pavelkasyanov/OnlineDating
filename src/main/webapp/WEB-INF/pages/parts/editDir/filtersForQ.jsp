@@ -6,6 +6,8 @@
 
     <h3>Категории вопросов</h3>
 
+    <!--TODO контроллеры -->
+
     <select style="width: 60%" >
       <c:forEach var="category" items="${categoryList}">
         <option><c:out value="${category}"/></option>
