@@ -21,24 +21,25 @@ public class CountryDAOImpl implements  ICountryDAO {
     @Transactional
     @Override
     public void Add(Country country) {
-
-         Session session = sessionFactory.getCurrentSession();
-        System.out.println("Maven + Hibernate + MySQL");
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
 
         session.save(country);
 
-     /*   session.close();*/
+        session.getTransaction().commit();
+        session.close();
     }
 
     @Override
     @Transactional
     public Country get_btID(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        System.out.println("Maven + Hibernate + MySQL");
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
+
         Country country = (Country)session.get(Country.class, id);
 
         session.getTransaction().commit();
+        session.close();
 
         return country;
     }
@@ -46,18 +47,14 @@ public class CountryDAOImpl implements  ICountryDAO {
     @Override
     @Transactional
     public List<Country> countryList() {
-        Session session = sessionFactory.getCurrentSession();
-        System.out.println("Maven + Hibernate + MySQL");
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
 
         List countries = null;
         countries = session.createQuery("FROM Country").list();
-        for (Iterator iterator = countries.iterator(); iterator.hasNext();){
-            System.out.println("Object readed successfully.....!!");
-            Country employee = (Country) iterator.next();
-            System.out.print("Cuntry Name: " + employee.getCountry_Name());
 
-        }
-
+        session.getTransaction().commit();
+        session.close();
 
         return countries;
     }

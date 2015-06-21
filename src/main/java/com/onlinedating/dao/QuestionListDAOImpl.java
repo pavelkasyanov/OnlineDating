@@ -18,36 +18,25 @@ public class QuestionListDAOImpl implements  QuestionListDAO{
 
     @Override
     public void Add(QuestionList questionList) {
-        Session session = sessionFactory.getCurrentSession();
-        System.out.println("Maven + Hibernate + MySQL");
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
 
         session.save(questionList);
 
         session.getTransaction().commit();
-
+        session.close();
     }
 
     @Override
     public QuestionList get_btID(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        System.out.println("Maven + Hibernate + MySQL");
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
+
         QuestionList questionList = (QuestionList)session.get(QuestionList.class,id);
 
         session.getTransaction().commit();
-       // session.close();
+        session.close();
+
         return questionList;
-    }
-
-    @Override
-    public void test() {
-        Session session = sessionFactory.getCurrentSession();
-        System.out.println("Maven + Hibernate + MySQL");
-        session.beginTransaction();
-        List category = null;
-        category = session.createQuery("FROM Category").list();
-        session.getTransaction().commit();
-
     }
 }

@@ -20,39 +20,42 @@ public class UserDAOImpl implements UserDAO {
     @Override
     @Transactional
     public void Add(User user) {
-        Session session = sessionFactory.getCurrentSession();
-        System.out.println("Maven + Hibernate + MySQL");
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(user);
-        session.getTransaction().commit();
 
+        session.save(user);
+
+        session.getTransaction().commit();
+        session.close();
     }
 
     @Override
     @Transactional
     public User get_btID(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        System.out.println("Maven + Hibernate + MySQL");
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
+
         User user = (User)session.get(User.class,id);
 
         session.getTransaction().commit();
-       // session.close();
+        session.close();
+
         return user;
     }
 
     @Override
     @Transactional
     public User get_byLogin(String login) {
-        Session session = sessionFactory.getCurrentSession();
-        System.out.println("Maven + Hibernate + MySQL");
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
+
         User user =
                 (User)session.createCriteria( User.class ).
                         add(Restrictions.eq("User_login", login)).
                         uniqueResult();
 
         session.getTransaction().commit();
+        session.close();
 
         return user;
     }
@@ -60,24 +63,29 @@ public class UserDAOImpl implements UserDAO {
     @Override
     @Transactional
     public void update(User user , int id) {
-        Session session = sessionFactory.getCurrentSession();
-        System.out.println("Maven + Hibernate + MySQL");
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
 
         User employee = (User)session.get(User.class, id);
         employee = user;
         session.update(employee);
-        session.getTransaction().commit();
 
+        session.getTransaction().commit();
+        session.close();
     }
 
     @Override
     @Transactional
     public List<User> list() {
         @SuppressWarnings("unchecked")
-        List<User> listUser = (List<User>) sessionFactory.getCurrentSession()
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<User> listUser = (List<User>) session
                 .createCriteria(User.class)
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+        session.getTransaction().commit();
+        session.close();
 
         return listUser;
     }
