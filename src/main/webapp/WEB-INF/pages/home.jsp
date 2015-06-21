@@ -16,29 +16,3 @@
 
 <jsp:include page="parts/Footer.jsp"/>
 <jsp:include page="parts/pageFooter.jsp"/>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

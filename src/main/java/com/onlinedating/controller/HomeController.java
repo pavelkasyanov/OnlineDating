@@ -28,8 +28,10 @@ public class HomeController {
 
 	@Autowired
 	QuestionDAO questionService;
+
 	@Autowired
 	QuestionListService questionListService;
+
 	@Autowired
 	UserService userService;
 
@@ -48,10 +50,10 @@ public class HomeController {
 			Set<Question> questions = userService.getQuestions(user);
 
 			//TODO add url user
-			model.addAttribute("avatartUrl",user.getPhoto().getUrl());
+			model.addAttribute("avatartUrl", user.getPhoto().getUrl());
 
 			//TODO aboutme
-			model.addAttribute("aboutMeText",user.getUser_Inf());
+			model.addAttribute("aboutMeText", user.getUser_Inf());
 
 			addQuestions(model, questions);
 
