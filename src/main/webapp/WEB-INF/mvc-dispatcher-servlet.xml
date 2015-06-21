@@ -2,25 +2,116 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <context:component-scan base-package="com.onlinedating"/>
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
     <mvc:annotation-driven />
 
+    <!-- Spring settings -->
+
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <bean id="questionDAO" class="com.onlinedating.dao.QuestionDAO" />
-    <bean id="questionService" class="com.onlinedating.service.QuestionService" />
+    <!-- Hibernate settings -->
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>classpath:hibernate/hibernate.properties</value>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:hibernate/hibernate.cfg.xml" />
+    </bean>
+
+    <tx:annotation-driven />
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <!-- DAO settings -->
+
+    <bean id="userDao" class="com.onlinedating.dao.UserDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="countryDao" class="com.onlinedating.dao.CountryDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="cityDao" class="com.onlinedating.dao.CityDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="questionlistDao" class="com.onlinedating.dao.QuestionListDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="questionDao" class="com.onlinedating.dao.QuestionDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="categoryDao" class="com.onlinedating.dao.CategoryDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+    <bean id="eventList" class="com.onlinedating.dao.EventListDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+    <bean id="event" class="com.onlinedating.dao.EventDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+    <bean id="photo" class="com.onlinedating.dao.PhotoDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
 
 
+    <bean id="questionService" class="com.onlinedating.service.QuestionServiceImpl"/>
+    <bean id="userService" class="com.onlinedating.service.UserServiceImplND"/>
+    <bean id="questionListService" class="com.onlinedating.service.QuestionListServiceImpl"/>
+    <bean id="categoryService" class="com.onlinedating.service.CategoryServiceImpl"/>
+    <bean id="countryService" class="com.onlinedating.service.CountryServiceImpl"/>
+    <bean id="cityService" class="com.onlinedating.service.CityServiceImpl"/>
+    <bean id="eventService" class="com.onlinedating.service.EventServiceImpl"/>
+    <bean id="eventListService" class="com.onlinedating.service.EventListServiceImpl"/>
 
 </beans>

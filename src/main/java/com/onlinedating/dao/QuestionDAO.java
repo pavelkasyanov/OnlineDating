@@ -1,31 +1,21 @@
 package com.onlinedating.dao;
 
-
+import com.onlinedating.model.Category;
 import com.onlinedating.model.Question;
+import com.onlinedating.model.QuestionList;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionDAO implements IQuestionDAO {
+/**
+ * Created by Aver on 17.06.2015.
+ */
+public interface QuestionDAO {
 
-    private List<Question> list;
+    void Add( Question question);
 
-    public QuestionDAO(){
-
-        list = new ArrayList<Question>();
-        list.add(new Question("Смотреть ужастики?"));
-        list.add(new Question("Играть в шахматы?"));
-        list.add(new Question("Поехать на выходные к маме?"));
-
-    }
-
-    @Override
-    public void add(Question question) {
-        list.add(question);
-    }
-
-    @Override
-    public List<Question> getList() {
-        return list;
-    }
+    Question get_btID(int id);
+    void update( Question question, int id);
+    void delete (int id);
+    List<Question> question_list();
+     List<Question> Get_Question_list_byquestionList(QuestionList questionList);
 }

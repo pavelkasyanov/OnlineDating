@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.onlinedating.model">
+
+    <class name="Category" table="Category">
+        <id name="CategoryID" type="java.lang.Integer">
+            <column name="CategorID" />
+            <generator class="identity">
+            </generator>
+        </id>
+        <property name="Category_Name" type="string">
+            <column name="Category_Name"  not-null="true" unique="true" />
+        </property>
+
+        <set name="questions" table="Question" fetch="join">
+            <key>
+                <column name="Category_CategorID" not-null="true"></column>
+            </key>
+            <one-to-many class="Question"/>
+        </set>
+
+    </class>
+</hibernate-mapping>

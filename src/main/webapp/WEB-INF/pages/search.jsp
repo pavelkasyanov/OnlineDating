@@ -1,18 +1,23 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Владислав
+  User: pavlik
   Date: 19.06.2015
-  Time: 13:30
+  Time: 14:28
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel=" stylesheet " type="text/css">
+<head>
+<head>
 
-<link href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" type="text/css" rel="stylesheet">
 
-<body >
+</head>
+</head>
+<body>
 
+<!-- menu -->
 
 <div class="container-fluid">
   <div class="row">
@@ -34,9 +39,9 @@
 
           <ul class="nav navbar-nav" >
 
-            <li><a href="#"> Моя страница </a> </li>
+            <li><a href="home.html"> Моя страница </a> </li>
             <li><a href="#"> Поиск </a> </li>
-            <li><a href="#"> Вопросы </a> </li>
+            <li><a href="ask.html"> Вопросы </a> </li>
             <li><a href="#"> Link </a> </li>
           </ul>
 
@@ -59,28 +64,28 @@
       <table class="table" cellpadding="0" cellspacing="0">
         <tr>
           <td style = "text-align: center; background-color: white;">
-            <img src="${pageContext.request.contextPath}/resources/css/img/ph1.jpg>" class="img-polaroid"  >
+            <img src="img/photo/ph1.jpg" class="img-polaroid">
             <p> Имя : Возраст </p>
             <p> Мой напряг : Его/ее напряг </p>
 
 
           </td>
           <td style = "text-align: center; background-color: white; ">
-            <img src="${pageContext.request.contextPath}/resources/css/img/ph1.jpg>" class="img-polaroid"  >
+            <img src="img/photo/ph1.jpg" class="img-polaroid">
             <p> Имя : Возраст </p>
             <p> Мой напряг : Его/ее напряг </p>
 
 
           </td>
           <td style = "text-align: center; background-color: white; ">
-            <img src="${pageContext.request.contextPath}/resources/css/img/ph1.jpg >" class="img-polaroid"  >
+            <img src="img/photo/ph1.jpg" class="img-polaroid">
             <p> Имя : Возраст </p>
             <p> Мой напряг : Его/ее напряг </p>
 
 
           </td>
           <td style = "text-align: center; background-color: white; ">
-            <img src="${pageContext.request.contextPath}/resources/css/img/ph1.jpg >" class="img-polaroid"  >
+            <img src="img/photo/ph1.jpg" class="img-polaroid">
             <p> Имя : Возраст </p>
             <p> Мой напряг : Его/ее напряг </p>
 
@@ -150,34 +155,5 @@
       </div>
     </div>
   </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
-
-
 </html>
