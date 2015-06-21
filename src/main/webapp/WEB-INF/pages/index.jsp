@@ -24,7 +24,6 @@
                     document.getElementById('pass').value = '';
                 } else {
                     /*TODO fix url*/
-                    alert("545345");
                     window.location.replace('/OnlineDating/home');
                 }
             });
