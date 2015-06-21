@@ -7,13 +7,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-
+import pack.analize.*;
 /**
  * Created by Кирилл on 17.06.15.
  */
 
 public class CompatibilityMarks {
-    final static String DEFAULT_FILE_NAME= "compatibilityMarks.properties";
+    final static String DEFAULT_FILE_NAME= "prop.properties";
 
     private int[] marks = new int[12];
 
@@ -36,104 +36,26 @@ public class CompatibilityMarks {
     private int whochecksUnimportantYesHeavily;
     private int whochecksUnimportantNo;
 
-    void loadProperties(String fileName){
-        if(!new File(fileName).exists()) {
-            fileName = DEFAULT_FILE_NAME;
-        }
-        StringBuilder sb = new StringBuilder();
-        int i = 0 ;
-        try {
-            //Объект для чтения файла в буфер
-            BufferedReader in = new BufferedReader(new FileReader(fileName));
-            try {
-                //В цикле построчно считываем файл
-                String s;
-                while ((s = in.readLine()) != null) {
-                    marks[i] = analyzeConfigFile(s);
-                    i++;
-                }
-            } finally {
-                //Также не забываем закрыть файл
-                in.close();
-            }
-        } catch(IOException e) {
-            throw new RuntimeException(e);
-        }
-    // setting values
-   // inspectedImportantYesEasy = props.getProperty(INSPECTED_IMPORTANT_YES_EASY);
+    public void loadProperties(String fileName){
+        PropertiesAnalizatorMap propAnaliz = new PropertiesAnalizatorMap();
+        marks[0] = inspectedImportantYesEasy = Integer.parseInt(propAnaliz.matched("INSPECTED_IMPORTANT_YES_EASY"));
+        marks[1] = inspectedImportantYesHeavily = Integer.parseInt(propAnaliz.matched("INSPECTED_IMPORTANT_YES_HEAVY"));
+        marks[2] = inspectedImportantNo = Integer.parseInt(propAnaliz.matched("INSPECTED_IMPORTANT_NO"));
+        marks[3] = whochecksImportantYesEasy = Integer.parseInt(propAnaliz.matched("WHOCHECKS_IMPORTANT_YES_EASY"));
+        marks[4] = whochecksImportantYesHeavily = Integer.parseInt(propAnaliz.matched("WHOCHECKS_IMPORTANT_YES_HEAVY"));
+        marks[5] = whochecksImportantNo = Integer.parseInt(propAnaliz.matched("WHOCHECKS_IMPORTANT_NO"));
 
-    // calculate max values
+        marks[6] = inspectedUnimportantYesEasy = Integer.parseInt(propAnaliz.matched("INSPECTED_UNIMPORTANT_YES_EASY"));
+        marks[7] = inspectedUnimportantYesHeavily = Integer.parseInt(propAnaliz.matched("INSPECTED_UNIMPORTANT_YES_HEAVY"));
+        marks[8] = inspectedUnimportantNo = Integer.parseInt(propAnaliz.matched("INSPECTED_UNIMPORTANT_NO"));
+        marks[9] = whochecksUnimportantYesEasy = Integer.parseInt(propAnaliz.matched("WHOCHECKS_UNIMPORTANT_YES_EASY"));
+        marks[10] = whochecksUnimportantYesHeavily = Integer.parseInt(propAnaliz.matched("WHOCHECKS_UNIMPORTANT_YES_HEAVY"));
+        marks[11] = whochecksUnimportantNo = Integer.parseInt(propAnaliz.matched("WHOCHECKS_UNIMPORTANT_NO"));
         calculateMaxPossibleValues();
 
     }
 
-    private int analyzeConfigFile(String analyzedString){
-        if(analyzedString.contains("INSPECTED")) {
-            if (analyzedString.contains("UNIMPORTANT")) {
-                if (analyzedString.contains("EASY")) {
-                    inspectedUnimportantYesEasy = analyzeFindInt(analyzedString);
-                }
-                if (analyzedString.contains("HEAVY")) {
-                    inspectedUnimportantYesHeavily = analyzeFindInt(analyzedString);
-                }
-                if (analyzedString.contains("NO")) {
-                    inspectedUnimportantNo = analyzeFindInt(analyzedString);
-                }
-            } else {
-                if (analyzedString.contains("EASY")) {
-                    inspectedImportantYesEasy = analyzeFindInt(analyzedString);
-                }
-                if (analyzedString.contains("HEAVY")) {
-                    inspectedImportantYesHeavily = analyzeFindInt(analyzedString);
-                }
-                if (analyzedString.contains("NO")) {
-                    inspectedImportantNo = analyzeFindInt(analyzedString);
-                }
-            }
-        }
-        else
-        {
-            if (analyzedString.contains("UNIMPORTANT")) {
-                if (analyzedString.contains("EASY")) {
-                    whochecksUnimportantYesEasy = analyzeFindInt(analyzedString);
-                }
-                if (analyzedString.contains("HEAVY")) {
-                    whochecksUnimportantYesHeavily = analyzeFindInt(analyzedString);
-                }
-                if (analyzedString.contains("NO")) {
-                    whochecksUnimportantNo = analyzeFindInt(analyzedString);
-                }
-            } else {
-                if (analyzedString.contains("EASY")) {
-                    whochecksImportantYesEasy = analyzeFindInt(analyzedString);
-                }
-                if (analyzedString.contains("HEAVY")) {
-                    whochecksImportantYesHeavily = analyzeFindInt(analyzedString);
-                }
-                if (analyzedString.contains("NO")) {
-                    whochecksImportantNo = analyzeFindInt(analyzedString);
-                }
-            }
-        }
-        return analyzeFindInt(analyzedString);
-    }
-    private int analyzeFindInt(String analyzedString){
-        int startPosition = analyzedString.indexOf('=');
-        int finishPosition = analyzedString.indexOf(';');
-        char letter;
-        String world = "";
-        for ( int i = startPosition;i<finishPosition;i++) {
-            letter = analyzedString.charAt(i);
-            if(letter != ' '){
-                world += letter;
-            }
-        }
-        return Integer.parseInt(world);
-    }
-
-
-
-    private void calculateMaxPossibleValues(){
+    public void calculateMaxPossibleValues(){
         // 4 for for all 4 variables
         inspectedMaxMarkImportant = 0;
         for(int i = 0; i< 3;i++){

@@ -1,6 +1,8 @@
 package pack.analize;
 
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -10,18 +12,13 @@ import java.util.Properties;
  * Created by Кирилл on 18.06.15.
  */
 
-public class PropertiesAnalizatorMap {/*implements AnalizatorMap {
-    private static final String ANALIZATOR_MAP = "analizators.properties";
+public class PropertiesAnalizatorMap  {
+    private static final String ANALIZATOR_MAP = "configCompatibility.properties";
     private Properties props;
     boolean isWeb;
 
-    public static void main(String[] args) {
-        System.out.println(new PropertiesAnalizatorMap(false).props.getProperty("наш"));
-        System.out.println("Ваш".toLowerCase((new Locale("RU"))));
-    }
-
-    PropertiesAnalizatorMap() {
-        this(true);
+    public PropertiesAnalizatorMap() {
+        this(false);
     }
 
     PropertiesAnalizatorMap(boolean isWeb) {
@@ -29,12 +26,12 @@ public class PropertiesAnalizatorMap {/*implements AnalizatorMap {
         initProperties();
     }
 
-    @Override
+
     public String matched(String word) {
         return props.getProperty(word);
     }
 
-    @Override
+
     public void reInit() {
         initProperties();
     }
@@ -49,7 +46,7 @@ public class PropertiesAnalizatorMap {/*implements AnalizatorMap {
 
     private void initPropertiesWeb() {
         props = new Properties();
-        InputStream resourceAsStream = Analizators.class.getClassLoader().getResourceAsStream(ANALIZATOR_MAP);
+        InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(ANALIZATOR_MAP);
         try {
             props.load(resourceAsStream);
         } catch (IOException e) {
@@ -58,15 +55,16 @@ public class PropertiesAnalizatorMap {/*implements AnalizatorMap {
         }
     }
 
-    private void initPropertiesMain() {
+    private void initPropertiesMain(){
         props = new Properties();
-        URL url = ClassLoader.getSystemResource(ANALIZATOR_MAP);
+        FileInputStream fileInputStream = null;
         try {
-            props.load(url.openStream());
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
+            fileInputStream = new FileInputStream(ANALIZATOR_MAP);
+            props.load(fileInputStream);
+            fileInputStream.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    */
+
 }
