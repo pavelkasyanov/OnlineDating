@@ -15,8 +15,8 @@ public class CheckCompatibilityTest2 {
     @Test
     public void testCheck() throws Exception {
         CheckCompatibility cC = new CheckCompatibility();
-     //   cC.check(0,"");
-    //    assertEquals(-1, cC.getPercent());
+        cC.check(0,"");
+        assertEquals(-1, cC.getPercent());
 //1
         cC.check(1,ANSWER_YES_EASY);
         assertEquals(5,cC.getValueInspected());

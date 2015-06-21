@@ -22,7 +22,7 @@ public class CheckCompatibility {
     {
         CompatibilityMarks comMarks = new CompatibilityMarks();
         comMarks.loadProperties(DEFAULT_FILE_NAME);
-        if(value != null) {
+        if((value != null)&&(!"".equals(value))) {
             if (PRIORITY_IMPORTANT == priority)
             {
                 if(ANSWER_YES_EASY.equals(value)) {
