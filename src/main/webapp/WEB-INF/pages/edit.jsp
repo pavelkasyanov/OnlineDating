@@ -19,24 +19,13 @@
       if ($(this).find('.btn-primary').size()>0) {
         $(this).find('.btn').toggleClass('btn-primary');
       }
-      /*if ($(this).find('.btn-danger').size()>0) {
-        $(this).find('.btn').toggleClass('btn-danger');
-      }
-      if ($(this).find('.btn-success').size()>0) {
-        $(this).find('.btn').toggleClass('btn-success');
-      }
-      if ($(this).find('.btn-info').size()>0) {
-        $(this).find('.btn').toggleClass('btn-info');
-      }
-
-      $(this).find('.btn').toggleClass('btn-default');*/
     });
 
     $('form').submit(function(){
       var text = $('#questionText').val();
       var category = $('#category_new').val();
 
-      var loginResp = $.post( '/add_ask_ajax',
+      var loginResp = $.post( '/add_ask',
               {questionText: text,
                 category_new:category}
       );
@@ -50,10 +39,37 @@
 
       });
 
+      loginResp.error(function() { alert("Ошибка выполнения"); })
+
       return false;
     });
-
   });
+
+  function getLastQuestions() {
+
+    var lastQuestionRequest = $.get('/last_ask');
+
+    lastQuestionRequest.done(function( data ) {
+      var obj = JSON.parse(data);
+      var cont = $('#lastAskList');
+      cont.empty();
+
+      obj.forEach( function(item, i, obj) {
+        var result = '<li><h4><br>'+item.text+'</h4> </li>';
+        cont.append(result);
+      });
+    });
+  }
+
+  function deleteQuestion(askId) {
+    var deleteAsk = $.post('/delete_ask',
+            {askId: askId});
+
+    deleteAsk.done(function( data ){
+      var element = $('#'+'myAsk_'+askId);
+      element.hide();
+    });
+  }
 </script>
 
 
@@ -106,7 +122,7 @@
           <li class="active"><a href="#tab1" data-toggle="tab"> Мои вопросы </a></li>
           <li><a href="#tab2" data-toggle="tab"> Вопросы друзей </a></li>
           <li><a href="#tab3" data-toggle="tab"> Топ </a></li>
-          <li><a href="#tab4" data-toggle="tab"> Последние вопросы </a></li>
+          <li><a href="#tab4" data-toggle="tab" onclick="getLastQuestions();"> Последние вопросы </a></li>
 
         </ul>
 
@@ -152,12 +168,12 @@
                 </div>
               </div>
             </div>
-            <div class="row">
+            <div class="row" id="my_question_list_div">
               <ul id="my_question_list">
                 <c:forEach var="question" items="${myQuestionList}">
-                  <li>
+                  <li id="myAsk_${question.questionID}">
                     <h4><br>
-                      <c:out value="${question}" />
+                      <c:out value="${question}" /><a onclick="deleteQuestion(${question.questionID});">delete</a>
                     </h4>
                   </li>
                 </c:forEach>
@@ -194,14 +210,7 @@
           </div>
 
           <div class="tab-pane fade" id = "tab4">
-            <ul>
-              <c:forEach var="question" items="${last_questions}">
-                <li>
-                  <h4><br>
-                    <c:out value="${question}" />
-                  </h4>
-                </li>
-              </c:forEach>
+            <ul id="lastAskList">
             </ul>
           </div>
 

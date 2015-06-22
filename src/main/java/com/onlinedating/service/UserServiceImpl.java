@@ -1,11 +1,12 @@
 package com.onlinedating.service;
 
 import com.onlinedating.dao.UserDAO;
-import com.onlinedating.dao.UserDAOImpl;
+import com.onlinedating.model.Question;
 import com.onlinedating.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Aver on 17.06.2015.
@@ -44,4 +45,8 @@ public class UserServiceImpl implements UserService {
         return userDAO.list();
     }
 
+    @Override
+    public Set<Question> getQuestions(User user) {
+        return user.getQuestions();
+    }
 }

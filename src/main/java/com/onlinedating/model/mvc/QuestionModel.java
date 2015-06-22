@@ -1,6 +1,7 @@
 package com.onlinedating.model.mvc;
 
 import com.onlinedating.model.Category;
+import com.onlinedating.model.Question;
 import com.onlinedating.model.QuestionList;
 import com.onlinedating.model.User;
 
@@ -15,10 +16,24 @@ public class QuestionModel {
     private java.util.Date date;
     private int my_fav;
 
+    public QuestionModel(){
+
+    }
+
+    public QuestionModel(Question question) {
+        this.QuestionID = question.getQuestionID();
+        this.text = question.getText();
+        this.date = question.getDate();
+        this.my_fav = question.getMy_fav();
+        this.Priority = question.getPriority();
+    }
+
     public int getQuestionID() {
         return QuestionID;
     }
-
+    public void setQuestionID(int questionID) {
+        QuestionID = questionID;
+    }
     public String getText() {
         return text;
     }
@@ -27,9 +42,6 @@ public class QuestionModel {
         this.text = text;
     }
 
-    public void setQuestionID(int questionID) {
-        QuestionID = questionID;
-    }
 
     public int getPriority() {
         return Priority;

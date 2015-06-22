@@ -4,6 +4,7 @@ import com.onlinedating.dao.QuestionDAO;
 import com.onlinedating.model.Question;
 import com.onlinedating.model.QuestionList;
 import com.onlinedating.model.User;
+import com.onlinedating.model.mvc.AskRow;
 import com.onlinedating.service.QuestionListService;
 import com.onlinedating.service.UserService;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -18,13 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class HomeController {
 
+	public static final String CUR_USER = "cur_user";
 	@Autowired
 	QuestionDAO questionService;
 	@Autowired
@@ -39,20 +39,55 @@ public class HomeController {
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(ModelMap model, HttpServletRequest request) {
-		if (request.getSession().getAttribute("login_user") != null) {
+		if (request.getSession().getAttribute(CUR_USER) != null) {
 
-			User user = userService.get((String)request.getSession().getAttribute("login_user"));
-			QuestionList questionList = questionListService.get_btID(user.getQuestionList().getQuestionListID());
-			Set<Question> list = questionList.getQuestions();
-			model.addAttribute("myAskList",list );
-			model.addAttribute("avatartUrl",user.getPhoto().getUrl());
+			User user = (User)request.getSession().getAttribute(CUR_USER);
+			//QuestionList questionList = questionListService.get_btID(user.getQuestionList().getQuestionListID());
+			//Set<Question> list = questionList.getQuestions();
+			Set<Question> questions = userService.getQuestions(user);
 
-			model.addAttribute("aboutMeText",user.getUser_Inf());
+			//TODO add url user
+			//model.addAttribute("avatartUrl",user.getPhoto().getUrl());
+
+			//TODO aboutme
+			//model.addAttribute("aboutMeText",user.getUser_Inf());
+
+			addQuestions(model, questions);
 
 			return "home";
 		}
 
 		return "redirect:/";
+	}
+
+	private void addQuestions(ModelMap model, Set<Question> questions) {
+		model.addAttribute("myAskList", questions);
+
+		List<AskRow> stat = getStat(questions);
+		model.addAttribute("askRowList", stat);
+
+//			<c:out value="${askRow.question.text}" />
+//
+//			<c:out value="${askRow.countAnswered}" />
+//			<c:out value="${askRow.countDenied}" />
+//			<c:out value="${askRow.countImportant}" />
+//			<c:out value="${askRow.countAgreed}" />
+//
+	}
+
+//	TODO to servis
+
+	private List<AskRow> getStat(Set<Question> questions) {
+		List<AskRow> askRows = new ArrayList<AskRow>();
+		for (Question question:questions){
+			AskRow askRow = new AskRow(question);
+			askRow.setCountAnswered(15);
+			askRow.setCountDenied(20);
+			askRows.add(askRow);
+
+
+		}
+		return askRows;
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -71,8 +106,10 @@ public class HomeController {
 		if (login != null || !login.equals("")) {
 
 			User user = userService.get(login);
+			System.out.println("User service get glogih");
+
 			if (user != null) {
-				request.getSession().setAttribute("login_user", login);
+				request.getSession().setAttribute(CUR_USER, user);
 				map.put("answer", "");
 				return converter.writeValueAsString(map);
 			}
@@ -89,7 +126,7 @@ public class HomeController {
 	public String logout(ModelMap model,
 						 HttpServletRequest request) {
 
-		request.getSession().removeAttribute("login_user");
+		request.getSession().removeAttribute(CUR_USER);
 
 		return "redirect:home";
 	}

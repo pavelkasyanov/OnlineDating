@@ -15,7 +15,7 @@ public interface QuestionService
     Question get_btID(int id);
     void update( Question question, int id);
     void delete (int id);
-    List<Question> getLast();
+    List<Question> getLast(int count);
 
 
     List<Question> question_list();
