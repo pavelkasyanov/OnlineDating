@@ -51,7 +51,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
 
-    public List<Event> question_list() {
-        return eventDAO.question_list();
+    public List<Event> event_list() {
+        return eventDAO.event_list();
     }
 }

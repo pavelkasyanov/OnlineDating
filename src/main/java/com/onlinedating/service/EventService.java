@@ -14,5 +14,5 @@ public interface EventService {
     void update(Event event, int id);
     void delete(int id);
 
-    List<Event> question_list();
+    List<Event> event_list();
 }

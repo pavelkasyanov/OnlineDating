@@ -23,6 +23,10 @@
         <mapping resource="hibernate/modelConfig/Event.hbm.xml"/>
         <mapping resource="hibernate/modelConfig/EventList.hbm.xml"/>
         <mapping resource="hibernate/modelConfig/Photo.hbm.xml"/>
+        <mapping resource="hibernate/modelConfig/ContactList.hbm.xml"/>
+        <mapping resource="hibernate/modelConfig/Contacts.hbm.xml"/>
+        <mapping resource="hibernate/modelConfig/MessageList.hbm.xml"/>
+        <mapping resource="hibernate/modelConfig/Message.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>

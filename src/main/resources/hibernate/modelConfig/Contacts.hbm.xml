@@ -2,32 +2,28 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="com.onlinedating.model">
 
-    <class name="Event" table="Event">
-        <id name="event_id" type="java.lang.Integer">
-            <column name="EventID" />
+    <class name="Contacts" table="Contacts">
+        <id name="contact_id" type="java.lang.Integer">
+            <column name="ContactsID" />
             <generator class="identity">
             </generator>
         </id>
 
-        <property name="text" type="string">
+        <property name="myRelation" type="integer">
             <column name="text" not-null="true" unique="true" />
         </property>
 
-        <property name="date" type="java.util.Date">
-            <column name="DATE"  not-null="true" unique="true" />
-        </property>
 
-        <many-to-one name="owner" class="User">
+        <many-to-one name="friend" class="User">
             <column name="Other_UserID" ></column>
         </many-to-one>
 
 
-        <many-to-one name="eventList" class="EventList">
-            <column name="EventList_EventListID" ></column>
+        <many-to-one name="contactList" class="ContactList">
+            <column name="ContactList_ContactListID" ></column>
         </many-to-one>
 
 
 
     </class>
-
 </hibernate-mapping>

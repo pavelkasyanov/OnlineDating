@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.onlinedating.model">
+
+    <class name="MessageList" table="MessageList">
+        <id name="messagelist_id" type="java.lang.Integer">
+            <column name="MessageListID" />
+            <generator class="identity">
+            </generator>
+        </id>
+        <set name="messageSet" table="Message" fetch="select" >
+            <key>
+                <column name="MessageList_MessageListID" not-null="true"></column>
+            </key>
+            <one-to-many class="Message"/>
+        </set>
+
+    </class>
+</hibernate-mapping>

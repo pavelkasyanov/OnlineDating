@@ -98,11 +98,35 @@
             <ref bean="sessionFactory" />
         </constructor-arg>
     </bean>
-    <bean id="photo" class="com.onlinedating.dao.PhotoDAOImpl">
+    <bean id="photoDAO" class="com.onlinedating.dao.PhotoDAOImpl">
         <constructor-arg>
             <ref bean="sessionFactory" />
         </constructor-arg>
     </bean>
+    <bean id="contactListDAO" class="com.onlinedating.dao.ContactListDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="contactsDAO" class="com.onlinedating.dao.ContactDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="messageDAO" class="com.onlinedating.dao.MessageDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="messageListDAO" class="com.onlinedating.dao.MessageListDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+
 
 
     <bean id="questionService" class="com.onlinedating.service.QuestionServiceImpl"/>
