@@ -1,8 +1,8 @@
 package com.onlinedating.controller;
 
 import com.onlinedating.dao.QuestionDAO;
+import com.onlinedating.service.CheckCompatibility;
 import com.onlinedating.model.Question;
-import com.onlinedating.model.QuestionList;
 import com.onlinedating.model.User;
 import com.onlinedating.service.QuestionListService;
 import com.onlinedating.service.UserService;
@@ -15,12 +15,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import static com.onlinedating.service.CompatibilityAnswers.ANSWER_YES_EASY;
+import static com.onlinedating.service.CompatibilityAnswers.PRIORITY_IMPORTANT;
+import static com.onlinedating.service.CompatibilityAnswers.PRIORITY_UNIMPORTANT;
 
 @Controller
 public class HomeController {
@@ -54,11 +61,25 @@ public class HomeController {
 			//TODO aboutme
 			//model.addAttribute("aboutMeText",user.getUser_Inf());
 
+			testCheckCompatibility(request);
 			return "home";
 		}
 
 		return "redirect:/";
 	}
+
+	private void testCheckCompatibility(HttpServletRequest request) {
+		//TODO load properties
+		CheckCompatibility cC;
+		FileInputStream fileInputStream = null;
+		ServletContext context = request.getServletContext();
+		InputStream iS = context.getResourceAsStream("/WEB-INF/classes/configCompatibility.properties");
+		cC = new CheckCompatibility(iS);
+		cC.check(PRIORITY_UNIMPORTANT,ANSWER_YES_EASY);
+		int valueInspected = cC.getValueQuestioner();
+		System.out.println(valueInspected);
+	}
+
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
