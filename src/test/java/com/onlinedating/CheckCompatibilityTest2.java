@@ -1,58 +1,72 @@
 package com.onlinedating;
 
-import com.onlinedating.model.CheckCompatibility;
+import com.onlinedating.service.CheckCompatibility;
 import org.junit.Test;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static com.onlinedating.model.CompatibilityAnswers.*;
-/**
- * Created by Кирилл on 17.06.15.
- */
+import static com.onlinedating.service.CompatibilityAnswers.*;
+
 public class CheckCompatibilityTest2 {
+    CheckCompatibility cC;
+    public CheckCompatibilityTest2(){
+        //TODO load properties
+        FileInputStream fileInputStream = null;
+        try {
+            fileInputStream = new FileInputStream("configCompatibility.properties");
+            cC = new CheckCompatibility(fileInputStream);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                fileInputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     @Test
     public void testCheck() throws Exception {
-        CheckCompatibility cC = new CheckCompatibility();
         cC.check(0,"");
         assertEquals(-1, cC.getPercent());
-//1
         cC.check(1,ANSWER_YES_EASY);
-        assertEquals(5,cC.getValueInspected());
-        assertEquals(5,cC.getValueWhoChecks());
+        assertEquals(5,cC.getValueQuestioner());
+        assertEquals(5,cC.getValueRespondent());
         cC.check(1,ANSWER_YES_HEAVILY);
-        assertEquals(8,cC.getValueInspected());
-        assertEquals(4,cC.getValueWhoChecks());
+        assertEquals(8,cC.getValueQuestioner());
+        assertEquals(4,cC.getValueRespondent());
         cC.check(1,ANSWER_NO);
-        assertEquals(4,cC.getValueInspected());
-        assertEquals(7,cC.getValueWhoChecks());
+        assertEquals(4,cC.getValueQuestioner());
+        assertEquals(7,cC.getValueRespondent());
         cC.check(0,ANSWER_YES_EASY);
-        assertEquals(6,cC.getValueInspected());
-        assertEquals(9,cC.getValueWhoChecks());
+        assertEquals(6,cC.getValueQuestioner());
+        assertEquals(9,cC.getValueRespondent());
         cC.check(0,ANSWER_YES_HEAVILY);
-        assertEquals(6,cC.getValueInspected());
-        assertEquals(7,cC.getValueWhoChecks());
+        assertEquals(6,cC.getValueQuestioner());
+        assertEquals(7,cC.getValueRespondent());
         cC.check(0,ANSWER_NO);
-        assertEquals(8,cC.getValueInspected());
-        assertEquals(11,cC.getValueWhoChecks());
+        assertEquals(8,cC.getValueQuestioner());
+        assertEquals(11,cC.getValueRespondent());
     }
 
     @Test
     public void testGetValueWoman() throws Exception {
-        CheckCompatibility cC = new CheckCompatibility();
-        assertEquals(0, cC.getValueInspected());
+        assertEquals(0, cC.getValueQuestioner());
     }
 
     @Test
     public void testGetValueMan() throws Exception {
-        CheckCompatibility cC = new CheckCompatibility();
-        assertEquals(0,cC.getValueWhoChecks());
+        assertEquals(0,cC.getValueRespondent());
     }
 
     @Test
     public void testGetPercent() throws Exception {
-        CheckCompatibility cC = new CheckCompatibility();
         assertEquals(0,cC.getPercent());
     }
 
@@ -63,10 +77,8 @@ public class CheckCompatibilityTest2 {
         li.add(0);
         li.add(0);
         li.add(1);
-        CheckCompatibility cC = new CheckCompatibility();
         int[] a = cC.getMaximumCompatibility(li);
         assertEquals(18,a[1]);
         assertEquals(14,a[0]);
-
     }
 }
