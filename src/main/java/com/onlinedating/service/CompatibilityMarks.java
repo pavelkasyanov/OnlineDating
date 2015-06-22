@@ -1,15 +1,7 @@
 package com.onlinedating.service;
-
-import com.sun.java.util.jar.pack.*;
-
-
 import java.io.*;
 import java.util.Properties;
 
-
-/**
- * Created by Кирилл on 17.06.15.
- */
 
 public class CompatibilityMarks {
     final static String DEFAULT_FILE_NAME= "configCompatibility.properties";

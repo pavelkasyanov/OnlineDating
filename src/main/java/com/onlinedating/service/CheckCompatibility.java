@@ -4,9 +4,7 @@ import java.io.InputStream;
 import java.util.List;
 import static com.onlinedating.service.CompatibilityAnswers.PRIORITY_IMPORTANT;
 import static com.onlinedating.service.CompatibilityAnswers.PRIORITY_UNIMPORTANT;
-/**
- * Created by Кирилл on 17.06.15.
- */
+
 
 public class CheckCompatibility {
     private int valueQuestioner = 0;
