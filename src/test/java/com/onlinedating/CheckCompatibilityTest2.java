@@ -11,9 +11,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static com.onlinedating.service.CompatibilityAnswers.*;
-/**
- * Created by Кирилл on 17.06.15.
- */
+
 public class CheckCompatibilityTest2 {
     CheckCompatibility cC;
     public CheckCompatibilityTest2(){

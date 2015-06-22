@@ -48,9 +48,8 @@ public class HomeController {
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(ModelMap model, HttpServletRequest request) {
 		if (request.getSession().getAttribute(CUR_USER) != null) {
-
 			User user = (User)request.getSession().getAttribute(CUR_USER);
-			//QuestionList questionList = questionListService.get_btID(user.getQuestionList().getQuestionListID());
+			///QuestionList questionList = questionListService.get_btID(user.getQuestionList().getQuestionListID());
 			//Set<Question> list = questionList.getQuestions();
 			Set<Question> questions = userService.getQuestions(user);
 			model.addAttribute("myAskList", questions);
@@ -94,7 +93,7 @@ public class HomeController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		ObjectMapper converter = new ObjectMapper();
 
-		if (login != null || !login.equals("")) {
+		if (login != null || !"".equals(login)) {
 
 			User user = userService.get(login);
 			System.out.println("User service get glogih");
