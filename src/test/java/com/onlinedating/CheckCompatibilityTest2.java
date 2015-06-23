@@ -18,7 +18,7 @@ public class CheckCompatibilityTest2 {
         //TODO load properties
         FileInputStream fileInputStream = null;
         try {
-            fileInputStream = new FileInputStream("configCompatibility.properties");
+            fileInputStream = new FileInputStream("src/main/resources/configCompatibility.properties");
             cC = new CheckCompatibility(fileInputStream);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
