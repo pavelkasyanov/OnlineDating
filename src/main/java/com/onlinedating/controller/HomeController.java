@@ -70,7 +70,6 @@ public class HomeController {
 	private void testCheckCompatibility(HttpServletRequest request) {
 		//TODO load properties
 		CheckCompatibility cC;
-		FileInputStream fileInputStream = null;
 		ServletContext context = request.getServletContext();
 		InputStream iS = context.getResourceAsStream("/WEB-INF/classes/configCompatibility.properties");
 		cC = new CheckCompatibility(iS);
