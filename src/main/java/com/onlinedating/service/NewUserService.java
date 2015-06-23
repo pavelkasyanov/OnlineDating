@@ -1,9 +1,14 @@
-package com.onlinedating;
+package com.onlinedating.service;
 
-import com.onlinedating.model.CheckCompatibility;
+import com.onlinedating.model.Answer;
 import com.onlinedating.model.Question;
+import com.onlinedating.model.Relationship;
 import com.onlinedating.model.User;
 
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -63,8 +68,24 @@ public class NewUserService implements INewUserService {
     }
 
 
-    Relationship getRelationship(User userWithQuestion, User userReporter) {
+    public Relationship getRelationship(User userWithQuestion, User userReporter) {
         Relationship relationship = getOrCreateRelationship(userWithQuestion, userReporter);
+
+        CheckCompatibility cc = null;
+        FileInputStream fileInputStream = null;
+        try {
+            fileInputStream = new FileInputStream("src/main/resources/configCompatibility.properties");
+            cc = new CheckCompatibility(fileInputStream);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                fileInputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         Set<Answer> answers1 = userWithQuestion.getAnswers();
         Set<Answer> answers2 = userReporter.getAnswers();
@@ -73,10 +94,9 @@ public class NewUserService implements INewUserService {
                 Question question1 = an1.getQuestion();
                 Question question2 = an2.getQuestion();
                 if (question1.equals(question2)) {
-                    CheckCompatibility cc = new CheckCompatibility();
                     cc.check(an1.getImportance(), an2.getAnswer());
-                    relationship.addStress(userWithQuestion, cc.getValueInspected());
-                    relationship.addStress(userReporter, cc.getValueWhoChecks());
+                    relationship.addStress(userWithQuestion, cc.getValueQuestioner());
+                    relationship.addStress(userReporter, cc.getValueRespondent());
                 }
             }
         }

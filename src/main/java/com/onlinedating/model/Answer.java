@@ -1,10 +1,5 @@
-package com.onlinedating;
+package com.onlinedating.model;
 
-import com.onlinedating.model.Question;
-
-/**
- * Created by Artem.Zolotov on 6/22/2015.
- */
 public class Answer {
 
     private Question question;

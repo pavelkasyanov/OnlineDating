@@ -1,4 +1,4 @@
-package com.onlinedating;
+package com.onlinedating.model;
 
 import com.onlinedating.model.User;
 

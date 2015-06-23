@@ -1,4 +1,4 @@
-package com.onlinedating;
+package com.onlinedating.service;
 
 import com.onlinedating.model.Question;
 import com.onlinedating.model.User;

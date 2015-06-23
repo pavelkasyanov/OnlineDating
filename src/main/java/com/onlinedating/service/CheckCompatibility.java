@@ -19,7 +19,6 @@ public class CheckCompatibility {
 
     public void check(int priority, String value)
     {
-
         if((value != null)&&(!"".equals(value))) {
             if (PRIORITY_IMPORTANT == priority)
             {

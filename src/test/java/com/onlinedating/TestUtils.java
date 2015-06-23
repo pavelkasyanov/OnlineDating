@@ -1,7 +1,9 @@
 package com.onlinedating;
 
 import com.onlinedating.model.Question;
+import com.onlinedating.model.Relationship;
 import com.onlinedating.model.User;
+import com.onlinedating.service.NewUserService;
 
 import static org.junit.Assert.assertEquals;
 
