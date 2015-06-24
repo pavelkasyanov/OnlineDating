@@ -92,4 +92,12 @@ public class User implements java.io.Serializable {
     public void setAnswers(Set<Answer> answers) {
         this.answers = answers;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "User_login='" + User_login + '\'' +
+                ", User_Name='" + User_Name + '\'' +
+                '}';
+    }
 }

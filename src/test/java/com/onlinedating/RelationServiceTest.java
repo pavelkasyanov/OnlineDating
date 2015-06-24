@@ -3,20 +3,14 @@ package com.onlinedating;
 import com.onlinedating.model.Answer;
 import com.onlinedating.model.Question;
 import com.onlinedating.model.User;
-import com.onlinedating.service.CheckCompatibility;
 import com.onlinedating.service.CompatibilityMarks;
 import com.onlinedating.service.NewUserService;
 import org.junit.Test;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-
-import static com.onlinedating.service.CompatibilityAnswers.*;
-
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.Set;
 
+import static com.onlinedating.service.CompatibilityAnswers.ANSWER_NO;
+import static com.onlinedating.service.CompatibilityAnswers.PRIORITY_IMPORTANT;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -24,7 +18,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class RelationServiceTest {
 
-    static final String CONFIG_FILE_NAME = "src/main/resources/configCompatibility.properties";
+    static final String CONFIG_FILE_NAME = "configCompatibility.properties";
     Question q;
     User userQuestioner;
     User userReporter;

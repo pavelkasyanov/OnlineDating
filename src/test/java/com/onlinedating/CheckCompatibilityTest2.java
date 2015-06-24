@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 import static com.onlinedating.service.CompatibilityAnswers.*;
 
 public class CheckCompatibilityTest2 {
-    static final String CONFIG_FILE_NAME = "src/main/resources/configCompatibility.properties";
+    static final String CONFIG_FILE_NAME = "configCompatibility.properties";
     CheckCompatibility cC;
     public CheckCompatibilityTest2(){
         FileInputStream fileInputStream = null;
@@ -99,10 +99,8 @@ public class CheckCompatibilityTest2 {
         li.add(PRIORITY_UNIMPORTANT);
         li.add(PRIORITY_IMPORTANT);
         int[] compatibility = cC.getMaximumCompatibility(li);
-        int questioner = cm.getMaxMarkImportantQuestioner() + cm.getMaxMarkUnimportantQuestioner()
-                + cm.getMaxMarkUnimportantQuestioner() + cm.getMaxMarkImportantQuestioner();
-        int respondent = cm.getMaxMarkImportantRespondent() + cm.getMaxMarkUnimportantRespondent()
-                + cm.getMaxMarkUnimportantRespondent() + cm.getMaxMarkImportantRespondent();
+        int questioner = cm.getMaxMarkImportantQuestioner() * 2 + cm.getMaxMarkUnimportantQuestioner() * 2;
+        int respondent = cm.getMaxMarkImportantRespondent() *2 + cm.getMaxMarkUnimportantRespondent() *2;
         assertEquals(questioner,compatibility[0]);
         assertEquals(respondent,compatibility[1]);
     }

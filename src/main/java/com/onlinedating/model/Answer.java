@@ -27,4 +27,13 @@ public class Answer {
     public int getImportance() {
         return importance;
     }
+
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "question=" + question.getText() +
+                ", answer='" + answer + '\'' +
+                ", importance=" + importance +
+                '}';
+    }
 }
