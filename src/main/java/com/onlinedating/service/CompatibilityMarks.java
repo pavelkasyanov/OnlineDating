@@ -1,11 +1,13 @@
 package com.onlinedating.service;
+
 import java.io.*;
+import java.net.URL;
 import java.util.Properties;
 
 
 public class CompatibilityMarks {
-    public static final String IMPORTANT_YES_EASY_QUESTIONER= "important.yes.easy.questioner";
-    public static final String IMPORTANT_YES_HEAVY_QUESTIONER= "important.yes.heavy.questioner";
+    public static final String IMPORTANT_YES_EASY_QUESTIONER = "important.yes.easy.questioner";
+    public static final String IMPORTANT_YES_HEAVY_QUESTIONER = "important.yes.heavy.questioner";
     public static final String IMPORTANT_NO_QUESTIONER = "important.no.questioner";
     public static final String IMPORTANT_YES_EASY_RESPONDENT = "important.yes.easy.respondent";
     public static final String IMPORTANT_YES_HEAVY_RESPONDENT = "important.yes.heavy.respondent";
@@ -38,47 +40,33 @@ public class CompatibilityMarks {
     private int unimportantYesHeavilyRespondent;
     private int unimportantNoRespondent;
 
-    public void loadProperties(InputStream resourceAsStream) {
-        Properties props = new Properties();
-               try {
-            props.load(resourceAsStream);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        marks[0] = importantYesEasyQuestioner = Integer.parseInt(props.getProperty(IMPORTANT_YES_EASY_QUESTIONER));
-        marks[1] = importantYesHeavilyQuestioner = Integer.parseInt(props.getProperty(IMPORTANT_YES_HEAVY_QUESTIONER));
-        marks[2] = importantNoQuestioner = Integer.parseInt(props.getProperty(IMPORTANT_NO_QUESTIONER));
-        marks[3] = importantYesEasyRespondent = Integer.parseInt(props.getProperty(IMPORTANT_YES_EASY_RESPONDENT));
-        marks[4] = importantYesHeavilyRespondent = Integer.parseInt(props.getProperty(IMPORTANT_YES_HEAVY_RESPONDENT));
-        marks[5] = importantNoRespondent = Integer.parseInt(props.getProperty(IMPORTANT_NO_RESPONDENT));
-
-        marks[6] = unimportantYesEasyQuestioner = Integer.parseInt(props.getProperty(UNIMPORTANT_YES_EASY_QUESTIONER));
-        marks[7] = unimportantYesHeavilyQuestioner = Integer.parseInt(props.getProperty(UNIMPORTANT_YES_HEAVY_QUESTIONER));
-        marks[8] = unimportantNoQuestioner = Integer.parseInt(props.getProperty(UNIMPORTANT_NO_QUESTIONER));
-        marks[9] = unimportantYesEasyRespondent = Integer.parseInt(props.getProperty(UNIMPORTANT_YES_EASY_RESPONDENT));
-        marks[10] = unimportantYesHeavilyRespondent = Integer.parseInt(props.getProperty(UNIMPORTANT_YES_HEAVY_RESPONDENT));
-        marks[11] = unimportantNoRespondent = Integer.parseInt(props.getProperty(UNIMPORTANT_NO_RESPONDENT));
-        calculateMaxPossibleValues();
-    }
     public void loadProperties(String filename) {
-        Properties props = new Properties();
         FileInputStream fileInputStream = null;
-
         try {
-            fileInputStream = new FileInputStream(filename);
-            props.load(fileInputStream);
+            URL path = ClassLoader.getSystemResource(filename);
+            File file = new File(path.toURI());
+            fileInputStream = new FileInputStream(file);
+            loadProperties(fileInputStream);
+
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             try {
                 fileInputStream.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void loadProperties(InputStream resourceAsStream) {
+        Properties props = new Properties();
+        try {
+            props.load(resourceAsStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         marks[0] = importantYesEasyQuestioner = Integer.parseInt(props.getProperty(IMPORTANT_YES_EASY_QUESTIONER));
         marks[1] = importantYesHeavilyQuestioner = Integer.parseInt(props.getProperty(IMPORTANT_YES_HEAVY_QUESTIONER));
         marks[2] = importantNoQuestioner = Integer.parseInt(props.getProperty(IMPORTANT_NO_QUESTIONER));
@@ -94,80 +82,95 @@ public class CompatibilityMarks {
         marks[11] = unimportantNoRespondent = Integer.parseInt(props.getProperty(UNIMPORTANT_NO_RESPONDENT));
         calculateMaxPossibleValues();
     }
-    public void calculateMaxPossibleValues(){
+
+
+    public void calculateMaxPossibleValues() {
         maxMarkImportantQuestioner = 0;
-        for(int i = 0; i< 3;i++){
-            if(marks[i] > maxMarkImportantQuestioner)
+        for (int i = 0; i < 3; i++) {
+            if (marks[i] > maxMarkImportantQuestioner)
                 maxMarkImportantQuestioner = marks[i];
         }
         maxMarkImportantRespondent = 0;
-        for(int i = 3; i< 6;i++){
-            if(marks[i] > maxMarkImportantRespondent)
+        for (int i = 3; i < 6; i++) {
+            if (marks[i] > maxMarkImportantRespondent)
                 maxMarkImportantRespondent = marks[i];
         }
         maxMarkUnimportantQuestioner = 0;
-        for(int i = 6; i< 9;i++){
-            if(marks[i] > maxMarkUnimportantQuestioner)
+        for (int i = 6; i < 9; i++) {
+            if (marks[i] > maxMarkUnimportantQuestioner)
                 maxMarkUnimportantQuestioner = marks[i];
         }
         maxMarkUnimportantRespondent = 0;
-        for(int i = 9; i< 12;i++){
-            if(marks[i] > maxMarkUnimportantRespondent)
+        for (int i = 9; i < 12; i++) {
+            if (marks[i] > maxMarkUnimportantRespondent)
                 maxMarkUnimportantRespondent = marks[i];
         }
 
     }
 
     public int getMaxMarkImportantQuestioner() {
-        return  maxMarkImportantQuestioner;
+        return maxMarkImportantQuestioner;
     }
+
     public int getMaxMarkImportantRespondent() {
-        return  maxMarkImportantRespondent;
+        return maxMarkImportantRespondent;
     }
+
     public int getMaxMarkUnimportantQuestioner() {
-        return  maxMarkUnimportantQuestioner;
+        return maxMarkUnimportantQuestioner;
     }
+
     public int getMaxMarkUnimportantRespondent() {
-        return  maxMarkUnimportantRespondent;
+        return maxMarkUnimportantRespondent;
     }
 
     public int getImportantYesEasyQuestioner() {
-        return  importantYesEasyQuestioner;
+        return importantYesEasyQuestioner;
     }
+
     public int getImportantYesHeavilyQuestioner() {
-        return  importantYesHeavilyQuestioner;
+        return importantYesHeavilyQuestioner;
     }
+
     public int getImportantNoQuestioner() {
         return importantNoQuestioner;
     }
+
     public int getImportantYesEasyRespondent() {
         return importantYesEasyRespondent;
     }
+
     public int getImportantYesHeavilyRespondent() {
         return importantYesHeavilyRespondent;
     }
+
     public int getImportantNoRespondent() {
         return importantNoRespondent;
     }
+
     public int getUnimportantYesEasyQuestioner() {
         return unimportantYesEasyQuestioner;
     }
+
     public int getUnimportantYesHeavilyQuestioner() {
         return unimportantYesHeavilyQuestioner;
     }
+
     public int getUnimportantNoQuestioner() {
         return unimportantNoQuestioner;
     }
+
     public int getUnimportantYesEasyRespondent() {
         return unimportantYesEasyRespondent;
     }
+
     public int getUnimportantYesHeavilyRespondent() {
         return unimportantYesHeavilyRespondent;
     }
+
     public int getUnimportantNoRespondent() {
         return unimportantNoRespondent;
     }
-
 
 
 }

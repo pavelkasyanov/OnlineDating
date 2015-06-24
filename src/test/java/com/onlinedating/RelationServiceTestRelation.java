@@ -12,7 +12,7 @@ import static com.onlinedating.service.CompatibilityAnswers.*;
  * Created by Artem.Zolotov on 6/22/2015.
  */
 public class RelationServiceTestRelation {
-    static final String CONFIG_FILE_NAME = "src/main/resources/configCompatibility.properties";
+    static final String CONFIG_FILE_NAME = "configCompatibility.properties";
     Question q1;
     Question q2;
     Question q3;
@@ -79,7 +79,7 @@ public class RelationServiceTestRelation {
         TestUtils.assertStress(userQuestionerPasha, cm.getImportantYesHeavilyQuestioner(), userReporterMasha, cm.getImportantYesHeavilyRespondent(), userService);
         TestUtils.assertStress(userVasya, cm.getUnimportantYesHeavilyQuestioner(), userReporterMasha, cm.getUnimportantYesHeavilyRespondent(), userService);
     }
-/*
+
     @Test
     public void test2Questions() throws Exception {
         userService.userValue(userQuestionerPasha, q1, PRIORITY_IMPORTANT);
@@ -123,6 +123,6 @@ public class RelationServiceTestRelation {
 
         TestUtils.assertStress(userQuestionerPasha, expectedPasha, userReporterMasha, expectedMasha, userService);
     }
-    */
-}
+
+}//#
 

@@ -1,8 +1,7 @@
 package com.onlinedating.model;
 
-import com.onlinedating.model.User;
-
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -22,9 +21,26 @@ public class Relationship {
         return integer;
     }
 
+    public void setStress(User user, int stress) {
+        Integer integer = userStress.get(user);
+        userStress.put(user, stress);
+    }
+
     public void addStress(User user, int stress) {
         Integer integer = userStress.get(user);
         userStress.put(user, integer + stress);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Relationship{");
+        Iterator<User> iterator = userStress.keySet().iterator();
+        while (iterator.hasNext()) {
+            User next = iterator.next();
+            sb.append(next).append(" stress = ").append(userStress.get(next)).append(" ");
+        }
+
+        sb.append('}');
+        return sb.toString();
+    }
 }
