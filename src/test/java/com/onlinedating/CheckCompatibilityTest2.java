@@ -19,7 +19,6 @@ public class CheckCompatibilityTest2 {
     static final String CONFIG_FILE_NAME = "src/main/resources/configCompatibility.properties";
     CheckCompatibility cC;
     public CheckCompatibilityTest2(){
-        //TODO load properties
         FileInputStream fileInputStream = null;
         try {
             fileInputStream = new FileInputStream("src/main/resources/configCompatibility.properties");
