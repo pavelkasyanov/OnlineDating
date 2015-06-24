@@ -1,7 +1,10 @@
 package com.onlinedating;
 
 import com.onlinedating.service.CheckCompatibility;
+import com.onlinedating.service.CompatibilityMarks;
 import org.junit.Test;
+import static com.onlinedating.service.CompatibilityAnswers.PRIORITY_IMPORTANT;
+import static com.onlinedating.service.CompatibilityAnswers.PRIORITY_UNIMPORTANT;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,9 +16,9 @@ import static org.junit.Assert.*;
 import static com.onlinedating.service.CompatibilityAnswers.*;
 
 public class CheckCompatibilityTest2 {
+    static final String CONFIG_FILE_NAME = "src/main/resources/configCompatibility.properties";
     CheckCompatibility cC;
     public CheckCompatibilityTest2(){
-        //TODO load properties
         FileInputStream fileInputStream = null;
         try {
             fileInputStream = new FileInputStream("src/main/resources/configCompatibility.properties");
@@ -33,26 +36,42 @@ public class CheckCompatibilityTest2 {
     }
     @Test
     public void testCheck() throws Exception {
-        cC.check(0,"");
+        CompatibilityMarks cm = new CompatibilityMarks();
+        cm.loadProperties(CONFIG_FILE_NAME);
+        int valueQuestioner = 0,valueRespondent = 0;
+
+        cC.check(PRIORITY_UNIMPORTANT,"");
         assertEquals(-1, cC.getPercent());
-        cC.check(1,ANSWER_YES_EASY);
-        assertEquals(5,cC.getValueQuestioner());
-        assertEquals(5,cC.getValueRespondent());
-        cC.check(1,ANSWER_YES_HEAVILY);
-        assertEquals(8,cC.getValueQuestioner());
-        assertEquals(4,cC.getValueRespondent());
-        cC.check(1,ANSWER_NO);
-        assertEquals(4,cC.getValueQuestioner());
-        assertEquals(7,cC.getValueRespondent());
-        cC.check(0,ANSWER_YES_EASY);
-        assertEquals(6,cC.getValueQuestioner());
-        assertEquals(9,cC.getValueRespondent());
-        cC.check(0,ANSWER_YES_HEAVILY);
-        assertEquals(6,cC.getValueQuestioner());
-        assertEquals(7,cC.getValueRespondent());
-        cC.check(0,ANSWER_NO);
-        assertEquals(8,cC.getValueQuestioner());
-        assertEquals(11,cC.getValueRespondent());
+        cC.check(PRIORITY_IMPORTANT,ANSWER_YES_EASY);
+        valueQuestioner += cm.getImportantYesEasyQuestioner();
+        valueRespondent += cm.getImportantYesEasyRespondent();
+        assertEquals(valueQuestioner,cC.getValueQuestioner());
+        assertEquals(valueRespondent,cC.getValueRespondent());
+        cC.check(PRIORITY_IMPORTANT,ANSWER_YES_HEAVILY);
+        valueQuestioner +=cm.getImportantYesHeavilyQuestioner();
+        valueRespondent +=cm.getImportantYesHeavilyRespondent();
+        assertEquals(valueQuestioner,cC.getValueQuestioner());
+        assertEquals(valueRespondent,cC.getValueRespondent());
+        cC.check(PRIORITY_IMPORTANT,ANSWER_NO);
+        valueQuestioner +=cm.getImportantNoQuestioner();
+        valueRespondent +=cm.getImportantNoRespondent();
+        assertEquals(valueQuestioner,cC.getValueQuestioner());
+        assertEquals(valueRespondent,cC.getValueRespondent());
+        cC.check(PRIORITY_UNIMPORTANT,ANSWER_YES_EASY);
+        valueQuestioner +=cm.getUnimportantYesEasyQuestioner();
+        valueRespondent +=cm.getUnimportantYesEasyRespondent();
+        assertEquals(valueQuestioner,cC.getValueQuestioner());
+        assertEquals(valueRespondent,cC.getValueRespondent());
+        cC.check(PRIORITY_UNIMPORTANT,ANSWER_YES_HEAVILY);
+        valueQuestioner +=cm.getUnimportantYesHeavilyQuestioner();
+        valueRespondent +=cm.getUnimportantYesHeavilyRespondent();
+        assertEquals(valueQuestioner,cC.getValueQuestioner());
+        assertEquals(valueRespondent,cC.getValueRespondent());
+        cC.check(PRIORITY_UNIMPORTANT,ANSWER_NO);
+        valueQuestioner +=cm.getUnimportantNoQuestioner();
+        valueRespondent +=cm.getUnimportantNoRespondent();
+        assertEquals(valueQuestioner,cC.getValueQuestioner());
+        assertEquals(valueRespondent,cC.getValueRespondent());
     }
 
     @Test
@@ -72,13 +91,19 @@ public class CheckCompatibilityTest2 {
 
     @Test
     public void testGetMaximumCompatibility() throws Exception {
+        CompatibilityMarks cm = new CompatibilityMarks();
+        cm.loadProperties(CONFIG_FILE_NAME);
         List<Integer> li = new ArrayList<Integer>(4);
-        li.add(1);
-        li.add(0);
-        li.add(0);
-        li.add(1);
-        int[] a = cC.getMaximumCompatibility(li);
-        assertEquals(18,a[1]);
-        assertEquals(14,a[0]);
+        li.add(PRIORITY_IMPORTANT);
+        li.add(PRIORITY_UNIMPORTANT);
+        li.add(PRIORITY_UNIMPORTANT);
+        li.add(PRIORITY_IMPORTANT);
+        int[] compatibility = cC.getMaximumCompatibility(li);
+        int questioner = cm.getMaxMarkImportantQuestioner() + cm.getMaxMarkUnimportantQuestioner()
+                + cm.getMaxMarkUnimportantQuestioner() + cm.getMaxMarkImportantQuestioner();
+        int respondent = cm.getMaxMarkImportantRespondent() + cm.getMaxMarkUnimportantRespondent()
+                + cm.getMaxMarkUnimportantRespondent() + cm.getMaxMarkImportantRespondent();
+        assertEquals(questioner,compatibility[0]);
+        assertEquals(respondent,compatibility[1]);
     }
 }
