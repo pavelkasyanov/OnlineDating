@@ -43,15 +43,5 @@ public class QuestionListDAOImpl implements  QuestionListDAO{
         return questionList;
     }
 
-    @Override
-    @ Transactional
-    public void test() {
-        Session session = sessionFactory.getCurrentSession();
-        System.out.println("Maven + Hibernate + MySQL");
-        session.beginTransaction();
-        List category = null;
-        category = session.createQuery("FROM Category").list();
-        session.getTransaction().commit();
 
-    }
 }

@@ -25,7 +25,7 @@
       var text = $('#questionText').val();
       var category = $('#category_new').val();
 
-      var loginResp = $.post( '/add_ask',
+      var loginResp = $.post( '${pageContext.request.contextPath}/add_ask',
               {questionText: text,
                 category_new:category}
       );
@@ -47,7 +47,7 @@
 
   function getLastQuestions() {
 
-    var lastQuestionRequest = $.get('/last_ask');
+    var lastQuestionRequest = $.get('${pageContext.request.contextPath}/last_ask');
 
     lastQuestionRequest.done(function( data ) {
       var obj = JSON.parse(data);
@@ -63,7 +63,7 @@
   function getLastCategoryQuestions() {
     var category = $('#category_new1').val();
 
-    var lastQuestionRequest = $.post('/category_last', {
+    var lastQuestionRequest = $.post('${pageContext.request.contextPath}/category_last', {
 
             category_new1:category})
             ;
