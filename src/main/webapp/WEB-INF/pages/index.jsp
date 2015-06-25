@@ -11,7 +11,7 @@
             var userLogin = $('#login').val();
             var userPass = $('#pass').val();
 
-            var loginResp = $.post( 'login',
+            var loginResp = $.post( '${pageContext.request.contextPath}/login',
                     {login: userLogin,
                         pass:userPass}
             );
@@ -24,7 +24,7 @@
                     document.getElementById('pass').value = '';
                 } else {
                     /*TODO fix url*/
-                    window.location.replace('/OnlineDating/home');
+                    window.location.replace('${pageContext.request.contextPath}/home');
                 }
             });
 

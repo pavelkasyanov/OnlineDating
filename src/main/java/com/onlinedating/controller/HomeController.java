@@ -40,7 +40,7 @@ public class HomeController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public String home(ModelMap model, HttpServletRequest request) {
 		if (request.getSession().getAttribute(CUR_USER) != null) {
 

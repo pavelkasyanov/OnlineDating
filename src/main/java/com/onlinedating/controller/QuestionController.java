@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "ask")
 public class QuestionController {
 
     @Autowired
@@ -33,7 +34,7 @@ public class QuestionController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/ask", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String index(ModelMap model,
                         HttpServletRequest request) {
 
@@ -47,7 +48,7 @@ public class QuestionController {
         return "edit";
     }
 
-    @RequestMapping(value = "/add_ask", method = RequestMethod.POST)
+    @RequestMapping(value = "add_ask", method = RequestMethod.POST)
     @ResponseBody
     public String addAsk(@RequestParam(value = "questionText") String questionText,
                             @RequestParam(value = "category_new") String category,
@@ -59,7 +60,7 @@ public class QuestionController {
             if (true) {
 
                 question = questionService.Add(questionText,
-                        (String) request.getSession().getAttribute("login_user"),
+                        ((User)request.getSession().getAttribute(HomeController.CUR_USER)).getUser_login(),
                         category);
 
                 questionModel = new QuestionModel(question);
@@ -68,7 +69,7 @@ public class QuestionController {
             return converter.writeValueAsString(questionModel);
     }
 
-    @RequestMapping(value = "/delete_ask", method = RequestMethod.POST)
+    @RequestMapping(value = "delete_ask", method = RequestMethod.POST)
     @ResponseBody
     public String deleteAsk(@RequestParam(value = "askId") String askId)
             throws IOException {
@@ -80,7 +81,7 @@ public class QuestionController {
         return "done";
     }
 
-    @RequestMapping(value = "/last_ask", method = RequestMethod.GET)
+    @RequestMapping(value = "last_ask", method = RequestMethod.GET)
     @ResponseBody
     public String getLastQuestions()
             throws IOException {
