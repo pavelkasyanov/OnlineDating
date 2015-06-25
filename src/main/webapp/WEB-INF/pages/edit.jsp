@@ -15,34 +15,34 @@
         $(this).find('.btn').toggleClass('btn-primary');
       }
     });
-
-    $('form').submit(function(){
-      var text = $('#questionText').val();
-      var category = $('#category_new').val();
-
-      var loginResp = $.post( '/add_ask',
-              {questionText: text,
-                category_new:category}
-      );
-
-      loginResp.done(function( data ) {
-        var obj = JSON.parse(data);
-
-        var result = '<li><h4><br>'+obj.text+'</h4> </li>';
-        $('#my_question_list').append(result);
-        $('textarea').val('');
-
-      });
-
-      loginResp.error(function() { alert("Ошибка выполнения"); })
-
-      return false;
-    });
   });
+
+  function addAsk(){
+    var text = $('#questionText').val();
+    var category = $('#category_new').val();
+
+    var loginResp = $.post( '${pageContext.request.contextPath}/ask/add_ask',
+            {questionText: text,
+              category_new:category}
+    );
+
+    loginResp.done(function( data ) {
+      var obj = JSON.parse(data);
+
+      var result = '<li><h4><br>'+obj.text+'</h4> </li>';
+      $('#my_question_list').append(result);
+      $('textarea').val('');
+
+    });
+
+    loginResp.error(function() { alert("Ошибка выполнения"); })
+
+    return false;
+  }
 
   function getLastQuestions() {
 
-    var lastQuestionRequest = $.get('/last_ask');
+    var lastQuestionRequest = $.get('${pageContext.request.contextPath}/ask/last_ask');
 
     lastQuestionRequest.done(function( data ) {
       var obj = JSON.parse(data);
@@ -57,7 +57,7 @@
   }
 
   function deleteQuestion(askId) {
-    var deleteAsk = $.post('/delete_ask',
+    var deleteAsk = $.post('${pageContext.request.contextPath}/ask/delete_ask',
             {askId: askId});
 
     deleteAsk.done(function( data ){
