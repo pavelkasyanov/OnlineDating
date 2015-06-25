@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: pavlik
-  Date: 19.06.2015
-  Time: 14:28
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -39,9 +32,9 @@
 
           <ul class="nav navbar-nav" >
 
-            <li><a href="home.html"> Моя страница </a> </li>
-            <li><a href="#"> Поиск </a> </li>
-            <li><a href="ask.html"> Вопросы </a> </li>
+            <li><a href="home"> Моя страница </a> </li>
+            <li><a href=""> Поиск </a> </li>
+            <li><a href="ask"> Вопросы </a> </li>
             <li><a href="#"> Link </a> </li>
           </ul>
 
@@ -64,28 +57,28 @@
       <table class="table" cellpadding="0" cellspacing="0">
         <tr>
           <td style = "text-align: center; background-color: white;">
-            <img src="img/photo/ph1.jpg" class="img-polaroid">
+            <img src="${pageContext.request.contextPath}/resources/css/img/ph1.jpg" class="img-polaroid">
             <p> Имя : Возраст </p>
             <p> Мой напряг : Его/ее напряг </p>
 
 
           </td>
           <td style = "text-align: center; background-color: white; ">
-            <img src="img/photo/ph1.jpg" class="img-polaroid">
+            <img src="${pageContext.request.contextPath}/resources/css/img/ph1.jpg" class="img-polaroid">
             <p> Имя : Возраст </p>
             <p> Мой напряг : Его/ее напряг </p>
 
 
           </td>
           <td style = "text-align: center; background-color: white; ">
-            <img src="img/photo/ph1.jpg" class="img-polaroid">
+            <img src="${pageContext.request.contextPath}/resources/css/img/ph1.jpg" class="img-polaroid">
             <p> Имя : Возраст </p>
             <p> Мой напряг : Его/ее напряг </p>
 
 
           </td>
           <td style = "text-align: center; background-color: white; ">
-            <img src="img/photo/ph1.jpg" class="img-polaroid">
+            <img src="${pageContext.request.contextPath}/resources/css/img/ph1.jpg" class="img-polaroid">
             <p> Имя : Возраст </p>
             <p> Мой напряг : Его/ее напряг </p>
 
