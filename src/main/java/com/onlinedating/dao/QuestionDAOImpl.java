@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Aver on 17.06.2015.
  */
-public class QuestionDAOImpl implements QuestionDAO {
+public  class QuestionDAOImpl implements QuestionDAO {
     private SessionFactory sessionFactory;
 
     public QuestionDAOImpl(SessionFactory sessionFactory) {
@@ -123,6 +123,20 @@ public class QuestionDAOImpl implements QuestionDAO {
 
         List<Question> questions = null;
         questions = session.createQuery("FROM Question where User_UserID = " + userId).list();
+
+        session.getTransaction().commit();
+        session.close();
+
+        return questions;
+    }
+
+    @Override
+    public List<Question> question_list_byCategory(Category category) {
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
+
+        List<Question> questions = null;
+        questions = session.createQuery("FROM Question where Category_CategorID = " + category.getCategoryID()).list();
 
         session.getTransaction().commit();
         session.close();

@@ -20,4 +20,6 @@ public interface QuestionDAO {
     List<Question> Get_Question_list_byquestionList(QuestionList questionList);
 
     List<Question> getQuestionFromUser(int userId);
+
+    List<Question> question_list_byCategory(Category category);
 }
