@@ -1,10 +1,9 @@
 package com.onlinedating.controller;
 
 import com.onlinedating.dao.QuestionDAO;
+import com.onlinedating.service.CheckCompatibility;
 import com.onlinedating.model.Question;
-import com.onlinedating.model.QuestionList;
 import com.onlinedating.model.User;
-import com.onlinedating.model.mvc.AskRow;
 import com.onlinedating.service.QuestionListService;
 import com.onlinedating.service.UserService;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -16,22 +15,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.*;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import static com.onlinedating.service.CompatibilityAnswers.ANSWER_YES_EASY;
+import static com.onlinedating.service.CompatibilityAnswers.PRIORITY_IMPORTANT;
+import static com.onlinedating.service.CompatibilityAnswers.PRIORITY_UNIMPORTANT;
 
 @Controller
 public class HomeController {
 
 	public static final String CUR_USER = "cur_user";
-
 	@Autowired
 	QuestionDAO questionService;
-
 	@Autowired
 	QuestionListService questionListService;
-
 	@Autowired
 	UserService userService;
 
@@ -40,59 +45,39 @@ public class HomeController {
 		return "index";
 	}
 
-	@RequestMapping(value = "home", method = RequestMethod.GET)
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(ModelMap model, HttpServletRequest request) {
 		if (request.getSession().getAttribute(CUR_USER) != null) {
-
 			User user = (User)request.getSession().getAttribute(CUR_USER);
-			//QuestionList questionList = questionListService.get_btID(user.getQuestionList().getQuestionListID());
+			///QuestionList questionList = questionListService.get_btID(user.getQuestionList().getQuestionListID());
 			//Set<Question> list = questionList.getQuestions();
-			List<Question> questions = userService.getQuestions(user);
+			Set<Question> questions = userService.getQuestions(user);
+			model.addAttribute("myAskList", questions);
 
 			//TODO add url user
-			model.addAttribute("avatartUrl", user.getPhoto().getUrl());
+			//model.addAttribute("avatartUrl",user.getPhoto().getUrl());
 
 			//TODO aboutme
-			model.addAttribute("aboutMeText", user.getUser_Inf());
+			//model.addAttribute("aboutMeText",user.getUser_Inf());
 
-			addQuestions(model, questions);
-
+			testCheckCompatibility(request);
 			return "home";
 		}
 
 		return "redirect:/";
 	}
 
-	private void addQuestions(ModelMap model, List<Question> questions) {
-
-		model.addAttribute("myAskList", questions);
-
-		List<AskRow> stat = getStat(questions);
-		model.addAttribute("askRowList", stat);
-
-//			<c:out value="${askRow.question.text}" />
-//
-//			<c:out value="${askRow.countAnswered}" />
-//			<c:out value="${askRow.countDenied}" />
-//			<c:out value="${askRow.countImportant}" />
-//			<c:out value="${askRow.countAgreed}" />
-//
+	private void testCheckCompatibility(HttpServletRequest request) {
+		//TODO load properties
+		CheckCompatibility cC;
+		ServletContext context = request.getSession().getServletContext();
+		InputStream iS = context.getResourceAsStream("/WEB-INF/classes/configCompatibility.properties");
+		cC = new CheckCompatibility(iS);
+		cC.check(PRIORITY_UNIMPORTANT,ANSWER_YES_EASY);
+		int valueInspected = cC.getValueQuestioner();
+		System.out.println(valueInspected);
 	}
 
-//	TODO to servis
-
-	private List<AskRow> getStat(List<Question> questions) {
-		List<AskRow> askRows = new ArrayList<AskRow>();
-
-		for (Question question:questions) {
-			AskRow askRow = new AskRow(question);
-			askRow.setCountAnswered(15);
-			askRow.setCountDenied(20);
-			askRows.add(askRow);
-		}
-
-		return askRows;
-	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
@@ -107,7 +92,7 @@ public class HomeController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		ObjectMapper converter = new ObjectMapper();
 
-		if (login != null || !login.equals("")) {
+		if (login != null || !"".equals(login)) {
 
 			User user = userService.get(login);
 			System.out.println("User service get glogih");

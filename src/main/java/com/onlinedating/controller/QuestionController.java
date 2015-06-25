@@ -60,7 +60,7 @@ public class QuestionController {
             if (true) {
 
                 question = questionService.Add(questionText,
-                        ((User)request.getSession().getAttribute(HomeController.CUR_USER)).getUser_login(),
+                        (String) request.getSession().getAttribute(HomeController.CUR_USER),
                         category);
 
                 questionModel = new QuestionModel(question);

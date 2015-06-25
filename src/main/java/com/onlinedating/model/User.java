@@ -2,6 +2,11 @@ package com.onlinedating.model;
 
 import java.util.Set;
 
+
+
+
+import java.util.Set;
+
 public class User implements java.io.Serializable {
     private int UserID;
     private String User_login;
@@ -12,6 +17,7 @@ public class User implements java.io.Serializable {
     private QuestionList questionList;
     private Set<Question> questions;
     private Photo photo;
+    private Set<Answer> answers;
 
     public int getUserID() {
         return UserID;
@@ -77,5 +83,21 @@ public class User implements java.io.Serializable {
 
     public void setPhoto(Photo photo) {
         this.photo = photo;
+    }
+
+    public Set<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(Set<Answer> answers) {
+        this.answers = answers;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "User_login='" + User_login + '\'' +
+                ", User_Name='" + User_Name + '\'' +
+                '}';
     }
 }

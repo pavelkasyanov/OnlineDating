@@ -11,7 +11,7 @@
             var userLogin = $('#login').val();
             var userPass = $('#pass').val();
 
-            var loginResp = $.post( '${pageContext.request.contextPath}/login',
+            var loginResp = $.post( 'login',
                     {login: userLogin,
                         pass:userPass}
             );
@@ -23,7 +23,6 @@
                     $('#error_user_login_alert').text(obj.answer);
                     document.getElementById('pass').value = '';
                 } else {
-                    /*TODO fix url*/
                     window.location.replace('${pageContext.request.contextPath}/home');
                 }
             });
