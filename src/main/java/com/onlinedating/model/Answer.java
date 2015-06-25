@@ -1,5 +1,7 @@
 package com.onlinedating.model;
 
+import com.onlinedating.service.CompatibilityAnswers;
+
 public class Answer {
 
     private Question question;
@@ -35,5 +37,24 @@ public class Answer {
                 ", answer='" + answer + '\'' +
                 ", importance=" + importance +
                 '}';
+    }
+
+    public String getImportanceText() {
+        if (importance == CompatibilityAnswers.PRIORITY_IMPORTANT) {
+            return "Мне это важно";
+        }
+        if (importance == CompatibilityAnswers.PRIORITY_UNIMPORTANT) {
+            return "Мне это пофиг";
+        }
+        return "Не определено";
+    }
+
+    public void mergeAnswers(Answer answer) {
+        if (this.importance == -1) {
+            this.importance = answer.importance;
+        }
+        if (this.answer == null) {
+            this.answer = answer.answer;
+        }
     }
 }

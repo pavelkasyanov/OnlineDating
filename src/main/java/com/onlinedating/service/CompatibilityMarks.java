@@ -43,6 +43,7 @@ public class CompatibilityMarks {
     public void loadProperties(String filename) {
         FileInputStream fileInputStream = null;
         try {
+
             URL path = ClassLoader.getSystemResource(filename);
             File file = new File(path.toURI());
             fileInputStream = new FileInputStream(file);

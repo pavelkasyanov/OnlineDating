@@ -24,7 +24,7 @@
             <li><a href="search"> Поиск </a> </li>
             <li><a href="ask"> Вопросы </a> </li>
             <!--TODO add condition -->
-            <li><a href="logout"> Log Out </a> </li>
+            <li><a href="logout">${cur_user.user_Name} Log Out </a> </li>
           </ul>
 
         </div>

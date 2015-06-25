@@ -3,10 +3,10 @@
 
 <div class="tab-pane fade" id = "tab2">
   <ul>
-    <c:forEach var="question" items="${questionList}">
+    <c:forEach var="askRow" items="${questionList}">
       <li>
         <h4><br>
-          <c:out value="${question}" />
+          <c:out value="${askRow.question}" />
         </h4>
       </li>
     </c:forEach>

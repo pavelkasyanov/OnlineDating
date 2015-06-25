@@ -4,6 +4,7 @@
 <jsp:param name="title" value="home"/>
 </jsp:include>
 <jsp:include page="parts/Header.jsp"/>
+
 <script type="text/javascript">
   jQuery(document).ready(function ($) {
     $('#mytabs').tab();

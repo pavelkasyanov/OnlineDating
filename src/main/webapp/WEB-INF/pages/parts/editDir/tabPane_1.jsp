@@ -41,10 +41,10 @@
   </div>
   <div class="row" id="my_question_list_div">
     <ul id="my_question_list">
-      <c:forEach var="question" items="${myQuestionList}">
-        <li id="myAsk_${question.questionID}">
+      <c:forEach var="askRow" items="${myQuestionList}">
+        <li id="myAsk_${askRow.question.questionID}">
           <h4><br>
-            <c:out value="${question}" /><a onclick="deleteQuestion(${question.questionID});">delete</a>
+            <c:out value="${askRow.question}" /><a onclick="deleteQuestion(${askRow.question.questionID});">delete</a>
           </h4>
         </li>
       </c:forEach>
@@ -52,3 +52,4 @@
   </div>
 
 </div>
+

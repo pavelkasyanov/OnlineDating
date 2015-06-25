@@ -100,4 +100,21 @@ public class User implements java.io.Serializable {
                 ", User_Name='" + User_Name + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (!User_login.equals(user.User_login)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return User_login.hashCode();
+    }
 }
