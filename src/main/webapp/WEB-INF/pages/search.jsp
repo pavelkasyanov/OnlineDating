@@ -1,10 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
 <head>
 
   <link href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css" rel="stylesheet">
   <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" type="text/css" rel="stylesheet">
+
 
 </head>
 </head>
@@ -56,34 +58,13 @@
 
       <table class="table" cellpadding="0" cellspacing="0">
         <tr>
-          <td style = "text-align: center; background-color: white;">
-            <img src="${pageContext.request.contextPath}/resources/css/img/ph1.jpg" class="img-polaroid">
-            <p> Имя : Возраст </p>
-            <p> Мой напряг : Его/ее напряг </p>
-
-
-          </td>
-          <td style = "text-align: center; background-color: white; ">
-            <img src="${pageContext.request.contextPath}/resources/css/img/ph1.jpg" class="img-polaroid">
-            <p> Имя : Возраст </p>
-            <p> Мой напряг : Его/ее напряг </p>
-
-
-          </td>
-          <td style = "text-align: center; background-color: white; ">
-            <img src="${pageContext.request.contextPath}/resources/css/img/ph1.jpg" class="img-polaroid">
-            <p> Имя : Возраст </p>
-            <p> Мой напряг : Его/ее напряг </p>
-
-
-          </td>
-          <td style = "text-align: center; background-color: white; ">
-            <img src="${pageContext.request.contextPath}/resources/css/img/ph1.jpg" class="img-polaroid">
-            <p> Имя : Возраст </p>
-            <p> Мой напряг : Его/ее напряг </p>
-
-
-          </td>
+          <c:forEach var="user" items="${userList}">
+            <td style = "text-align: center; background-color: white;">
+              <img src="${user.photo.url}" width="200" high="200" class="img-polaroid">
+              <p> Имя :${user.user_Name} Возраст </p>
+              <p hidden="true"> Мой напряг : Его/ее напряг </p>
+            </td>
+          </c:forEach>
         </tr>
 
 
