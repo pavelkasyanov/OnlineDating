@@ -16,5 +16,5 @@ public interface UserService {
     void update( User user, int id);
     List<User> getList();
 
-    Set<Question> getQuestions(User user);
+    List<Question> getQuestions(User user);
 }

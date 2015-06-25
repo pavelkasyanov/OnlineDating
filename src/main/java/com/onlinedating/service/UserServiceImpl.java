@@ -1,5 +1,6 @@
 package com.onlinedating.service;
 
+import com.onlinedating.dao.QuestionDAO;
 import com.onlinedating.dao.UserDAO;
 import com.onlinedating.model.Question;
 import com.onlinedating.model.User;
@@ -15,6 +16,10 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserDAO userDAO;
+
+    @Autowired
+    QuestionDAO questionDAO;
+
     @Override
     public User get(int id) {
 
@@ -46,7 +51,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Set<Question> getQuestions(User user) {
-        return user.getQuestions();
+    public List<Question> getQuestions(User user) {
+        return questionDAO.getQuestionFromUser(user.getUserID());
     }
 }

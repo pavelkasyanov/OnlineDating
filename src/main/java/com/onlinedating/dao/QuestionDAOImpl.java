@@ -114,4 +114,18 @@ public class QuestionDAOImpl implements QuestionDAO {
         return cities;
 
     }
+
+    @Override
+    public List<Question> getQuestionFromUser(int userId) {
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
+
+        List<Question> questions = null;
+        questions = session.createQuery("FROM Question where User_UserID = " + userId).list();
+
+        session.getTransaction().commit();
+        session.close();
+
+        return questions;
+    }
 }

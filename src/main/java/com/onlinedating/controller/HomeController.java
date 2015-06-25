@@ -47,7 +47,7 @@ public class HomeController {
 			User user = (User)request.getSession().getAttribute(CUR_USER);
 			//QuestionList questionList = questionListService.get_btID(user.getQuestionList().getQuestionListID());
 			//Set<Question> list = questionList.getQuestions();
-			Set<Question> questions = userService.getQuestions(user);
+			List<Question> questions = userService.getQuestions(user);
 
 			//TODO add url user
 			model.addAttribute("avatartUrl", user.getPhoto().getUrl());
@@ -63,7 +63,8 @@ public class HomeController {
 		return "redirect:/";
 	}
 
-	private void addQuestions(ModelMap model, Set<Question> questions) {
+	private void addQuestions(ModelMap model, List<Question> questions) {
+
 		model.addAttribute("myAskList", questions);
 
 		List<AskRow> stat = getStat(questions);
@@ -80,16 +81,16 @@ public class HomeController {
 
 //	TODO to servis
 
-	private List<AskRow> getStat(Set<Question> questions) {
+	private List<AskRow> getStat(List<Question> questions) {
 		List<AskRow> askRows = new ArrayList<AskRow>();
-		for (Question question:questions){
+
+		for (Question question:questions) {
 			AskRow askRow = new AskRow(question);
 			askRow.setCountAnswered(15);
 			askRow.setCountDenied(20);
 			askRows.add(askRow);
-
-
 		}
+
 		return askRows;
 	}
 
