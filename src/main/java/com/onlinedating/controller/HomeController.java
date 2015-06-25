@@ -1,6 +1,7 @@
 package com.onlinedating.controller;
 
 import com.onlinedating.dao.QuestionDAO;
+import com.onlinedating.model.mvc.AskRow;
 import com.onlinedating.service.CheckCompatibility;
 import com.onlinedating.model.Question;
 import com.onlinedating.model.User;
@@ -21,9 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static com.onlinedating.service.CompatibilityAnswers.ANSWER_YES_EASY;
 import static com.onlinedating.service.CompatibilityAnswers.PRIORITY_IMPORTANT;
@@ -51,7 +50,7 @@ public class HomeController {
 			User user = (User)request.getSession().getAttribute(CUR_USER);
 			///QuestionList questionList = questionListService.get_btID(user.getQuestionList().getQuestionListID());
 			//Set<Question> list = questionList.getQuestions();
-			Set<Question> questions = userService.getQuestions(user);
+			List<Question> questions = userService.getQuestions(user);
 			model.addAttribute("myAskList", questions);
 
 			//TODO add url user
@@ -65,6 +64,35 @@ public class HomeController {
 		}
 
 		return "redirect:/";
+	}
+
+	private void addQuestions(ModelMap model, List<Question> questions) {
+		model.addAttribute("myAskList", questions);
+
+		List<AskRow> stat = getStat(questions);
+		model.addAttribute("askRowList", stat);
+
+//			<c:out value="${askRow.question.text}" />
+//
+//			<c:out value="${askRow.countAnswered}" />
+//			<c:out value="${askRow.countDenied}" />
+//			<c:out value="${askRow.countImportant}" />
+//			<c:out value="${askRow.countAgreed}" />
+//
+	}
+
+//	TODO to servis
+	private List<AskRow> getStat(List<Question> questions) {
+		List<AskRow> askRows = new ArrayList<AskRow>();
+		for (Question question:questions){
+			AskRow askRow = new AskRow(question);
+			askRow.setCountAnswered(15);
+			askRow.setCountDenied(20);
+			askRows.add(askRow);
+
+
+		}
+		return askRows;
 	}
 
 	private void testCheckCompatibility(HttpServletRequest request) {
