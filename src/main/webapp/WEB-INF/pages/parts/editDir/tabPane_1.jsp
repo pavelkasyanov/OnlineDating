@@ -1,5 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 
 <div class="tab-pane fade in active" id = "tab1">
 
@@ -9,10 +9,9 @@
     <div class="col-md-6  col-lg-6 col-sm-6  ">
 
       <br>
-      <form action="add_ask" method="post" class="form-horizontal">
+      <form class="form-horizontal">
 
         <h3>Выбор категории вопроса</h3>
-
         <select style="width: 60%" name="category_new" id="category_new">
           <c:forEach var="category" items="${categoryList}">
             <option value="${category}"><c:out value="${category}"/></option>
@@ -20,11 +19,10 @@
         </select>
         <textarea rows="5" style="width: 100%; resize: none" name="questionText" id="questionText"></textarea>
         <div class="form-actions">
-          <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+          <button type="button" class="btn btn-primary" onclick="addAsk();">Сохранить изменения</button>
 
           <button type="reset" class="btn">Отмена</button>
         </div>
-
       </form>
 
 
