@@ -3,6 +3,7 @@ package com.onlinedating.service;
 import com.onlinedating.dao.UserDAO;
 import com.onlinedating.model.Question;
 import com.onlinedating.model.User;
+import com.onlinedating.model.mvc.AskRow;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -15,6 +16,12 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserDAO userDAO;
+
+    @Override
+    public void init() {
+
+    }
+
     @Override
     public User get(int id) {
 
@@ -49,4 +56,10 @@ public class UserServiceImpl implements UserService {
     public Set<Question> getQuestions(User user) {
         return user.getQuestions();
     }
+
+    @Override
+    public Set<AskRow> getAnswers(User user) {
+        return null;
+    }
+
 }

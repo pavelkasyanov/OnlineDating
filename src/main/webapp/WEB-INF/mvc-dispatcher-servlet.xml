@@ -24,6 +24,14 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+
+
+
+
+
+
+
+    <context:component-scan base-package="com.onlinedating"/>
     <!-- Hibernate settings -->
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -45,18 +53,25 @@
         <property name="configLocation" value="classpath:hibernate/hibernate.cfg.xml" />
     </bean>
 
-    <tx:annotation-driven />
+
+
+    <tx:annotation-driven  transaction-manager="transactionManager" />
     <bean id="transactionManager"
           class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
+
+
+
+
+
+
+
     <!-- DAO settings -->
 
     <bean id="userDao" class="com.onlinedating.dao.UserDAOImpl">
-        <constructor-arg>
-            <ref bean="sessionFactory" />
-        </constructor-arg>
+        <constructor-arg ref="sessionFactory"/>
     </bean>
 
     <bean id="countryDao" class="com.onlinedating.dao.CountryDAOImpl">
@@ -105,13 +120,102 @@
     </bean>
 
 
-    <bean id="questionService" class="com.onlinedating.service.QuestionServiceImpl"/>
-    <bean id="userService" class="com.onlinedating.service.UserServiceImplND"/>
-    <bean id="questionListService" class="com.onlinedating.service.QuestionListServiceImpl"/>
-    <bean id="categoryService" class="com.onlinedating.service.CategoryServiceImpl"/>
-    <bean id="countryService" class="com.onlinedating.service.CountryServiceImpl"/>
-    <bean id="cityService" class="com.onlinedating.service.CityServiceImpl"/>
-    <bean id="eventService" class="com.onlinedating.service.EventServiceImpl"/>
-    <bean id="eventListService" class="com.onlinedating.service.EventListServiceImpl"/>
+    <bean id="questionService" class="com.onlinedating.service.NewQuestionService"  init-method="init"/>
+    <bean id="relationshipService" class="com.onlinedating.service.NewUserService" init-method="init" />
+    <bean id="userService" class="com.onlinedating.service.UserServiceImplND" depends-on="relationshipService,questionService" init-method="init"/>
+
+    <!--<bean id="questionListService" class="com.onlinedating.service.QuestionListServiceImpl"/>-->
+    <!--<bean id="categoryService" class="com.onlinedating.service.CategoryServiceImpl"/>-->
+    <!--<bean id="countryService" class="com.onlinedating.service.CountryServiceImpl"/>-->
+    <!--<bean id="cityService" class="com.onlinedating.service.CityServiceImpl"/>-->
+    <!--<bean id="eventService" class="com.onlinedating.service.EventServiceImpl"/>-->
+    <!--<bean id="eventListService" class="com.onlinedating.service.EventListServiceImpl"/>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </beans>

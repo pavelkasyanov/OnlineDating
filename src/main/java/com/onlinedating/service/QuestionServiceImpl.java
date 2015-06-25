@@ -1,17 +1,15 @@
 package com.onlinedating.service;
 
 import com.onlinedating.dao.QuestionDAO;
-import com.onlinedating.model.Category;
 import com.onlinedating.model.Question;
 import com.onlinedating.model.User;
-import org.hibernate.metamodel.relational.Database;
+import com.onlinedating.model.mvc.AskRow;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Aver on 17.06.2015.
@@ -21,20 +19,20 @@ public class QuestionServiceImpl implements  QuestionService {
     QuestionDAO questionDAO;
     @Autowired
     UserService userService;
-    @Autowired
-    CategoryService categoryService;
-    @Autowired
-    QuestionListService questionListService;
+//    @Autowired
+//    CategoryService categoryService;
+//    @Autowired
+//    QuestionListService questionListService;
 
     @Override
-    public Question Add(String text,String user_login, String category)
+    public Question Add(String text, String user_login)
     {
         Question question = new Question();
         User user = userService.get(user_login);
         question.setText(text);
         question.setOwner(user);
         question.setPriority(0);
-        question.setCategory(categoryService.get_byName(category));
+//        question.setCategory(categoryService.get_byName(category));
         question.setQuestionList(user.getQuestionList());
         Date dateoperation = new java.sql.Date(new java.util.Date().getTime());
         question.setDate(dateoperation);
@@ -72,5 +70,25 @@ public class QuestionServiceImpl implements  QuestionService {
     @Override
     public List<Question> question_list() {
         return questionDAO.question_list();
+    }
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void addQuestions(Set<Question> questions) {
+
+    }
+
+    @Override
+    public Set<AskRow> getAnswers(User user) {
+        return null;
+    }
+
+    @Override
+    public void setUserService(UserService userService) {
+
     }
 }

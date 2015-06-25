@@ -5,10 +5,7 @@ import com.onlinedating.model.Question;
 import com.onlinedating.model.Relationship;
 import com.onlinedating.model.User;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Artem.Zolotov on 6/22/2015.
@@ -17,6 +14,7 @@ public class NewUserService implements INewUserService {
 
     Map<String, User> users = new HashMap();
     HashMap<String, Relationship> relationshipMap = new HashMap();
+    private boolean isWeb;
 
     @Override
     public void registerUser(User user) {
@@ -53,8 +51,18 @@ public class NewUserService implements INewUserService {
         } else {
             answers = userQuestioner.getAnswers();
         }
-
-        answers.add(answer);
+        boolean newAnswer = true;
+        // check if user valued or answered this question
+        for (Answer next : answers) {
+            if (next.getQuestion().equals(q)) {
+                next.mergeAnswers(answer);
+                newAnswer = false;
+                break;
+            }
+        }
+        if (newAnswer) {
+            answers.add(answer);
+        }
 
         User user = getUser(userQuestioner);
         user.setAnswers(answers);
@@ -69,11 +77,11 @@ public class NewUserService implements INewUserService {
 
         Relationship relationshipInverse = new Relationship(userWithQuestion, userReporter);
 
-        CheckCompatibility cc = CheckCompatibility.getDefault();
-        CheckCompatibility ccInverse = CheckCompatibility.getDefault();
+        CheckCompatibility cc = getNewCheckCompatibility();
+        CheckCompatibility ccInverse = getNewCheckCompatibility();
         System.out.println("-- Computing relationship --");
-        Set<Answer> answers1 = userWithQuestion.getAnswers();
-        Set<Answer> answers2 = userReporter.getAnswers();
+        Set<Answer> answers1 = userWithQuestion.getAnswers() != null ? userWithQuestion.getAnswers() : Collections.<Answer>emptySet();
+        Set<Answer> answers2 = userReporter.getAnswers() != null ? userReporter.getAnswers() : Collections.<Answer>emptySet();
 
         for (Answer an1 : answers1) {
             for (Answer an2 : answers2) {
@@ -98,6 +106,10 @@ public class NewUserService implements INewUserService {
         System.out.println("Computing relationship  ends ---- \n  ");
 
         return relationship;
+    }
+
+    private CheckCompatibility getNewCheckCompatibility() {
+        return CheckCompatibility.getDefault(isWeb);
     }
 
     private void checkingStress(User userWithQuestion, Answer an1, User userReporter, Answer an2, Relationship relationship, CheckCompatibility cc) {
@@ -127,6 +139,15 @@ public class NewUserService implements INewUserService {
 
     private void updateRelationShips(User user) {
 
+    }
+
+
+    public void init() {
+        System.out.println("RelationshipService init");
+    }
+
+    public void setIsWeb(boolean isWeb) {
+        this.isWeb = isWeb;
     }
 
 

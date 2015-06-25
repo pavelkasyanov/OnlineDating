@@ -1,5 +1,6 @@
 package com.onlinedating.service;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -15,7 +16,18 @@ public class CheckCompatibility {
 
     static final String CONFIG_FILE_NAME = "configCompatibility.properties";
 
-    static public CheckCompatibility getDefault() {
+    static public CheckCompatibility getDefault(boolean isWeb) {
+        if (isWeb) {
+            InputStream resourceAsStream = CheckCompatibility.class.getClassLoader().getResourceAsStream(CONFIG_FILE_NAME);
+            CheckCompatibility checkCompatibility = new CheckCompatibility(resourceAsStream);
+            try {
+                resourceAsStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return checkCompatibility;
+
+        }
         return new CheckCompatibility(CONFIG_FILE_NAME);
     }
 

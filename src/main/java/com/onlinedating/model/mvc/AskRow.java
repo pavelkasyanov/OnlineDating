@@ -1,15 +1,19 @@
 package com.onlinedating.model.mvc;
 
+import com.onlinedating.model.Answer;
 import com.onlinedating.model.Question;
 
 /**
  * Created by pavlik on 19.06.2015.
  */
 public class AskRow {
-    private Question question;
+   private Question question;
    private int countAnswered;
    private int countDenied;
-//  	<c:out value="${askRow.countImportant}" />
+    private Answer answer;
+    private int countValued;
+
+    //  	<c:out value="${askRow.countImportant}" />
 ////			<c:out value="${askRow.countAgreed}"
     public AskRow(Question question) {
 
@@ -36,5 +40,21 @@ public class AskRow {
 
     public Question getQuestion() {
         return question;
+    }
+
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
+    }
+
+    public Answer getAnswer() {
+        return answer;
+    }
+
+    public void setCountValued(int countValued) {
+        this.countValued = countValued;
+    }
+
+    public int getCountValued() {
+        return countValued;
     }
 }
