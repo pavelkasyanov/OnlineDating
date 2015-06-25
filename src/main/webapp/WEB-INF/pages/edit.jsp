@@ -60,6 +60,26 @@
       });
     });
   }
+  function getLastCategoryQuestions() {
+    var category = $('#category_new1').val();
+
+    var lastQuestionRequest = $.post('/category_last', {
+
+            category_new1:category})
+            ;
+
+    lastQuestionRequest.done(function( data ) {
+      var obj = JSON.parse(data);
+
+      var cont = $('#lastAskCategoryList');
+      cont.empty();
+
+      obj.forEach( function(item, i, obj) {
+        var result = '<li><h4><br>'+item.text+'</h4> </li>';
+        cont.append(result);
+      });
+    });
+  }
 
   function deleteQuestion(askId) {
     var deleteAsk = $.post('/delete_ask',
@@ -121,9 +141,8 @@
         <ul class="nav nav-tabs">
           <li class="active"><a href="#tab1" data-toggle="tab"> Мои вопросы </a></li>
           <li><a href="#tab2" data-toggle="tab"> Вопросы друзей </a></li>
-          <li><a href="#tab3" data-toggle="tab"> Топ </a></li>
+          <li><a href="#tab3" data-toggle="tab" > Топ </a></li>
           <li><a href="#tab4" data-toggle="tab" onclick="getLastQuestions();"> Последние вопросы </a></li>
-
         </ul>
 
         <div  class="tab-content">
@@ -193,19 +212,18 @@
               </ul>
           </div>
           <div class="tab-pane fade" id = "tab3">
-            <ul>
-              <li>
-                <h4><br>
-                  Смотреть ужастики?
-                </h4>
-              </li>
-              <li>
-                <h4><br> Играть в шахматы? </h4>
-              </li>
+            <select style="width: 60%" name="category_new1" id="category_new1" onchange="getLastCategoryQuestions();">
+              <c:forEach var="category" items="${categoryList}">
+                <option value="${category}"  ><c:out value="${category}"/></option>
+              </c:forEach>
+            </select>
+            <button type="button" onclick='getLastCategoryQuestions();'> Submit </button>
+            <ul id="lastAskCategoryList">
 
-              <li>
-                <h4><br>Поехать на выходные к маме?</h4>
-              </li>
+
+                <h3>Выбор категории вопроса</h3>
+
+
             </ul>
           </div>
 

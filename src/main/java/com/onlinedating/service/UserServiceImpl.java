@@ -47,6 +47,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Set<Question> getQuestions(User user) {
-        return user.getQuestions();
+        User NEW = userDAO.get_byLogin(user.getUser_login());
+        return NEW.getQuestions();
+
     }
 }

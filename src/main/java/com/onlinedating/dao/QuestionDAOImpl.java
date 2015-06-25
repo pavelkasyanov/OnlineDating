@@ -23,25 +23,26 @@ public class QuestionDAOImpl implements QuestionDAO {
     @Override
     @Transactional
     public void Add(Question question) {
-        Session session = sessionFactory.openSession();//sessionFactory.getCurrentSession();
+        //Session session = sessionFactoryopenSession();//
+        Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
         session.save(question);
         session.getTransaction().commit();
 
-        session.close();
+
     }
 
     @Override
     @Transactional
     public Question get_btID(int id) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
         Question question = (Question)session.get(Question.class,id);
         session.getTransaction().commit();
 
-        session.close();
+
 
         return question;
     }
@@ -49,7 +50,7 @@ public class QuestionDAOImpl implements QuestionDAO {
     @Override
     public void update(Question question, int id) {
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
 
@@ -60,13 +61,13 @@ public class QuestionDAOImpl implements QuestionDAO {
 
         session.getTransaction().commit();
 
-        session.close();
+
 
     }
 
     @Override
     public void delete(int id) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
         Question question =
@@ -74,14 +75,14 @@ public class QuestionDAOImpl implements QuestionDAO {
         session.delete(question);
         session.getTransaction().commit();
 
-        session.close();
+
 
     }
 
     @Override
-    @Transactional
-    public List<Question> question_list() {
-        Session session = sessionFactory.openSession();
+       @Transactional
+       public List<Question> question_list() {
+        Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
         List question = null;
@@ -93,14 +94,31 @@ public class QuestionDAOImpl implements QuestionDAO {
         }
         session.getTransaction().commit();
 
-        session.close();
+
 
         return question;
     }
 
+    @Override
+    @Transactional
+    public List<Question> question_list_byCategory( Category category) {
+        Session session = sessionFactory.getCurrentSession();
+
+        System.out.println("Maven + Hibernate + MySQL");
+        session.beginTransaction();
+        List cities = null;
+        int  countryID = category.getCategoryID();
+        cities = session.createQuery("FROM Question where Category_CategorID =" + countryID).list();
+        session.getTransaction().commit();
+
+
+        return cities;
+    }
+
+
     public List<Question> Get_Question_list_byquestionList(QuestionList questionList)
     {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
 
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
@@ -109,7 +127,6 @@ public class QuestionDAOImpl implements QuestionDAO {
         cities = session.createQuery("FROM Question where QuestionList_QuestionListID =" + countryID).list();
         session.getTransaction().commit();
 
-        session.close();
 
         return cities;
 

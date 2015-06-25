@@ -42,15 +42,15 @@ public class HomeController {
 		if (request.getSession().getAttribute(CUR_USER) != null) {
 
 			User user = (User)request.getSession().getAttribute(CUR_USER);
-			//QuestionList questionList = questionListService.get_btID(user.getQuestionList().getQuestionListID());
+			QuestionList questionList = questionListService.get_btID(user.getQuestionList().getQuestionListID());
 			//Set<Question> list = questionList.getQuestions();
 			Set<Question> questions = userService.getQuestions(user);
 
 			//TODO add url user
-			//model.addAttribute("avatartUrl",user.getPhoto().getUrl());
+			model.addAttribute("avatartUrl",user.getPhoto().getUrl());
 
 			//TODO aboutme
-			//model.addAttribute("aboutMeText",user.getUser_Inf());
+			model.addAttribute("aboutMeText",user.getUser_Inf());
 
 			addQuestions(model, questions);
 

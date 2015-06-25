@@ -17,5 +17,6 @@ public interface QuestionDAO {
     void update( Question question, int id);
     void delete (int id);
     List<Question> question_list();
+    public List<Question> question_list_byCategory( Category category);
      List<Question> Get_Question_list_byquestionList(QuestionList questionList);
 }

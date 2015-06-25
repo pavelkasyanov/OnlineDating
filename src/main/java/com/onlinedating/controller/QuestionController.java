@@ -37,36 +37,37 @@ public class QuestionController {
     public String index(ModelMap model,
                         HttpServletRequest request) {
 
-        User user = (User)request.getSession().getAttribute(HomeController.CUR_USER);
+        User user = (User)request.getSession().getAttribute("cur_user");
 
         model.addAttribute("questionList", null);
         model.addAttribute("last_questions",questionService.getLast(10));
-        model.addAttribute("myQuestionList", userService.getQuestions(user));
+        model.addAttribute("myQuestionList",userService.getQuestions(user));
         model.addAttribute("categoryList", categoryService.category_list());
 
         return "edit";
     }
 
     @RequestMapping(value = "/add_ask", method = RequestMethod.POST)
-    @ResponseBody
-    public String addAsk(@RequestParam(value = "questionText") String questionText,
-                            @RequestParam(value = "category_new") String category,
-                            HttpServletRequest request) throws IOException {
+     @ResponseBody
+     public String addAsk(@RequestParam(value = "questionText") String questionText,
+                          @RequestParam(value = "category_new") String category,
+                          HttpServletRequest request) throws IOException {
 
         Question question = null;
         QuestionModel questionModel = null;
         ObjectMapper converter = new ObjectMapper();
-            if (true) {
+        if (true) {
 
-                question = questionService.Add(questionText,
-                        (String) request.getSession().getAttribute("login_user"),
-                        category);
+            question = questionService.Add(questionText,
+                    (User) request.getSession().getAttribute("cur_user"),
+                    category);
 
-                questionModel = new QuestionModel(question);
-            }
+            questionModel = new QuestionModel(question);
+        }
 
-            return converter.writeValueAsString(questionModel);
+        return converter.writeValueAsString(questionModel);
     }
+
 
     @RequestMapping(value = "/delete_ask", method = RequestMethod.POST)
     @ResponseBody
@@ -92,6 +93,25 @@ public class QuestionController {
 
         for(Question q: temp) {
            res.add(new QuestionModel(q));
+        }
+
+        return converter.writeValueAsString(res);
+    }
+    @RequestMapping(value = "/category_last", method = RequestMethod.POST)
+    @ResponseBody
+    public String getCategoryLastQuestions( @RequestParam(value = "category_new1") String category)
+            throws IOException {
+
+        ObjectMapper converter = new ObjectMapper();
+
+        List<Question> temp = questionService.getByCategory(category);
+        temp = questionService.getLastCategory(10,temp);
+        //полуучить по категории список, отрезать 10 последних и передать в res
+        List<QuestionModel> res = new ArrayList<QuestionModel>();
+
+
+        for(Question q: temp) {
+            res.add(new QuestionModel(q));
         }
 
         return converter.writeValueAsString(res);

@@ -130,7 +130,7 @@
 
 
     <bean id="questionService" class="com.onlinedating.service.QuestionServiceImpl"/>
-    <bean id="userService" class="com.onlinedating.service.UserServiceImplND"/>
+    <bean id="userService" class="com.onlinedating.service.UserServiceImpl"/>
     <bean id="questionListService" class="com.onlinedating.service.QuestionListServiceImpl"/>
     <bean id="categoryService" class="com.onlinedating.service.CategoryServiceImpl"/>
     <bean id="countryService" class="com.onlinedating.service.CountryServiceImpl"/>
