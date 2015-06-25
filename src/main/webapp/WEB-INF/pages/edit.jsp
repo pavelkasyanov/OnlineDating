@@ -62,7 +62,7 @@
   function getLastCategoryQuestions() {
     var category = $('#category_new1').val();
 
-    var lastQuestionRequest = $.post('${pageContext.request.contextPath}/category_last', {
+    var lastQuestionRequest = $.post('${pageContext.request.contextPath}/ask/category_last', {
 
             category_new1:category})
             ;
