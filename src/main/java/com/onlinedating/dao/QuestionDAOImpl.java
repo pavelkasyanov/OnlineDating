@@ -99,22 +99,6 @@ public class QuestionDAOImpl implements QuestionDAO {
         return question;
     }
 
-    @Override
-    @Transactional
-    public List<Question> question_list_byCategory( Category category) {
-        Session session = sessionFactory.getCurrentSession();
-
-        System.out.println("Maven + Hibernate + MySQL");
-        session.beginTransaction();
-        List cities = null;
-        int  countryID = category.getCategoryID();
-        cities = session.createQuery("FROM Question where Category_CategorID =" + countryID).list();
-        session.getTransaction().commit();
-
-
-        return cities;
-    }
-
 
     public List<Question> Get_Question_list_byquestionList(QuestionList questionList)
     {

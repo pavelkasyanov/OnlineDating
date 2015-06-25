@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "ask")
 public class QuestionController {
 
     @Autowired
@@ -47,7 +48,7 @@ public class QuestionController {
         return "edit";
     }
 
-    @RequestMapping(value = "/add_ask", method = RequestMethod.POST)
+    @RequestMapping(value = "add_ask", method = RequestMethod.POST)
     @ResponseBody
     public String addAsk(@RequestParam(value = "questionText") String questionText,
                             @RequestParam(value = "category_new") String category,
@@ -59,7 +60,7 @@ public class QuestionController {
             if (true) {
 
                 question = questionService.Add(questionText,
-                        ((User)request.getSession().getAttribute(HomeController.CUR_USER)).getUser_login(),
+                        ((User)request.getSession().getAttribute(HomeController.CUR_USER)),
                         category);
 
                 questionModel = new QuestionModel(question);
@@ -96,7 +97,7 @@ public class QuestionController {
 
         return converter.writeValueAsString(res);
     }
-    @RequestMapping(value = "/category_last", method = RequestMethod.POST)
+    @RequestMapping(value = "category_last", method = RequestMethod.POST)
     @ResponseBody
     public String getCategoryLastQuestions( @RequestParam(value = "category_new1") String category)
             throws IOException {

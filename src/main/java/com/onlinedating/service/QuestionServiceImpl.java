@@ -27,7 +27,7 @@ public class QuestionServiceImpl implements  QuestionService {
     QuestionListService questionListService;
 
     @Override
-    public Question Add(String text,User user_login, String category)
+    public Question Add(String text, User user_login, String category)
     {
         Question question = new Question();
         User user = user_login;
@@ -83,7 +83,7 @@ public class QuestionServiceImpl implements  QuestionService {
     public List<Question> getByCategory(String category) {
 
         Category category1 = categoryService.get_byName(category);
-        List<Question> last_list = questionDAO.question_list_byCategory(category1);
+        List<Question> last_list = null;//questionDAO.question_list_byCategory(category1);
 
         return last_list;
     }

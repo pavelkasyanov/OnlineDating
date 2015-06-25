@@ -58,6 +58,7 @@
       });
     });
   }
+
   function getLastCategoryQuestions() {
     var category = $('#category_new1').val();
 
