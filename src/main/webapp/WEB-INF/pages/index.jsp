@@ -23,9 +23,7 @@
                     $('#error_user_login_alert').text(obj.answer);
                     document.getElementById('pass').value = '';
                 } else {
-                    /*TODO fix url*/
-                    alert("545345");
-                    window.location.replace('/OnlineDating/home');
+                    window.location.replace('${pageContext.request.contextPath}/home');
                 }
             });
 
