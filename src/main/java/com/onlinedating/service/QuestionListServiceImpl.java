@@ -21,7 +21,6 @@ public class QuestionListServiceImpl implements QuestionListService {
     @Override
     public QuestionList get_btID(int id) {
 
-        questionListDAO.test();
         return questionListDAO.get_btID(id);
 
     }

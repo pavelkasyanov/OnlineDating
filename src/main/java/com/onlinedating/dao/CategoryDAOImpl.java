@@ -22,28 +22,26 @@ public class CategoryDAOImpl implements  CategoryDAO {
     @Override
     @Transactional
     public void Add(Category category) {
-        Session session = sessionFactory.getCurrentSession();
-        System.out.println("Maven + Hibernate + MySQL");
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-
-
         session.save(category);
+
         session.getTransaction().commit();
-
-
+        session.close();
     }
 
 
     @Override
     @Transactional
     public Category get_byID(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        System.out.println("Maven + Hibernate + MySQL");
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
+
         Category category = (Category)session.get(Category.class,id);
 
         session.getTransaction().commit();
+        session.close();
 
         return category;
     }
@@ -51,33 +49,29 @@ public class CategoryDAOImpl implements  CategoryDAO {
     @Override
     @Transactional
     public Category get_byName(String category_name) {
-        Session session = sessionFactory.getCurrentSession();
-        System.out.println("Maven + Hibernate + MySQL");
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
+
         Category category =
                 (Category)session.createCriteria( Category.class ).
                         add(Restrictions.eq("Category_Name", category_name)).
                         uniqueResult();
 
         session.getTransaction().commit();
-
+        session.close();
         return category;
     }
 
     @Override
     @Transactional
     public List<Category> category_list() {
-        Session session = sessionFactory.getCurrentSession();
-        System.out.println("Maven + Hibernate + MySQL");
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
-        List category = null;
-        category = session.createQuery("FROM Category").list();
-        for (Iterator iterator = category.iterator(); iterator.hasNext();){
-            Category employee = (Category) iterator.next();
-            System.out.print("Category Name: " + employee.getCategory_Name());
 
-        }
+        List<Category> category = session.createQuery("FROM Category").list();
+
         session.getTransaction().commit();
+        session.close();
 
         return category;
     }

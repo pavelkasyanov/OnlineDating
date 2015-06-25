@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row">
 
   <div class="col-md-2 col-lg-2 col-sm-2" style="border-right: solid 1px rgba(30, 30, 30, 0.23); background-color: rgba(30, 30, 30, 0.05); height: 200px ">

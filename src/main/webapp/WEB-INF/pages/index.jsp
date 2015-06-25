@@ -25,7 +25,7 @@
                 } else {
                     /*TODO fix url*/
                     alert("545345");
-                    window.location.replace('/home');
+                    window.location.replace('/OnlineDating/home');
                 }
             });
 
