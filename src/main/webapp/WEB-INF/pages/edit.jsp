@@ -28,10 +28,13 @@
 
     loginResp.done(function( data ) {
       var obj = JSON.parse(data);
-
-      var result = '<li><h4><br>'+obj.text+'</h4> </li>';
+      var askLI = '<li id="myAsk_' + obj.questionID + '">';
+      var delLink = '<a onclick="deleteQuestion('+obj.questionID+');">delete</a>';
+      var result = askLI+'<h4><br>'+obj.text+delLink+'</h4> </li>';
       $('#my_question_list').append(result);
       $('textarea').val('');
+
+
 
     });
 

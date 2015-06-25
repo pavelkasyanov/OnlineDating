@@ -54,12 +54,15 @@ public class HomeController {
 			model.addAttribute("myAskList", questions);
 
 			//TODO add url user
-			//model.addAttribute("avatartUrl",user.getPhoto().getUrl());
+			model.addAttribute("avatartUrl",user.getPhoto().getUrl());
 
 			//TODO aboutme
-			//model.addAttribute("aboutMeText",user.getUser_Inf());
+			model.addAttribute("aboutMeText",user.getUser_Inf());
 
 			testCheckCompatibility(request);
+
+			addQuestions(model, questions);
+
 			return "home";
 		}
 
