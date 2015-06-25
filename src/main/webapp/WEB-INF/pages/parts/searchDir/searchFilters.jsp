@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-'<div class="col-md-3 col-lg-3 col-sm-3" style="font-family: Helvetica, Arial, sans-serif;border-left: solid 1px rgba(0, 0, 0, 0.15)">
+
+<div class="col-md-3 col-lg-3 col-sm-3" style="font-family: Helvetica, Arial, sans-serif;border-left: solid 1px rgba(0, 0, 0, 0.15)">
 <div class="row" style=" margin-left: 10px;  ">
   <form class="form-inline" method="get" name="searchFilter" id="searchFilter">
 
