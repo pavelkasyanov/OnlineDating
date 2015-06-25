@@ -27,10 +27,10 @@ public class QuestionServiceImpl implements  QuestionService {
     QuestionListService questionListService;
 
     @Override
-    public Question Add(String text,String user_login, String category)
+    public Question Add(String text,User user_login, String category)
     {
         Question question = new Question();
-        User user = userService.get(user_login);
+        User user = user_login;
         question.setText(text);
         question.setOwner(user);
         question.setPriority(0);
@@ -68,6 +68,26 @@ public class QuestionServiceImpl implements  QuestionService {
 
         return (length < count ? last_list : last_list.subList(0, count));
     }
+    @Override
+    public List<Question> getLastCategory(int count, List category) {
+
+
+        Collections.sort(category, new QuestionDataComparator());
+        int length = category.size();
+
+        return (length < count ? category : category.subList(0, count));
+    }
+
+
+    @Override
+    public List<Question> getByCategory(String category) {
+
+        Category category1 = categoryService.get_byName(category);
+        List<Question> last_list = questionDAO.question_list_byCategory(category1);
+
+        return last_list;
+    }
+
 
     @Override
     public List<Question> question_list() {

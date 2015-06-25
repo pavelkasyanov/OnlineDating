@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "ask")
 public class QuestionController {
 
     @Autowired
@@ -48,7 +47,7 @@ public class QuestionController {
         return "edit";
     }
 
-    @RequestMapping(value = "add_ask", method = RequestMethod.POST)
+    @RequestMapping(value = "/add_ask", method = RequestMethod.POST)
     @ResponseBody
     public String addAsk(@RequestParam(value = "questionText") String questionText,
                             @RequestParam(value = "category_new") String category,
@@ -93,6 +92,25 @@ public class QuestionController {
 
         for(Question q: temp) {
            res.add(new QuestionModel(q));
+        }
+
+        return converter.writeValueAsString(res);
+    }
+    @RequestMapping(value = "/category_last", method = RequestMethod.POST)
+    @ResponseBody
+    public String getCategoryLastQuestions( @RequestParam(value = "category_new1") String category)
+            throws IOException {
+
+        ObjectMapper converter = new ObjectMapper();
+
+        List<Question> temp = questionService.getByCategory(category);
+        temp = questionService.getLastCategory(10,temp);
+        //полуучить по категории список, отрезать 10 последних и передать в res
+        List<QuestionModel> res = new ArrayList<QuestionModel>();
+
+
+        for(Question q: temp) {
+            res.add(new QuestionModel(q));
         }
 
         return converter.writeValueAsString(res);

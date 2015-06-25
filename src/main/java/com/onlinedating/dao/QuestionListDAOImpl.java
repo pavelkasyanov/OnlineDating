@@ -3,6 +3,7 @@ package com.onlinedating.dao;
 import com.onlinedating.model.QuestionList;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,26 +18,30 @@ public class QuestionListDAOImpl implements  QuestionListDAO{
     }
 
     @Override
+    @Transactional
     public void Add(QuestionList questionList) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
+        System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
 
         session.save(questionList);
 
         session.getTransaction().commit();
-        session.close();
+
     }
 
     @Override
+    @ Transactional
     public QuestionList get_btID(int id) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
+        System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
-
         QuestionList questionList = (QuestionList)session.get(QuestionList.class,id);
 
         session.getTransaction().commit();
-        session.close();
-
+       // session.close();
         return questionList;
     }
+
+
 }

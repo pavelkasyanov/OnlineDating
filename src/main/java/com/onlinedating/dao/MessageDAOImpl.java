@@ -1,8 +1,7 @@
 package com.onlinedating.dao;
 
-import com.onlinedating.model.Category;
 import com.onlinedating.model.Event;
-import com.onlinedating.model.Question;
+import com.onlinedating.model.Message;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -11,54 +10,53 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by Aver on 17.06.2015.
+ * Created by Aver on 22.06.2015.
  */
-public class EventDAOImpl implements EventDAO{
+public class MessageDAOImpl implements MessageDAO {
+
 
     private SessionFactory sessionFactory;
 
-    public EventDAOImpl(SessionFactory sessionFactory) {
+    public MessageDAOImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
     @Override
     @Transactional
-    public void Add(Event event) {
+    public void Add(Message message) {
         Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
-        session.save(event);
+        session.save(message);
         session.getTransaction().commit();
 
     }
 
-
     @Override
     @Transactional
-    public Event get_btID(int id) {
+    public Message get_btID(int id) {
         Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
-        Event event = (Event)session.get(Event.class,id);
+        Message message = (Message)session.get(Message.class,id);
         session.getTransaction().commit();
-        return event;
+        return message;
     }
 
-
-
     @Override
     @Transactional
-    public void update(Event event, int id) {
+    public void update(Message message, int id) {
         Session session = sessionFactory.getCurrentSession();
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
 
-        Event employee =
-                (Event)session.get(Event.class, id);
-        employee = event;
+        Message employee =
+                (Message)session.get(Message.class, id);
+        employee = message;
         session.update(employee);
 
         session.getTransaction().commit();
+
     }
 
     @Override
@@ -67,27 +65,30 @@ public class EventDAOImpl implements EventDAO{
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
-        Event question =
-                (Event)session.get(Event.class, id);
-        session.delete(question);
+        Message message =
+                (Message)session.get(Message.class, id);
+        session.delete(message);
         session.getTransaction().commit();
+
     }
 
     @Override
     @Transactional
-    public List<Event> event_list() {
+    public List<Message> message_list() {
+
         Session session = sessionFactory.getCurrentSession();
+
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
-        List event = null;
-        event = session.createQuery("FROM Event").list();
-        for (Iterator iterator = event.iterator(); iterator.hasNext();){
-            Event employee = (Event) iterator.next();
+        List message = null;
+        message = session.createQuery("FROM Message").list();
+        for (Iterator iterator = message.iterator(); iterator.hasNext();){
+            Message employee = (Message) iterator.next();
             System.out.print("Category Name: " + employee.getText());
 
         }
         session.getTransaction().commit();
 
-        return event;
+        return message;
     }
 }

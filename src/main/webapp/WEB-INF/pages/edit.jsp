@@ -58,6 +58,26 @@
       });
     });
   }
+  function getLastCategoryQuestions() {
+    var category = $('#category_new1').val();
+
+    var lastQuestionRequest = $.post('${pageContext.request.contextPath}/category_last', {
+
+            category_new1:category})
+            ;
+
+    lastQuestionRequest.done(function( data ) {
+      var obj = JSON.parse(data);
+
+      var cont = $('#lastAskCategoryList');
+      cont.empty();
+
+      obj.forEach( function(item, i, obj) {
+        var result = '<li><h4><br>'+item.text+'</h4> </li>';
+        cont.append(result);
+      });
+    });
+  }
 
   function deleteQuestion(askId) {
     var deleteAsk = $.post('${pageContext.request.contextPath}/ask/delete_ask',
