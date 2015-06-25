@@ -81,7 +81,7 @@ public class QuestionController {
         return "done";
     }
 
-    @RequestMapping(value = "/last_ask", method = RequestMethod.GET)
+    @RequestMapping(value = "last_ask", method = RequestMethod.GET)
     @ResponseBody
     public String getLastQuestions()
             throws IOException {
