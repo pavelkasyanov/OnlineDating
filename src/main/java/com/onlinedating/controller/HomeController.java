@@ -70,7 +70,7 @@ public class HomeController {
 	private void testCheckCompatibility(HttpServletRequest request) {
 		//TODO load properties
 		CheckCompatibility cC;
-		ServletContext context = request.getServletContext();
+		ServletContext context = request.getSession().getServletContext();
 		InputStream iS = context.getResourceAsStream("/WEB-INF/classes/configCompatibility.properties");
 		cC = new CheckCompatibility(iS);
 		cC.check(PRIORITY_UNIMPORTANT,ANSWER_YES_EASY);
