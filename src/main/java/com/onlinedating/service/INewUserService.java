@@ -9,7 +9,7 @@ import com.onlinedating.model.User;
 public interface INewUserService {
     void registerUser(User user);
 
-    User getUser(User userQuestioner);
+    User getUser(String userLogin);
 
     void userValue(User userQuestioner, Question q, int important);
 

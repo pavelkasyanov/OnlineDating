@@ -1,9 +1,11 @@
 package com.onlinedating.service;
 
+import com.onlinedating.dao.UserDAO;
 import com.onlinedating.model.Answer;
 import com.onlinedating.model.Question;
 import com.onlinedating.model.Relationship;
 import com.onlinedating.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,6 +17,9 @@ import java.util.Set;
  */
 public class NewUserService implements INewUserService {
 
+    @Autowired
+    UserDAO userDAO;
+
     Map<String, User> users = new HashMap();
     HashMap<String, Relationship> relationshipMap = new HashMap();
 
@@ -24,8 +29,8 @@ public class NewUserService implements INewUserService {
     }
 
     @Override
-    public User getUser(User userQuestioner) {
-        return users.get(userQuestioner.getUser_login());
+    public User getUser(String userLogin) {
+        return userDAO.get_byLogin(userLogin);
     }
 
     @Override
@@ -56,7 +61,7 @@ public class NewUserService implements INewUserService {
 
         answers.add(answer);
 
-        User user = getUser(userQuestioner);
+        User user = getUser(userQuestioner.getUser_login());
         user.setAnswers(answers);
         user.setQuestions(questions);
 

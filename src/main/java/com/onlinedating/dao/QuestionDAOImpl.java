@@ -54,8 +54,7 @@ public  class QuestionDAOImpl implements QuestionDAO {
         System.out.println("Maven + Hibernate + MySQL");
         session.beginTransaction();
 
-        Question employee =
-                (Question)session.get(Question.class, id);
+        Question employee = (Question)session.get(Question.class, id);
         employee = question;
         session.update(employee);
 

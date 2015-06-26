@@ -21,6 +21,7 @@ public class QuestionServiceImpl implements  QuestionService {
     QuestionDAO questionDAO;
     @Autowired
     UserService userService;
+
     @Autowired
     CategoryService categoryService;
     @Autowired

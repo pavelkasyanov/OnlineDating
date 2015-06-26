@@ -24,6 +24,14 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+
+
+
+
+
+
+
+    <context:component-scan base-package="com.onlinedating"/>
     <!-- Hibernate settings -->
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -45,18 +53,25 @@
         <property name="configLocation" value="classpath:hibernate/hibernate.cfg.xml" />
     </bean>
 
-    <tx:annotation-driven />
+
+
+    <tx:annotation-driven  transaction-manager="transactionManager" />
     <bean id="transactionManager"
           class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
+
+
+
+
+
+
+
     <!-- DAO settings -->
 
     <bean id="userDao" class="com.onlinedating.dao.UserDAOImpl">
-        <constructor-arg>
-            <ref bean="sessionFactory" />
-        </constructor-arg>
+        <constructor-arg ref="sessionFactory"/>
     </bean>
 
     <bean id="countryDao" class="com.onlinedating.dao.CountryDAOImpl">
@@ -98,44 +113,109 @@
             <ref bean="sessionFactory" />
         </constructor-arg>
     </bean>
-    <bean id="photoDAO" class="com.onlinedating.dao.PhotoDAOImpl">
+    <bean id="photo" class="com.onlinedating.dao.PhotoDAOImpl">
         <constructor-arg>
             <ref bean="sessionFactory" />
         </constructor-arg>
     </bean>
-    <bean id="contactListDAO" class="com.onlinedating.dao.ContactListDAOImpl">
-        <constructor-arg>
-            <ref bean="sessionFactory" />
-        </constructor-arg>
-    </bean>
-
-    <bean id="contactsDAO" class="com.onlinedating.dao.ContactDAOImpl">
-        <constructor-arg>
-            <ref bean="sessionFactory" />
-        </constructor-arg>
-    </bean>
-
-    <bean id="messageDAO" class="com.onlinedating.dao.MessageDAOImpl">
-        <constructor-arg>
-            <ref bean="sessionFactory" />
-        </constructor-arg>
-    </bean>
-
-    <bean id="messageListDAO" class="com.onlinedating.dao.MessageListDAOImpl">
-        <constructor-arg>
-            <ref bean="sessionFactory" />
-        </constructor-arg>
-    </bean>
-
 
 
     <bean id="questionService" class="com.onlinedating.service.QuestionServiceImpl"/>
+    <bean id="relationshipService" class="com.onlinedating.service.NewUserService"/>
     <bean id="userService" class="com.onlinedating.service.UserServiceImpl"/>
+
     <bean id="questionListService" class="com.onlinedating.service.QuestionListServiceImpl"/>
     <bean id="categoryService" class="com.onlinedating.service.CategoryServiceImpl"/>
     <bean id="countryService" class="com.onlinedating.service.CountryServiceImpl"/>
     <bean id="cityService" class="com.onlinedating.service.CityServiceImpl"/>
     <bean id="eventService" class="com.onlinedating.service.EventServiceImpl"/>
     <bean id="eventListService" class="com.onlinedating.service.EventListServiceImpl"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </beans>

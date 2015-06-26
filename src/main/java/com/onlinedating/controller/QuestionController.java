@@ -28,6 +28,7 @@ public class QuestionController {
 
     @Autowired
     QuestionService questionService;
+
     @Autowired
     CategoryService categoryService;
 
